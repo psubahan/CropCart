@@ -1,84 +1,159 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Customer Registration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Registration</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
         }
+
         .container {
-            max-width: 700px;
+            width: 60%;
             margin: 20px auto;
-            background: #fff;
+            background: white;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .image-section {
+        
+
+        h1 {
             text-align: center;
+            color: #2c7a7b;
             margin-bottom: 20px;
         }
-        .image-section img {
-            width: 100px;
+
+        .icon {
+            display: block;
+            margin: 0 auto 20px; /* Centers the icon and adds space below it */
+            width: 70px; /* Adjust size */
             height: auto;
         }
-        .image-section .title {
-            margin-top: 10px;
-            font-size: 20px;
-            font-weight: bold;
-            color: #0D815D;
-        }
+
         .form-group {
             margin-bottom: 15px;
         }
-        .form-group label {
+
+        label {
             display: block;
-            margin-bottom: 5px;
             font-weight: bold;
+            margin-bottom: 5px;
         }
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .form-group input:focus,
-        .form-group select:focus {
-            border-color: #0D815D;
-            outline: none;
-        }
-        .btn {
-            display: block;
-            width: 100%;
-            background-color: #0D815D;
-            color: #fff;
+
+        input, select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+
+        .button {
+            background-color: #008000;
+            color: white;
+            padding: 10px 15px;
             border: none;
-            padding: 10px;
-            border-radius: 4px;
-            font-size: 16px;
+            border-radius: 5px;
             cursor: pointer;
-            text-align: center;
+            font-size: 16px;
+            display: block;
+            margin: 20px auto;
         }
-        .btn:hover {
-            background-color: #066646;
-        }
+
     </style>
 </head>
 <body>
-    <div class="container">
+    <%@ include file="header.jsp"%>
+    <%
+    String userRegister = request.getParameter("userRegister");
+    %> 
+    <%if ("Farmer".equalsIgnoreCase(userRegister)) { %>
+    <div class="container" style="margin-top : 50px;">
         <div class="image-section">
-            <img src="https://th.bing.com/th/id/OIP.kCNMzRvb-QmjpvH1UPWUDQHaHa?w=199&h=199&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Customer Icon">
-            <div class="title">CUSTOMER REGISTRATION</div>
+            <div class="title" style="font-size:20px; font-weight : bold; text-align : center; margin : 15px; color : #008000;">FARMER REGISTRATION</div>
         </div>
-        <form action="processRegistration.jsp" method="post">
+
+        <form action="farmerRegistration" method="POST">
+            <div class="form-group">
+                <label for="name">Name</label> <!-- Removed the asterisk -->
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label> <!-- Removed the asterisk -->
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label> <!-- Removed the asterisk -->
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label> <!-- Removed the asterisk -->
+                <input type="password" id="confirm-password" name="confirm-password" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label> <!-- Removed the asterisk -->
+                <input type="text" id="address" name="address" required>
+            </div>
+            <div class="form-group">
+                <label for="state">State</label> <!-- Removed the asterisk -->
+                <input type="text" id="state" name="state" required>
+            </div>
+            <div class="form-group">
+                <label for="city">City</label> <!-- Removed the asterisk -->
+                <input type="text" id="city" name="city" required>
+            </div>
+            <div class="form-group">
+                <label for="pincode">Pincode</label> <!-- Removed the asterisk -->
+                <input type="number" id="pincode" name="pincode" required>
+            </div>
+            <div class="form-group">
+                <label for="mobile">Mobile Number</label> <!-- Removed the asterisk -->
+                <input type="tel" id="mobile" name="mobile" required>
+            </div>
+            <div class="form-group">
+                <label for="customer-type">Customer Type</label> <!-- Removed the asterisk -->
+                <select id="customer-type" name="customer-type" required>
+                    <option value="">Select</option>
+                    <option value="farmer">Farmer</option>
+                    <option value="buyer">Buyer</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="bank-name">Bank Name</label> <!-- Removed the asterisk -->
+                <input type="text" id="bank-name" name="bank-name">
+            </div>
+            <div class="form-group">
+                <label for="branch">Branch</label> <!-- Removed the asterisk -->
+                <input type="text" id="branch" name="branch">
+            </div>
+            <div class="form-group">
+                <label for="ifsc">IFSC</label> <!-- Removed the asterisk -->
+                <input type="text" id="ifsc" name="ifsc">
+            </div>
+            <div class="form-group">
+                <label for="account-number">Account Number</label> <!-- Removed the asterisk -->
+                <input type="text" id="account-number" name="account-number">
+            </div>
+            <input type="submit" class = "btn button" value="Click here to Register">
+        </form>
+    </div>
+    <%} 
+    
+    else if ("Customer".equalsIgnoreCase(userRegister)) { %>
+    <div class="container" style="margin-top : 50px;">
+        <div class="image-section">
+            <div class="title" style="font-size:20px; font-weight : bold; text-align : center; margin : 15px; color : #008000;">CUSTOMER REGISTRATION</div>
+        </div>
+        <form action="customerRegistration" method="post">
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
@@ -158,12 +233,14 @@
                 <label for="customerType">Customer Type:</label>
                 <select id="customerType" name="customerType" required>
                     <option value="">Select</option>
-                    <option value="Farmer">Farmer</option>
+                    <option value="Farmer">WholeSale</option>
                     <option value="Retailer">Retailer</option>
                 </select>
             </div>
-            <button type="submit" class="btn">Click Here to Register</button>
+            <input type="submit" class="btn button" value="Click Here to Register">
         </form>
     </div>
+    <%} %>
+    <%@ include file="footer.jsp"%>
 </body>
 </html>
