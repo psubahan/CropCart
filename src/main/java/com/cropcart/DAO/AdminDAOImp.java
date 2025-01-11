@@ -54,8 +54,8 @@ public class AdminDAOImp implements AdminDAO {
 		return status;
 	}
 	@Override
-	public Admin getAdmin(int admin_id) {
-		String query="SELECT * FROM ADMIN WHERE ADMIN_ID=?";
+	public Admin getAdmin(int admin_id,String password) {
+		String query="SELECT * FROM ADMIN WHERE ADMIN_ID=? AND PASSWORD=?";
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		Admin a=null;
@@ -63,6 +63,7 @@ public class AdminDAOImp implements AdminDAO {
 		try {
 			ps=con.prepareStatement(query);
 			ps.setInt(1, admin_id);
+			ps.setString(2, password);
 			rs=ps.executeQuery();
 			while(rs.next())
 			{
