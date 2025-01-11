@@ -1,9 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="header.css">
     <title></title>
@@ -19,7 +18,7 @@ body {
 
 .containers{
     width: 100%;
-    margin-top : 50px;
+    margin-top : 20px;
 }
 
 /* TOP */
@@ -82,9 +81,9 @@ a:hover {
             <div class="nav">
                 <h3 style="background-color: green;">CROP CART</h3>
                 <ul>
-                    <li><a href="#top">HOME</a></li>
-                    <li><a href="#center">FARMER'S MARKET</a></li>
-                    <li><a href="">NEWS AND ARTICLES</a></li>
+                    <li><a href="homePage.jsp">HOME</a></li>
+                    <li><a href="">FARMER'S MARKET</a></li>
+                    <li><a href="articles.jsp">NEWS AND ARTICLES</a></li>
                     <li><a href="">MY ACCOUNT</a></li>
                     <li><a href="">CONTACT</a></li>
                 </ul>

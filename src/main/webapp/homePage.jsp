@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +33,7 @@ body {
 
 /* TOP */
 .top {
-    background-image: url("/homepageImg.jpg");
+    background-image: url("images/homepageImg.jpg");
     height: 580px;
     background-repeat: no-repeat;
     background-size: cover;
@@ -102,7 +101,7 @@ a:hover {
     color: black;
     opacity: 0; /* Initially hidden */
     transform: translateY(30px) scale(0.95); 
-    animation: enhancedFadeIn 1.5s ease-out 2s forwards;
+    animation: enhancedFadeIn 1s ease-out 1s forwards;
 }
 
 @keyframes enhancedFadeIn {
@@ -136,14 +135,25 @@ a:hover {
 .image-container {
     flex: 1; /* Ensures equal width for the image and content */
     overflow: hidden; /* Ensures any cropped parts of the image are hidden */
+    
 }
-
+        
 .image-container img {
     width: 100%; /* Fills the container's width */
     height: 100%; /* Fills the container's height */
     object-fit: cover; /* Ensures the image fills the space while maintaining proportions */
     object-position: top; /* Crops the image from the top */
+    animation: fadeIn 4s ease-in-out;
 }
+
+@keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
 
 .center-content {
     flex: 1; /* Equal width for content */
@@ -212,49 +222,71 @@ a:hover {
 }
 
 .box {
-    background-color: #f4f4f4; /* Light background for the boxes */
-    padding: 20px;
-    height: 250px; /* Adjusted height for better spacing */
-    border-radius: 10px; /* Rounded corners for each box */
-    width: 30%; /* Each box takes up 30% of the width */
-    text-align: center; /* Center the content */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slight shadow for the boxes */
+    background-color: #ffffff; /* Clean white background */
+    padding: 30px; /* Added padding for better spacing */
+    height: 300px; /* Slightly increased height */
+    border-radius: 15px; /* Rounded corners */
+    width: 30%; /* Keep at 30% width for desktop view */
+    text-align: center;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1); /* Larger shadow for more depth */
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Distribute space evenly */
-    align-items: center; /* Horizontally center the content */
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease-in-out; /* Smooth transition for the hover effect */
+    margin-bottom: 20px; /* Space between boxes */
+}
+
+.box:hover {
+        transform: scale(1.05); /* Slightly enlarge the button */
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
 }
 
 .box h4 {
-    font-size: 1.1rem;
+    font-size: 1.2rem; /* Slightly larger font for the title */
+    font-weight: 600; /* Bold heading */
+    color: #333; /* Darker color for better readability */
+    margin-bottom: 20px;
 }
 
 .box i {
-    margin: 10px;
-    font-size: 1.5rem; /* Larger icon size */
-    color: #008000;
+    margin: 20px;
+    font-size: 2rem; /* Bigger icon size for emphasis */
+    color: #008000; /* Green icon to match the theme */
 }
 
 .box a {
     text-decoration: none;
     color: white;
     font-weight: bold;
-    border-radius: 5px;
-    padding: 13px;
-    transition: color 0.3s, transform 0.3s; /* Added transform transition */
+    border-radius: 8px;
+    padding: 15px 25px; /* Larger padding for the button */
     background-color: #008000;
-    margin-top: 10px; /* Space above the link */
-    display: inline-block; /* Ensures the link stays inline */
+    margin-top: 15px;
+    display: inline-block;
+    transition: all 0.3s ease; /* Smooth transition */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Button shadow */
 }
 
 .box a:hover {
-    transform: scale(1.1); /* Slightly increases size on hover */
+    background-color: #006400; /* Darker green for the hover effect */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Shadow effect on hover */
 }
 
-
-.box h4, .box i, .box a {
-    margin-bottom: 10px; /* Spacing between elements */
+@media (max-width: 768px) {
+    .box {
+        width: 100%; /* Full width for smaller screens */
+        margin-bottom: 20px; /* Space between boxes */
+    }
 }
+
+@media (max-width: 480px) {
+    .box {
+        width: 100%; /* Full width for very small screens */
+        padding: 20px; /* Adjust padding for mobile devices */
+    }
+}
+
 
 /*=========== BOTTOM ===============*/
 .bottom {
@@ -262,7 +294,7 @@ a:hover {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    margin-top: 70px;
+    margin-top: 120px;
     background-color: #f9f9f9;
     border-top: 1px solid #ddd;
     flex-wrap: wrap; /* Ensures wrapping on smaller screens */
@@ -328,7 +360,7 @@ a:hover {
                 <ul>
                     <li><a href="#top">HOME</a></li>
                     <li><a href="#center">FARMER'S MARKET</a></li>
-                    <li><a href="">NEWS AND ARTICLES</a></li>
+                    <li><a href="articles.jsp">NEWS AND ARTICLES</a></li>
                     <li><a href="">MY ACCOUNT</a></li>
                     <li><a href="">CONTACT</a></li>
                 </ul>
@@ -341,7 +373,7 @@ a:hover {
 
         <div id="center" class="center">
             <div class="image-container">
-               <img src="/tomatoes.avif" alt="vegetables">
+               <img src="images/tomatoes.avif" alt="vegetables">
             </div>
             <div class="center-content">
                 <h3>Learn About Us</h3>

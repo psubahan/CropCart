@@ -60,7 +60,7 @@
         <div class="row justify-content-center">      
             <div class="col-md-10">
                 <div class="login-panel" style="margin: 30px 0px 20px 0px;">
-                    <h3 style="text-align: center; font-size: 18px;">Farmer Login Panel</h3>
+                    <h3 style="text-align: center; font-size: 18px; color:#008000; font-weight:bold;">FARMER LOGIN PANEL</h3>
                 </div>
                 
                 <div class="row">
@@ -105,7 +105,7 @@
         <div class="row justify-content-center">      
             <div class="col-md-10">
                 <div class="login-panel" style="margin : 30px 0px 20px 0px;">
-                    <h3 style="text-align: center; font-size : 18px;">Customer Login Panel</h3>
+                    <h3 style="text-align: center; font-size: 18px; color:#008000; font-weight:bold;">CUSTOMER LOGIN PANEL</h3>
                 </div>
                 
                 <div class="row"  >
@@ -150,7 +150,7 @@
         <div class="row justify-content-center">      
             <div class="col-md-10">
                 <div class="login-panel" style="margin : 30px 0px 20px 0px;">
-                    <h3 style="text-align: center; font-size : 18px;">Admin Login Panel</h3>
+                    <h3 style="text-align: center; font-size: 18px; color:#008000; font-weight:bold;">ADMIN LOGIN PANEL</h3>
                 </div>
                 
                 <div class="row"  >
