@@ -23,6 +23,7 @@ import com.cropcart.dto.Farmer;
 /**
  * Servlet implementation class AdminLogin
  */
+@WebServlet("/login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
