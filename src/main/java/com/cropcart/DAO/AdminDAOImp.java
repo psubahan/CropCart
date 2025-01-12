@@ -17,42 +17,62 @@ public class AdminDAOImp implements AdminDAO {
 	}
 	@Override
 	public String addAdmin(Admin a) {
-		PreparedStatement ps=null;
-		int rs=0;
-		String status="";
-		String query="INSERT INTO ADMIN(NAME,MAIL,PHONE,PASSWORD) VALUES(?,?,?,?)";
-		try {
-			ps=con.prepareStatement(query);
-			ps.setString(1, a.getName());
-			ps.setString(2, a.getMail());
-			ps.setLong(3, a.getPhone());
-			ps.setString(4, a.getPassword());
-			rs=ps.executeUpdate();
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(rs>0)
-        {
-            try {
-                con.commit();
-                status="Success";
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            }
-        }
-        else {
-            try {
-                con.rollback();
-                status="failed";
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            }
-            
-        }
-		return status;
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+	    int res = 0;
+	    String status = "";
+
+	    String queryCheckEmailPhone = "SELECT * FROM ADMIN WHERE MAIL = ? OR PHONE = ?";
+	    String queryCheckPassword = "SELECT * FROM ADMIN WHERE PASSWORD = ?";
+	    String queryInsertAdmin = "INSERT INTO ADMIN(NAME, MAIL, PHONE, PASSWORD) VALUES(?, ?, ?, ?)";
+
+	    try {
+	        // Check if email or phone already exists
+	        ps = con.prepareStatement(queryCheckEmailPhone);
+	        ps.setString(1, a.getMail());
+	        ps.setLong(2, a.getPhone());
+	        rs = ps.executeQuery();
+
+	        if (rs.next()) {
+	            status = "EmailOrPhoneAlreadyExists";
+	        } else {
+	            // Check if password already exists
+	            ps = con.prepareStatement(queryCheckPassword);
+	            ps.setString(1, a.getPassword());
+	            rs = ps.executeQuery();
+
+	            if (rs.next()) {
+	                status = "PasswordAlreadyExists";
+	            } else {
+	                // Insert new admin
+	                ps = con.prepareStatement(queryInsertAdmin);
+	                ps.setString(1, a.getName());
+	                ps.setString(2, a.getMail());
+	                ps.setLong(3, a.getPhone());
+	                ps.setString(4, a.getPassword());
+	                res = ps.executeUpdate();
+
+	                if (res > 0) {
+	                    con.commit();
+	                    status = "Success";
+	                } else {
+	                    con.rollback();
+	                    status = "Failed";
+	                }
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        try {
+	            con.rollback();
+	        } catch (SQLException rollbackEx) {
+	            rollbackEx.printStackTrace();
+	        }
+	    }
+
+	    return status;
 	}
+
 	@Override
 	public Admin getAdmin(int admin_id,String password) {
 		String query="SELECT * FROM ADMIN WHERE ADMIN_ID=? AND PASSWORD=?";
