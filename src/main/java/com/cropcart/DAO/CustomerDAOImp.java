@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cropcart.db.dbConnection;
-import com.cropcart.dto.customer;
+import com.cropcart.dto.Customer;
 
 public class CustomerDAOImp implements CustomerDAO
 {
@@ -18,7 +18,7 @@ public class CustomerDAOImp implements CustomerDAO
 		this.con=dbConnection.getConnection();
 	}
 	@Override
-	public String addCustomer(customer c) {
+	public String addCustomer(Customer c) {
 		// TODO Auto-generated method stub
 		PreparedStatement ps=null;
 		int res=0;
@@ -68,11 +68,11 @@ public class CustomerDAOImp implements CustomerDAO
 	}
 
 	@Override
-	public customer getCustomer(int customer_id) {
+	public Customer getCustomer(int customer_id) {
 		// TODO Auto-generated method stub
 		PreparedStatement ps=null;
 		ResultSet rs=null;
-		customer c=null;
+		Customer c=null;
 		String query="SELECT * FROM CUSTOMER WHERE CUSTOMER_ID=?";
 		try {
 			ps=con.prepareStatement(query);
@@ -81,7 +81,7 @@ public class CustomerDAOImp implements CustomerDAO
 			boolean b=rs.next();
 			if(b)
 			{
-				c=new customer();
+				c=new Customer();
 				c.setCustomer_id(rs.getInt(1));
 				c.setName(rs.getString(2));
 				c.setPhone(rs.getLong(3));
@@ -104,11 +104,11 @@ public class CustomerDAOImp implements CustomerDAO
 	}
 	
 	@Override
-	public customer getCustomer(int customer_id,String password)
+	public Customer getCustomer(int customer_id,String password)
 	{
 		PreparedStatement ps=null;
 		ResultSet rs=null;
-		customer c=null;
+		Customer c=null;
 		String query="SELECT * FROM CUSTOMER WHERE CUSTOMER_ID=?";
 		try {
 			ps=con.prepareStatement(query);
@@ -117,7 +117,7 @@ public class CustomerDAOImp implements CustomerDAO
 			boolean b=rs.next();
 			if(b)
 			{
-				c=new customer();
+				c=new Customer();
 				c.setCustomer_id(rs.getInt(1));
 				c.setName(rs.getString(2));
 				c.setPhone(rs.getLong(3));
@@ -165,7 +165,7 @@ public class CustomerDAOImp implements CustomerDAO
 	}
 	
 	@Override
-	public String updateCustomer(customer c) {
+	public String updateCustomer(Customer c) {
 		// TODO Auto-generated method stub
 		PreparedStatement ps=null;
 		String status="";
@@ -200,9 +200,9 @@ public class CustomerDAOImp implements CustomerDAO
 	}
 
 	@Override
-	public List<customer> getAllCoustomers() {
+	public List<Customer> getAllCoustomers() {
 		// TODO Auto-generated method stub
-		ArrayList<customer> cl=new ArrayList<>();
+		ArrayList<Customer> cl=new ArrayList<>();
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		String query="SELECT * FROM CUSTOMER";
@@ -211,7 +211,7 @@ public class CustomerDAOImp implements CustomerDAO
 			rs=ps.executeQuery();
 			while(rs.next())
 			{
-				customer c=new customer();
+				Customer c=new Customer();
 				c.setCustomer_id(rs.getInt(1));
 				c.setName(rs.getString(2));
 				c.setPhone(rs.getLong(3));

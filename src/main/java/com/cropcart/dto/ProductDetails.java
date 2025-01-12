@@ -7,7 +7,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class productDetails
+public class ProductDetails
 {
 	private String category;
 	private String title;

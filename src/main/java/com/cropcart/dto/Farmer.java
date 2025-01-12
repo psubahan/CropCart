@@ -8,9 +8,9 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class farmer
+public class Farmer
 {
-	private int former_id;
+	private int farmer_id;
 	private String name;
 	private String email;
 	private String password;

@@ -2,14 +2,14 @@ package com.cropcart.DAO;
 
 import java.util.List;
 
-import com.cropcart.dto.customer;
+import com.cropcart.dto.Customer;
 
 public interface CustomerDAO 
 {
-	public String addCustomer(customer c);
-	public customer getCustomer(int customer_id,String password); 
-	public customer getCustomer(int customer_id);
+	public String addCustomer(Customer c);
+	public Customer getCustomer(int customer_id,String password); 
+	public Customer getCustomer(int customer_id);
 	public String deleteCustomer(int customer_id);
-	public String updateCustomer(customer c);
-	public List<customer> getAllCoustomers();
+	public String updateCustomer(Customer c);
+	public List<Customer> getAllCoustomers();
 }

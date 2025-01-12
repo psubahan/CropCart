@@ -7,7 +7,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class location
+public class Location
 {
 	private String state;
 	private String city;
