@@ -100,5 +100,32 @@ public class AdminDAOImp implements AdminDAO {
 		}
 		return a;
 	}
+	@Override
+	public Admin getAdmin(String mail, String Password) {
+		String query="SELECT * FROM ADMIN WHERE MAIL=? AND PASSWORD=?";
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		Admin a=null;
+		
+		try {
+			ps=con.prepareStatement(query);
+			ps.setString(1, mail);
+			ps.setString(2, Password);
+			rs=ps.executeQuery();
+			while(rs.next())
+			{
+				a=new Admin();
+				a.setAdmin_id(rs.getInt(1));
+				a.setName(rs.getString(2));
+				a.setMail(rs.getString(3));
+				a.setPhone(rs.getLong(4));
+				a.setPassword(rs.getString(5));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return a;
+	}
 
 }

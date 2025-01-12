@@ -50,12 +50,12 @@ public class Login extends HttpServlet {
 		HttpSession session=request.getSession();
 		if(request.getParameter("Admin")!=null)
 		{
-			int Admin_id=Integer.parseInt(request.getParameter("loginID"));
+			String mail=request.getParameter("mail");
 			String password=request.getParameter("password");
 			
 			Admin a=new Admin();
 			AdminDAO adao=new AdminDAOImp();
-			a=adao.getAdmin(Admin_id, password);
+			a=adao.getAdmin(mail, password);
 			if(a!=null)
 			{
 				session.setAttribute("Admin", a);
