@@ -8,6 +8,7 @@ public interface CustomerDAO
 {
 	public String addCustomer(Customer c);
 	public Customer getCustomer(int customer_id,String password); 
+	public Customer getCustomer(String mail,String password); 
 	public Customer getCustomer(int customer_id);
 	public String deleteCustomer(int customer_id);
 	public String updateCustomer(Customer c);

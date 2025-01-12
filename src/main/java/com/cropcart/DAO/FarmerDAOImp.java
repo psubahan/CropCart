@@ -250,5 +250,44 @@ public class FarmerDAOImp implements FarmerDAO
 		}
 		return lf;
 	}
+	@Override
+	public Farmer getCustomer(String mail, String password) {
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		Farmer f=null;
+		String query="SELECT * FROM FARMER WHERE EMAIL=? and PASSWORD=?";
+		try {
+			ps=con.prepareStatement(query);
+			ps.setString(1, mail);
+			ps.setString(2, password);
+			rs=ps.executeQuery();
+			boolean b=rs.next();
+			if(b)
+			{
+				f=new Farmer();
+				f.setFarmer_id(rs.getInt(1));
+				f.setName(rs.getString(2));
+				f.setEmail(rs.getString(3));
+				f.setAddress(rs.getString(5));
+				f.setState(rs.getString(6));
+				f.setCity(rs.getString(7));
+				f.setPhone(rs.getLong(8));
+				f.setPincode(rs.getInt(9));
+				f.setBank_name(rs.getString(10));
+				f.setBranch(rs.getString(11));
+				f.setIfsc(rs.getString(12));
+				f.setAcc_no(rs.getLong(13));
+				
+			}
+			else
+			{
+				f=null;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return f;
+	}
 
 }

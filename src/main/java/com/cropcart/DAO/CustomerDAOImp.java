@@ -228,6 +228,41 @@ public class CustomerDAOImp implements CustomerDAO
 		}
 		return cl;
 	}
+	@Override
+	public Customer getCustomer(String mail, String password) {
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		Customer c=null;
+		String query="SELECT * FROM CUSTOMER WHERE mail=? and password=?";
+		try {
+			ps=con.prepareStatement(query);
+			ps.setString(1, mail);
+			ps.setString(2, password);
+			rs=ps.executeQuery();
+			boolean b=rs.next();
+			if(b)
+			{
+				c=new Customer();
+				c.setCustomer_id(rs.getInt(1));
+				c.setName(rs.getString(2));
+				c.setPhone(rs.getLong(3));
+				c.setMail(rs.getString(4));
+				c.setAddress(rs.getString(6));
+				c.setState(rs.getString(7));
+				c.setPincode(rs.getInt(8));
+				c.setCustomer_type(rs.getString(9));
+				
+			}
+			else
+			{
+				c=null;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return c;
+	}
 
 
 }
