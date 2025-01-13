@@ -85,7 +85,7 @@
                                     <label for="password" class="form-label">Password</label>
                                     <input type="password" class="form-control" id="password" placeholder="Enter your Password">
                                 </div>
-                                <input type="submit" class="btn login-btn w-100" value="Login">
+                                <input type="submit" class="btn login-btn w-100" value="Login" name="farmer">
                                 <div class="text-center mt-3">
                                     <a href="register.jsp?userRegister=Farmer" class="text-decoration-none" style="color: #008000; font-weight: bold;">New User?</a>
                                     <br>
@@ -130,7 +130,7 @@
                                     <label for="password" class="form-label">Password</label>
                                     <input type="password" class="form-control" id="password" placeholder="Enter your Password">
                                 </div>
-                                <input type="submit" class="btn login-btn w-100" value="Login">
+                                <input type="submit" class="btn login-btn w-100" name="customer" value="Login">
                                 <div class="text-center mt-3">
                                      <a href="register.jsp?userRegister=Customer" class="text-decoration-none" style="color: #008000; font-weight: bold;">New User?</a>
                                      <br>
@@ -168,14 +168,14 @@
                             <form action="login" method="POST">
                               <input type="hidden" name="userType" value="<%= userType %>">
                                 <div class="mb-3">
-                                    <label for="loginID" class="form-label">Login ID</label>
-                                    <input type="text" class="form-control" id="loginID" placeholder="Enter your Login ID">
+                                    <label for="loginID" class="form-label">Mail ID</label>
+                                    <input type="email" class="form-control" name="email" id="loginID" placeholder="Enter your Login ID">
                                 </div>
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="password" placeholder="Enter your Password">
+                                    <input type="password" class="form-control" name="password"  id="password" placeholder="Enter your Password">
                                 </div>
-                                <input type="submit" class="btn login-btn w-100" value="Login">
+                                <input type="submit" class="btn login-btn w-100" name="Admin" value="Login">
                                 <div class="text-center mt-3">
                                     <a href="#" class="text-decoration-none" style="color: #008000; font-weight: bold;">Forgot Password?</a>
                                 </div>

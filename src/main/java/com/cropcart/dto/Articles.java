@@ -10,6 +10,7 @@ import lombok.Setter;
 
 public class Articles
 {
+	private int article_id;
 	private String article_type;
 	private String publish_Date;
 	private String title;

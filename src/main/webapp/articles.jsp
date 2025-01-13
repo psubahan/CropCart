@@ -16,6 +16,7 @@
             margin: 0;
             padding: 20px;
             background-color: #f9f9f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .container {
@@ -120,6 +121,7 @@
             
             while (iterator.hasNext()) {
                 a = iterator.next();
+                int id = a.getArticle_id();
                 String title = a.getTitle();
                 String publishDate = a.getPublish_Date();
                 String description = a.getDescription();
@@ -135,7 +137,8 @@
                 %>
                 <h4 ><%= title %></h4>
                 <p>Published on - <%= publishDate %></p>
-                <a href="readMore.jsp" class="button">Read More..</a>
+                <a href="readMore.jsp?id=<%=id%>" class="button">Read More..</a>
+
             </div>
         <%
             }

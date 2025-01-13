@@ -13,6 +13,10 @@
     padding: 0;
 }
 
+body{
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 html {
     scroll-behavior: smooth; 
 }

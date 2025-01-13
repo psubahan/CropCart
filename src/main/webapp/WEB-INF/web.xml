@@ -24,4 +24,14 @@
     <servlet-name>AdminLogin</servlet-name>
     <url-pattern>/AdminLogin</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Articles</display-name>
+    <servlet-name>Articles</servlet-name>
+    <servlet-class>com.cropcart.controller.Articles</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Articles</servlet-name>
+    <url-pattern>/Articles</url-pattern>
+  </servlet-mapping>
 </web-app>

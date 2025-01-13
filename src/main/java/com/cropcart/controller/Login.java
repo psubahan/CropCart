@@ -23,6 +23,8 @@ import com.cropcart.dto.Farmer;
 /**
  * Servlet implementation class AdminLogin
  */
+
+@WebServlet("/login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -49,16 +51,16 @@ public class Login extends HttpServlet {
 		HttpSession session=request.getSession();
 		if(request.getParameter("Admin")!=null)
 		{
-			int Admin_id=Integer.parseInt(request.getParameter("loginID"));
+			String mail=request.getParameter("email");
 			String password=request.getParameter("password");
 			
 			Admin a=new Admin();
 			AdminDAO adao=new AdminDAOImp();
-			a=adao.getAdmin(Admin_id, password);
+			a=adao.getAdmin(mail, password);
 			if(a!=null)
 			{
 				session.setAttribute("Admin", a);
-				RequestDispatcher rd=request.getRequestDispatcher("#");
+				RequestDispatcher rd=request.getRequestDispatcher("adminDashboard.jsp");
 				rd.forward(request, response);
 			}
 			else
@@ -67,6 +69,7 @@ public class Login extends HttpServlet {
 				rd.forward(request, response);
 			}
 		}
+		
 		else if(request.getParameter("customer")!=null)
 		{
 			String mail=request.getParameter("mail");

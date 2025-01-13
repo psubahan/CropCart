@@ -68,6 +68,10 @@
 .footer-bottom p {
     margin: 0;
 }
+
+body{
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
     </style>
 </head>
 <body>
@@ -79,8 +83,8 @@
             <p>Email : CropCart@gmail.com</p>
         </div>
         <div class="services">
-            <a href="#top">Home</a>
-            <a href="#center">About Us</a>
+            <a href="#homePage.jsp">Home</a>
+            <a href="#homePage.jsp">About Us</a>
             <a href="">Articles</a>
             <a href="">Contact</a>
             <a href="">Terms & Conditions</a>

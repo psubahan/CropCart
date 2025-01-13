@@ -4,7 +4,6 @@
 <head>
     <meta>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="header.css">
     <title></title>
     <style>
        * {
@@ -13,12 +12,12 @@
 }
 
 body {
-    font-family: sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .containers{
     width: 100%;
-    margin-top : 20px;
+    margin-top : 30px;
 }
 
 /* TOP */
