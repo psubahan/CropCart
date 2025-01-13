@@ -2,7 +2,6 @@ package com.cropcart.DAO;
 
 import java.util.List;
 
-import com.cropcart.dto.Customer;
 import com.cropcart.dto.Farmer;
 
 public interface FarmerDAO 

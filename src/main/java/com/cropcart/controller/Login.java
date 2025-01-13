@@ -23,7 +23,6 @@ import com.cropcart.dto.Farmer;
 /**
  * Servlet implementation class AdminLogin
  */
-
 @WebServlet("/login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -51,6 +50,7 @@ public class Login extends HttpServlet {
 		HttpSession session=request.getSession();
 		if(request.getParameter("Admin")!=null)
 		{
+
 			String mail=request.getParameter("email");
 			String password=request.getParameter("password");
 			

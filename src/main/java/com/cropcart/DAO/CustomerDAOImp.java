@@ -19,52 +19,58 @@ public class CustomerDAOImp implements CustomerDAO
 	}
 	@Override
 	public String addCustomer(Customer c) {
-		// TODO Auto-generated method stub
-		PreparedStatement ps=null;
-		int res=0;
-		ResultSet rs=null;
-		String status="";
-		String query="SELECT * FROM CUSTOMER WHERE MAIL=? AND PHONE=?";
-		try {
-			ps=con.prepareStatement(query);
-			ps.setString(1, c.getMail());
-			ps.setLong(2, c.getPhone());
-			rs=ps.executeQuery();
-			boolean b=rs.next();
-			if(b)
-			{
-				status="Existed";
-			}
-			else {
-				String query1="INSERT INTO CUSTOMER(NAME,PHONE,MAIL,PASSWORD,ADDRESS,STATE,CITY,PINCODE,CUSTOMER_TYPE) VALUES(?,?,?,?,?,?,?,?)";
-				ps=con.prepareStatement(query1);
-				ps.setString(1, c.getName());
-				ps.setLong(2, c.getPhone());
-				ps.setString(3, c.getMail());
-				ps.setString(4, c.getPassword());
-				ps.setString(5, c.getAddress());
-				ps.setString(6, c.getState());
-				ps.setString(7, c.getCity());
-				ps.setLong(8, c.getPincode());
-				ps.setString(9, c.getCustomer_type());
-				res=ps.executeUpdate();
-				if(res>0)
-				{
-					status="Submitted";
-				}
-				else
-				{
-					status="Failed";
-				}
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		
-		return status;
+	    PreparedStatement ps = null;
+	    int res = 0;
+	    ResultSet rs = null;
+	    String status = "";
+
+	    String queryCheckMailPhone = "SELECT * FROM CUSTOMER WHERE MAIL = ? AND PHONE = ?";
+	    String queryCheckPassword = "SELECT * FROM CUSTOMER WHERE PASSWORD = ?";
+	    
+	    try {
+	        // Check if email and phone already exist
+	        ps = con.prepareStatement(queryCheckMailPhone);
+	        ps.setString(1, c.getMail());
+	        ps.setLong(2, c.getPhone());
+	        rs = ps.executeQuery();
+	        
+	        if (rs.next()) {
+	            status = "Existed";
+	        } else {
+	            // Check if the password already exists
+	            ps = con.prepareStatement(queryCheckPassword);
+	            ps.setString(1, c.getPassword());
+	            rs = ps.executeQuery();
+	            
+	            if (rs.next()) {
+	                status = "PasswordAlreadyExists";
+	            } else {
+	                // Insert new customer
+	                String queryInsert = "INSERT INTO CUSTOMER(NAME, PHONE, MAIL, PASSWORD, ADDRESS, STATE, CITY, PINCODE, CUSTOMER_TYPE) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	                ps = con.prepareStatement(queryInsert);
+	                ps.setString(1, c.getName());
+	                ps.setLong(2, c.getPhone());
+	                ps.setString(3, c.getMail());
+	                ps.setString(4, c.getPassword());
+	                ps.setString(5, c.getAddress());
+	                ps.setString(6, c.getState());
+	                ps.setString(7, c.getCity());
+	                ps.setLong(8, c.getPincode());
+	                ps.setString(9, c.getCustomer_type());
+	                
+	                res = ps.executeUpdate();
+	                if (res > 0) {
+	                    status = "Submitted";
+	                } else {
+	                    status = "Failed";
+	                }
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } 
+
+	    return status;
 	}
 
 	@Override
