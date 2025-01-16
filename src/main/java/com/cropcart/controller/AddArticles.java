@@ -14,7 +14,6 @@ import com.cropcart.DAO.ArticlesDAO;
 import com.cropcart.DAO.ArticlesDAOImp;
 import com.cropcart.dto.Articles;
 
-@WebServlet("/AddArticles") // Maps this servlet to the form action
 public class AddArticles extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
