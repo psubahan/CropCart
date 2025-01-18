@@ -13,5 +13,4 @@ public interface CustomerDAO
 	public String deleteCustomer(int customer_id);
 	public String updateCustomer(Customer c);
 	public List<Customer> getAllCoustomers();
-	public Customer getCustomer1(int customer_id,String name);
 }
