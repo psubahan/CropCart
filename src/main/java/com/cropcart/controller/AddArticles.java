@@ -47,11 +47,12 @@ public class AddArticles extends HttpServlet {
         boolean res = adao.AddArticles(art);
 
         if (res) {
-            session.setAttribute("successMessage", "Article added successfully!");
+            request.setAttribute("successMessage", "Article added successfully!");
             RequestDispatcher rd=request.getRequestDispatcher("addArticle.jsp");
             rd.forward(request, response);
-        } else {
-            session.setAttribute("errorMessage", "Failed to add the article. Please try again.");
+        }
+        else {
+        	request.setAttribute("errorMessage", "Failed to add the article. Please try again.");
             RequestDispatcher rd=request.getRequestDispatcher("addArticle.jsp");
             rd.forward(request, response);
         }
