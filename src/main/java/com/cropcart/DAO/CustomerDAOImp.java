@@ -94,8 +94,9 @@ public class CustomerDAOImp implements CustomerDAO
 				c.setMail(rs.getString(4));
 				c.setAddress(rs.getString(6));
 				c.setState(rs.getString(7));
-				c.setPincode(rs.getInt(8));
-				c.setCustomer_type(rs.getString(9));
+				c.setCity(rs.getString(8));
+				c.setPincode(rs.getInt(9));
+				c.setCustomer_type(rs.getString(10));
 				
 			}
 			else
@@ -130,8 +131,9 @@ public class CustomerDAOImp implements CustomerDAO
 				c.setMail(rs.getString(4));
 				c.setAddress(rs.getString(6));
 				c.setState(rs.getString(7));
-				c.setPincode(rs.getInt(8));
-				c.setCustomer_type(rs.getString(9));
+				c.setCity(rs.getString(8));
+				c.setPincode(rs.getInt(9));
+				c.setCustomer_type(rs.getString(10));
 				
 			}
 			else
@@ -224,8 +226,9 @@ public class CustomerDAOImp implements CustomerDAO
 				c.setMail(rs.getString(4));
 				c.setAddress(rs.getString(6));
 				c.setState(rs.getString(7));
-				c.setPincode(rs.getInt(8));
-				c.setCustomer_type(rs.getString(9));
+				c.setCity(rs.getString(8));
+				c.setPincode(rs.getInt(9));
+				c.setCustomer_type(rs.getString(10));
 				cl.add(c);
 			}
 		} catch (SQLException e) {
@@ -255,8 +258,9 @@ public class CustomerDAOImp implements CustomerDAO
 				c.setMail(rs.getString(4));
 				c.setAddress(rs.getString(6));
 				c.setState(rs.getString(7));
-				c.setPincode(rs.getInt(8));
-				c.setCustomer_type(rs.getString(9));
+				c.setCity(rs.getString(8));
+				c.setPincode(rs.getInt(9));
+				c.setCustomer_type(rs.getString(10));
 				
 			}
 			else
@@ -269,6 +273,29 @@ public class CustomerDAOImp implements CustomerDAO
 		}
 		return c;
 	}
-
-
+	@Override
+	public Customer getCustomer1(int customer_id,String name) {
+		String query="SELECT * FROM CUSTOMER WHERE CUSTOMER_ID=? AND NAME=?";
+		Customer c=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		try {
+			ps=con.prepareStatement(query);
+			ps.setInt(1,customer_id);
+			ps.setString(2,name);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				c=new Customer();
+				c.setCustomer_id(rs.getInt("customer_id"));
+				c.setName(rs.getString("name"));
+				
+			}
+		
+		} 
+			catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return c;
+	}
 }
