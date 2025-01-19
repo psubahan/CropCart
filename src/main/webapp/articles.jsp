@@ -69,7 +69,7 @@
 }
 
  .card .button {
-    background-color: #008000; /* Initial background color */
+    background-color: #008000; 
     color: #fff;
     border: none;
     border-radius: 3px;
@@ -138,7 +138,6 @@
                 <h4 ><%= title %></h4>
                 <p>Published on - <%= publishDate %></p>
                 <a href="readMore.jsp?id=<%=id%>" class="button">Read More..</a>
-
             </div>
         <%
             }

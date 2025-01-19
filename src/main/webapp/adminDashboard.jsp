@@ -78,6 +78,10 @@
             color: #008000; /* Green for numbers */
             text-align: right;
         }
+        
+        a{
+           text-decoration : none;
+        }
     </style>
 </head>
 <body>
@@ -87,23 +91,23 @@
         <h1>Admin Dashboard</h1>
         <div class="table-container">
             <div class="record-row">
-                <div class="record-type">Number of Admin records</div>
+                <a href=""><div class="record-type">Number of Farmer records</div></a>
                 <div class="record-count">1</div>
             </div>
             <div class="record-row">
-                <div class="record-type">Number of Category records</div>
+                <a href=""><div class="record-type">Number of Customer records</div></a>
                 <div class="record-count">20</div>
             </div>
             <div class="record-row">
-                <div class="record-type">Number of Customer records</div>
+                <a href=""><div class="record-type">Number of Category records</div></a>
                 <div class="record-count">5</div>
             </div>
             <div class="record-row">
-                <div class="record-type">Number of Produce records</div>
+                <a href=""><div class="record-type">Number of Produce records</div></a>
                 <div class="record-count">179</div>
             </div>
             <div class="record-row">
-                <div class="record-type">Number of Purchase Order records</div>
+                <a href=""><div class="record-type">Number of Purchase Order records</div></a>
                 <div class="record-count">18</div>
             </div>
         </div>

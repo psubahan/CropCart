@@ -50,7 +50,7 @@
     <%
 		if (request.getParameter("id") != null) {
     	int id = Integer.parseInt(request.getParameter("id"));
-   		System.out.println("Article ID: " + id);  
+   		//System.out.println("Article ID: " + id);  
    	    ArticlesDAO adao = new ArticlesDAOImp();
    	    Articles a = adao.getArticle(id);
     	if (a != null) {
