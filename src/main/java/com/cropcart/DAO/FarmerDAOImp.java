@@ -78,7 +78,7 @@ public class FarmerDAOImp implements FarmerDAO
 
 
 	@Override
-	public Farmer getCustomer(int farmer_id, String password) {
+	public Farmer getFarmer(int farmer_id, String password) {
 		// TODO Auto-generated method stub
 		PreparedStatement ps=null;
 		ResultSet rs=null;
@@ -119,7 +119,7 @@ public class FarmerDAOImp implements FarmerDAO
 	}
 
 	@Override
-	public Farmer getCustomer(int farmer_id) {
+	public Farmer getFarmer(int farmer_id) {
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		Farmer f=null;
@@ -158,7 +158,7 @@ public class FarmerDAOImp implements FarmerDAO
 	}
 
 	@Override
-	public String deleteCustomer(int farmer_id) {
+	public String deleteFarmer(int farmer_id) {
 		PreparedStatement ps=null;
 		int res=0;
 		String status="";
@@ -183,7 +183,7 @@ public class FarmerDAOImp implements FarmerDAO
 	}
 
 	@Override
-	public String updateCustomer(Farmer f) {
+	public String updateFarmer(Farmer f) {
 		// TODO Auto-generated method stub
 		PreparedStatement ps=null;
 		String status="";
@@ -221,9 +221,9 @@ public class FarmerDAOImp implements FarmerDAO
 	}
 
 	@Override
-	public List<Farmer> getAllCoustomers() {
+	public List<Farmer> getAllFarmer() {
 		// TODO Auto-generated method stub
-		ArrayList<Farmer> lf=new ArrayList<Farmer>();
+		ArrayList<Farmer> fl=new ArrayList<Farmer>();
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		Farmer f=null;
@@ -246,6 +246,7 @@ public class FarmerDAOImp implements FarmerDAO
 				f.setBranch(rs.getString(11));
 				f.setIfsc(rs.getString(12));
 				f.setAcc_no(rs.getLong(13));
+				fl.add(f);
 				
 			}
 			
@@ -253,10 +254,10 @@ public class FarmerDAOImp implements FarmerDAO
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return lf;
+		return fl;
 	}
 	@Override
-	public Farmer getCustomer(String mail, String password) {
+	public Farmer getFarmer(String mail, String password) {
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		Farmer f=null;

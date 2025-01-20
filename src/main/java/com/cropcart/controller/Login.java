@@ -97,7 +97,7 @@ public class Login extends HttpServlet {
 			
 			Farmer f= new Farmer();
 			FarmerDAO fdao=new FarmerDAOImp();
-			f=fdao.getCustomer(mail, password);
+			f=fdao.getFarmer(mail, password);
 			if(f!=null)
 			{
 				session.setAttribute("farmer", f);
