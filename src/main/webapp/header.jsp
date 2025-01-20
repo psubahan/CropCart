@@ -40,9 +40,9 @@ body {
 
 .nav h3 {
     margin: 0;
-    padding: 10px 20px; /* Add padding around the text */
-    background-color: #007BFF; /* Set the background color */
-    color: white; /* Text color for contrast */
+    padding: 10px 20px; 
+    background-color: #007BFF; 
+    color: white; 
     font-size: 24px;
 }
 
@@ -79,6 +79,18 @@ a:hover {
         <div class="top" id="top">
             <div class="nav">
                 <h3 style="background-color: green;">CROP CART</h3>
+                
+                <%if(session.getAttribute("Admin")!=null){ %>
+                <ul>
+                    <li><a href="homePage.jsp">HOME</a></li>
+                    <li><a href="">FARMER'S MARKET</a></li>
+                    <li><a href="articlesList.jsp">NEWS AND ARTICLES</a></li>
+                    <li><a href="">MY ACCOUNT</a></li>
+                    <li><a href="">CONTACT</a></li>
+                </ul>
+                <%}
+              
+                else{ %>
                 <ul>
                     <li><a href="homePage.jsp">HOME</a></li>
                     <li><a href="">FARMER'S MARKET</a></li>
@@ -86,6 +98,7 @@ a:hover {
                     <li><a href="">MY ACCOUNT</a></li>
                     <li><a href="">CONTACT</a></li>
                 </ul>
+                <%} %>
     </div>
 </body>
 </html>
