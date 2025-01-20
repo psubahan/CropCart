@@ -87,7 +87,7 @@
         <h1>Admin Dashboard</h1>
         <div class="table-container">
             <div class="record-row">
-                <div class="record-type">Number of Admin records</div>
+                <a href="Productcat.jsp"><div class="record-type">Number of Admin records</div></a>
                 <div class="record-count">1</div>
             </div>
             <div class="record-row">

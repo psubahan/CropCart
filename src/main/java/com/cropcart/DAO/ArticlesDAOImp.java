@@ -14,7 +14,7 @@ public class ArticlesDAOImp implements ArticlesDAO {
 	private Connection con;
     
 	public ArticlesDAOImp() {
-		this.con = dbConnection.getConnection();
+		this.con = dbConnection .getConnection();
 	}
 
 
