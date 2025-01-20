@@ -9,7 +9,7 @@ public class dbConnection
     static String url = "jdbc:mysql://localhost:3306/agriculture";
 	
 	static String username = "root";
-	static String password = "tiger";
+	static String password = "root";
 	static Connection conn = null;
 
 	public static Connection getConnection() {
