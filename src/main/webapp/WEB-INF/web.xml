@@ -37,10 +37,9 @@
   <servlet>
     <servlet-name>AddArticles</servlet-name>
     <servlet-class>com.cropcart.controller.AddArticles</servlet-class>
-</servlet>
-<servlet-mapping>
+  </servlet>
+  <servlet-mapping>
     <servlet-name>AddArticles</servlet-name>
     <url-pattern>/AddArticles</url-pattern>
-</servlet-mapping>
-
+  </servlet-mapping>
 </web-app>

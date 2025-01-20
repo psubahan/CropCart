@@ -95,7 +95,7 @@
                 <div class="record-count">20</div>
             </div>
             <div class="record-row">
-                <div class="record-type">Number of Customer records</div>
+                <div class="record-type"><a href="CustomerRecords.jsp">Number of Customer records</a></div>
                 <div class="record-count">5</div>
             </div>
             <div class="record-row">
