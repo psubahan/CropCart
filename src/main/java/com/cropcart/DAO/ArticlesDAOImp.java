@@ -96,6 +96,38 @@ public class ArticlesDAOImp implements ArticlesDAO {
 	    }
 
 	}
+
+
+	@Override
+	public boolean addArticles(Articles a) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int res = 0;
+		
+		 String query = "INSERT INTO ARTICLES(articles_id,Article_type,publish_Date,title,Description,Article_image) VALUES(0,?,?,?,?,?)";
+	     try {
+			ps = con.prepareStatement(query);
+			
+			ps.setString(1,a.getArticle_type());
+			ps.setString(2, a.getPublish_Date());
+			ps.setString(3, a.getTitle());
+			ps.setString(4,a.getDescription());
+			ps.setString(5, a.getArticle_image());
+			
+			res = ps.executeUpdate();
+			
+			} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	     
+	    if(res>0) {
+	    	return true;
+	    }
+	    else {
+	    	return false;
+	    }
+		
+	}
 	
 	
 

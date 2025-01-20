@@ -91,11 +91,7 @@
         <h1>Admin Dashboard</h1>
         <div class="table-container">
             <div class="record-row">
-
-                <a href=""><div class="record-type">Number of Admin records</div></a>
-
                 <a href=""><div class="record-type">Number of Farmer records</div></a>
-
                 <div class="record-count">1</div>
             </div>
             <div class="record-row">
@@ -103,7 +99,7 @@
                 <div class="record-count">20</div>
             </div>
             <div class="record-row">
-                <a href=""><div class="record-type">Number of Category records</div></a>
+                <a href="ProductCat.jsp"><div class="record-type">Number of Category records</div></a>
                 <div class="record-count">5</div>
             </div>
             <div class="record-row">
