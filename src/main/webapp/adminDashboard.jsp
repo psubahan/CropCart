@@ -95,12 +95,11 @@
                 <div class="record-count">1</div>
             </div>
             <div class="record-row">
-                <a href=""><div class="record-type">Number of Customer records</div></a>
+                <a href="CustomerRecords.jsp""><div class="record-type">Number of  Customer records</div></a>
                 <div class="record-count">20</div>
             </div>
             <div class="record-row">
-                <div class="record-type"><a href="CustomerRecords.jsp">Number of Customer records</a></div>
-
+                <a href="Productcat.jsp"><div class="record-type">Number of Product Category records</div></a>
                 <div class="record-count">5</div>
             </div>
             <div class="record-row">
