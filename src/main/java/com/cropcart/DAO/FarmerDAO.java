@@ -2,6 +2,7 @@ package com.cropcart.DAO;
 
 import java.util.List;
 
+import com.cropcart.dto.Customer;
 import com.cropcart.dto.Farmer;
 
 public interface FarmerDAO 
@@ -13,4 +14,5 @@ public interface FarmerDAO
 	public String deleteCustomer(int farmer_id);
 	public String updateCustomer(Farmer f);
 	public List<Farmer> getAllCoustomers();
+	public Farmer getFarmer1(int Farmer_id,String name);
 }

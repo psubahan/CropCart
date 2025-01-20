@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cropcart.db.dbConnection;
+import com.cropcart.dto.Customer;
 import com.cropcart.dto.Farmer;
 
 public class FarmerDAOImp implements FarmerDAO
@@ -293,6 +294,31 @@ public class FarmerDAOImp implements FarmerDAO
 			e.printStackTrace();
 		}
 		return f;
+	}
+	@Override
+	public Farmer getFarmer1(int farmer_id, String name) {
+		String query="SELECT * FROM FARMER WHERE FARMER_ID=? AND NAME=?";
+		Farmer c=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		try {
+			ps=con.prepareStatement(query);
+			ps.setInt(1,farmer_id);
+			ps.setString(2,name);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				c=new Farmer();
+				c.setFarmer_id(rs.getInt("farmer_id"));
+				c.setName(rs.getString("name"));
+				
+			}
+		
+		} 
+			catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return c;
 	}
 
 }
