@@ -35,12 +35,21 @@
     <url-pattern>/Articles</url-pattern>
   </servlet-mapping>
   <servlet>
+    <description></description>
+    <display-name>EditArticle</display-name>
+    <servlet-name>EditArticle</servlet-name>
+    <servlet-class>com.cropcart.controller.EditArticle</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditArticle</servlet-name>
+    <url-pattern>/EditArticle</url-pattern>
+  </servlet-mapping>
     <servlet-name>AddArticles</servlet-name>
     <servlet-class>com.cropcart.controller.AddArticles</servlet-class>
-</servlet>
 <servlet-mapping>
     <servlet-name>AddArticles</servlet-name>
     <url-pattern>/AddArticles</url-pattern>
 </servlet-mapping>
+
 
 </web-app>

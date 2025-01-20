@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Farmer Registration</title>
+    <title>Registration</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -67,6 +67,11 @@
             font-size: 16px;
             display: block;
             margin: 20px auto;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .button:hover {
+            transform: scale(1.02); /* Slightly enlarges the button */
         }
 
     </style>
@@ -84,64 +89,56 @@
 
         <form action="farmerRegistration" method="POST">
             <div class="form-group">
-                <label for="name">Name</label> <!-- Removed the asterisk -->
+                <label for="name">Name</label>
                 <input type="text" id="name" name="name" required>
             </div>
             <div class="form-group">
-                <label for="email">Email</label> <!-- Removed the asterisk -->
+                <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
             </div>
             <div class="form-group">
-                <label for="password">Password</label> <!-- Removed the asterisk -->
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div class="form-group">
-                <label for="confirm-password">Confirm Password</label> <!-- Removed the asterisk -->
-                <input type="password" id="confirm-password" name="confirm-password" required>
-            </div>
-            <div class="form-group">
-                <label for="address">Address</label> <!-- Removed the asterisk -->
+                <label for="address">Address</label> 
                 <input type="text" id="address" name="address" required>
             </div>
             <div class="form-group">
-                <label for="state">State</label> <!-- Removed the asterisk -->
+                <label for="state">State</label> 
                 <input type="text" id="state" name="state" required>
             </div>
             <div class="form-group">
-                <label for="city">City</label> <!-- Removed the asterisk -->
+                <label for="city">City</label> 
                 <input type="text" id="city" name="city" required>
             </div>
             <div class="form-group">
-                <label for="pincode">Pincode</label> <!-- Removed the asterisk -->
+                <label for="pincode">Pincode</label> 
                 <input type="number" id="pincode" name="pincode" required>
             </div>
             <div class="form-group">
-                <label for="mobile">Mobile Number</label> <!-- Removed the asterisk -->
+                <label for="mobile">Mobile Number</label> 
                 <input type="tel" id="mobile" name="mobile" required>
             </div>
             <div class="form-group">
-                <label for="customer-type">Customer Type</label> <!-- Removed the asterisk -->
-                <select id="customer-type" name="customer-type" required>
-                    <option value="">Select</option>
-                    <option value="farmer">Farmer</option>
-                    <option value="buyer">Buyer</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="bank-name">Bank Name</label> <!-- Removed the asterisk -->
+                <label for="bank-name">Bank Name</label> 
                 <input type="text" id="bank-name" name="bank-name">
             </div>
             <div class="form-group">
-                <label for="branch">Branch</label> <!-- Removed the asterisk -->
+                <label for="branch">Branch</label> 
                 <input type="text" id="branch" name="branch">
             </div>
             <div class="form-group">
-                <label for="ifsc">IFSC</label> <!-- Removed the asterisk -->
+                <label for="ifsc">IFSC Code</label> 
                 <input type="text" id="ifsc" name="ifsc">
             </div>
             <div class="form-group">
-                <label for="account-number">Account Number</label> <!-- Removed the asterisk -->
+                <label for="account-number">Account Number</label>
                 <input type="text" id="account-number" name="account-number">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label> 
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
             </div>
             <input type="submit" class = "btn button" value="Click here to Register">
         </form>
@@ -155,31 +152,23 @@
         </div>
         <form action="customerRegistration" method="post">
             <div class="form-group">
-                <label for="name">Name:</label>
+                <label for="name">Name</label>
                 <input type="text" id="name" name="name" required>
             </div>
             <div class="form-group">
-                <label for="email">Email:</label>
+                <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
             </div>
             <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div class="form-group">
-                <label for="confirmPassword">Confirm Password:</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" required>
-            </div>
-            <div class="form-group">
-                <label for="contactNumber">Contact Number:</label>
+                <label for="contactNumber">Contact Number</label>
                 <input type="text" id="contactNumber" name="contactNumber" required>
             </div>
             <div class="form-group">
-                <label for="address">Address:</label>
+                <label for="address">Address</label>
                 <input type="text" id="address" name="address" required>
             </div>
             <div class="form-group">
-                <label for="state">State:</label>
+                <label for="state">State</label>
                 <select id="state" name="state" required>
                     <option value="">Select</option>
                     <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -221,21 +210,29 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="city">City:</label>
+                <label for="city">City</label>
                 <input type="text" id="city" name="city" required>
             </div>
             <div class="form-group">
-                <label for="pincode">Pincode:</label>
+                <label for="pincode">Pincode</label>
                 <input type="text" id="pincode" name="pincode" required>
             </div>
 
             <div class="form-group">
-                <label for="customerType">Customer Type:</label>
+                <label for="customerType">Customer Type</label>
                 <select id="customerType" name="customerType" required>
                     <option value="">Select</option>
                     <option value="Farmer">WholeSale</option>
                     <option value="Retailer">Retailer</option>
                 </select>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
             </div>
             <input type="submit" class="btn button" value="Click Here to Register">
         </form>
