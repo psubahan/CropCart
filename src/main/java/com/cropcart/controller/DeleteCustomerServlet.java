@@ -46,13 +46,13 @@ public class DeleteCustomerServlet extends HttpServlet {
             }
 
             // Forward back to the customer records page
-            request.getRequestDispatcher("customerrecords.jsp").forward(request, response);
+            request.getRequestDispatcher("CustomerRecords.jsp").forward(request, response);
 
         } catch (Exception e) {
             // Handle any unexpected exceptions
             e.printStackTrace();
             request.setAttribute("errorMessage", "Unexpected error occurred. Please try again later.");
-            request.getRequestDispatcher("customerrecords.jsp").forward(request, response);
+            request.getRequestDispatcher("CustomerRecords.jsp").forward(request, response);
         }
     }
 }
