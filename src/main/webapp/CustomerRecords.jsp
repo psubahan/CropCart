@@ -11,7 +11,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Details</title>
     <style>
-        /* CSS Styles for the page */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f4f4;
@@ -24,9 +23,11 @@
         }
 
         form {
-            margin-bottom: 20px;
+            margin-bottom: 8px;
+            margin-top: 50px;
             display: flex;
             gap: 10px;
+            justify-content: center;
         }
 
         input {
@@ -36,10 +37,27 @@
             border-radius: 5px;
         }
 
-        button {
+        .button {
+            background: none;
+            border: none;
+            color: #008000; 
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight : bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+            
+        }
+        
+        .buttons {
             background: linear-gradient(145deg, #008000, #66ff66);
             border: none;
-            color: white;
+            color: black;
             padding: 8px 16px;
             font-size: 14px;
             border-radius: 5px;
@@ -47,7 +65,7 @@
             transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        button:hover {
+        .buttons:hover {
             transform: scale(1.05);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
@@ -59,16 +77,17 @@
             background: white;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
         }
 
         table.articles thead {
             background: linear-gradient(145deg, #008000, #66ff66);
-            color: white;
+            color: black;
         }
 
         table.articles th, table.articles td {
             padding: 15px;
-            text-align: left;
+            text-align: center;
         }
 
         table.articles tbody tr:nth-child(odd) {
@@ -91,18 +110,20 @@
     </style>
 </head>
 <body>
+    <jsp:include page="header.jsp" />
     <form action="CustomerRecordsServlet" method="POST">
         <input type="text" id="customer_id" name="customer_id" placeholder="Customer ID" required>
         <input type="text" id="name" name="name" placeholder="Customer Name" required>
-        <button type="submit">Search</button>
+        <button type="submit" class="buttons">Search</button>
     </form>
 
-    <table class="articles">
+    <table class="articles" style="border-radius : 20px;">
         <thead>
             <tr>
                 <th>Customer ID</th>
                 <th>Customer Name</th>
-                <th>Action</th>
+                <th>View Details</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -119,11 +140,13 @@
                             <td>
                                 <form action="ViewCustomerDetails.jsp" method="get" style="display:inline;">
                                     <input type="hidden" name="customer_id" value="<%= customer.getCustomer_id() %>">
-                                    <button type="submit">View Details</button>
+                                    <button type="submit" class="button">View Details</button>
                                 </form>
+                            </td>
+                            <td>
                                 <form action="DeleteCustomerServlet" method="post" style="display:inline;">
                                     <input type="hidden" name="customer_id" value="<%= customer.getCustomer_id() %>">
-                                    <button type="submit">Delete</button>
+                                    <button type="submit" class="button">Delete</button>
                                 </form>
                             </td>
                         </tr>
@@ -132,12 +155,13 @@
                 } else {
             %>
                     <tr>
-                        <td colspan="3" class="no-data">No customers found.</td>
+                        <td colspan="4" class="no-data">No customers found.</td>
                     </tr>
             <%
                 }
             %>
         </tbody>
     </table>
+    <jsp:include page="footer.jsp" />
 </body>
 </html>

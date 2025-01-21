@@ -67,6 +67,7 @@
             font-size: 16px;
             display: block;
             margin: 20px auto;
+            width : 100%;
             transition: all 0.3s ease-in-out;
         }
         
