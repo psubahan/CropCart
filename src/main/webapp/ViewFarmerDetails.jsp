@@ -92,7 +92,7 @@
 
                 // Create the DAO object and fetch the customer details
                 FarmerDAO cdao = new FarmerDAOImp();
-                Farmer farmer = cdao.getCustomer(farmer_id);
+                Farmer farmer = cdao.getFarmer(farmer_id);
 
                 if (farmer != null) {
     %>
