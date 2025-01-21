@@ -62,7 +62,7 @@ public class ProductDAOImp implements ProductDAO
 		        ps = con.prepareStatement(query);
 		        rs = ps.executeQuery();
 
-		        if (rs.next()) {
+		        while (rs.next()) {
 		            pd = new ProductDetails();
 		            pd.setProduct_id(rs.getInt("product_id")); 
 		            pd.setCategoty(rs.getString("categoty"));
