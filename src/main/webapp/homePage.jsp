@@ -1,4 +1,17 @@
+<%@page import="com.cropcart.dto.Farmer"%>
+<%@page import="com.cropcart.DAO.FarmerDAOImp"%>
+<%@page import="com.cropcart.DAO.FarmerDAO"%>
+<%@page import="java.util.List"%>
+<%@page import="com.cropcart.DAO.CustomerDAOImp"%>
+<%@page import="com.cropcart.DAO.CustomerDAO"%>
+<%@page import="com.cropcart.dto.Customer"%>
 <%@ page language="java" %>
+<%
+	CustomerDAO cdao= new CustomerDAOImp();
+	List<Customer> cl=cdao.getAllCoustomers();
+	FarmerDAO fdao=new FarmerDAOImp();
+	List<Farmer>fl=fdao.getAllFarmer();
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -393,11 +406,11 @@ a:hover {
 
         <div class="details">
             <div class="item">
-                <p class="number">1</p>
+                <p class="number"><%=fl.size() %></p>
                 <p class="data">Farmers Registered</p>
             </div>
             <div class="item">
-                <p class="number">1</p>
+                <p class="number"><%=cl.size() %></p>
                 <p class="data">Customers</p>
             </div>
             <div class="item">

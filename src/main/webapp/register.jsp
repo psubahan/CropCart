@@ -73,21 +73,48 @@
         .button:hover {
             transform: scale(1.02); /* Slightly enlarges the button */
         }
-
+		.message {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
     </style>
 </head>
 <body>
     <%@ include file="header.jsp"%>
     <%
     String userRegister = request.getParameter("userRegister");
-    %> 
+    String message = (String) request.getAttribute("message");
+  %>
+  
+  <%
+      if (message != null) {
+  %>
+  <div class="container">
+      <div class="message <%= message.contains("successful") ? "success" : "error" %>">
+          <%= message %>
+      </div>
+  </div>
+  <%
+      }
+  %> 
     <%if ("Farmer".equalsIgnoreCase(userRegister)) { %>
     <div class="container" style="margin-top : 50px;">
         <div class="image-section">
             <div class="title" style="font-size:20px; font-weight : bold; text-align : center; margin : 15px; color : #008000;">FARMER REGISTRATION</div>
         </div>
 
-        <form action="farmerRegistration" method="POST">
+        <form action="register" method="POST">
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" required>
@@ -140,7 +167,7 @@
                 <label for="confirm-password">Confirm Password</label>
                 <input type="password" id="confirm-password" name="confirm-password" required>
             </div>
-            <input type="submit" class = "btn button" value="Click here to Register">
+            <button class = "btn button" name="farmer" value="farmer">Click here to Register</button>
         </form>
     </div>
     <%} 
@@ -150,7 +177,7 @@
         <div class="image-section">
             <div class="title" style="font-size:20px; font-weight : bold; text-align : center; margin : 15px; color : #008000;">CUSTOMER REGISTRATION</div>
         </div>
-        <form action="customerRegistration" method="post">
+        <form action="register" method="post">
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" required>
@@ -234,7 +261,7 @@
                 <label for="confirmPassword">Confirm Password</label>
                 <input type="password" id="confirmPassword" name="confirmPassword" required>
             </div>
-            <input type="submit" class="btn button" value="Click Here to Register">
+            <button class = "btn button" name="customer" value="customer">Click here to Register</button>
         </form>
     </div>
     <%} %>

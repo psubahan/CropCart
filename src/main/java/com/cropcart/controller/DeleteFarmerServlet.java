@@ -32,7 +32,7 @@ public class DeleteFarmerServlet extends HttpServlet {
                 FarmerDAO farmerDAO = new FarmerDAOImp();
 
                 // Perform the delete operation
-                String status = farmerDAO.deleteCustomer(farmerId);
+                String status = farmerDAO.deleteFarmer(farmerId);
 
                 if ("success".equalsIgnoreCase(status)) {
                     // Redirect to the main page with a success message

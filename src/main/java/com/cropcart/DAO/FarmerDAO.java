@@ -8,11 +8,13 @@ import com.cropcart.dto.Farmer;
 public interface FarmerDAO 
 {
 	public String addFarmer(Farmer f);
-	public Farmer getCustomer(int farmer_id,String password);
-	public Farmer getCustomer(String mail,String password);
-	public Farmer getCustomer(int farmer_id);
-	public String deleteCustomer(int farmer_id);
-	public String updateCustomer(Farmer f);
-	public List<Farmer> getAllCoustomers();
-	public Farmer getFarmer1(int Farmer_id,String name);
+
+	public Farmer getFarmer(int farmer_id,String password);
+	public Farmer getFarmer(String mail,String password);
+	public Farmer getFarmer(int farmer_id);
+	public String deleteFarmer(int farmer_id);
+	public String updateFarmer(Farmer f);
+	public List<Farmer> getAllFarmer();
+	public Farmer getFarmer1(int farmer_id, String name);
+
 }
