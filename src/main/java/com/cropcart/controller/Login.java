@@ -81,12 +81,12 @@ public class Login extends HttpServlet {
 			if(c!=null)
 			{
 				session.setAttribute("customer", c);
-				RequestDispatcher rd=request.getRequestDispatcher("#");
+				RequestDispatcher rd=request.getRequestDispatcher("customerDashboard.jsp");
 				rd.forward(request, response);
 			}
 			else
 			{
-				RequestDispatcher rd=request.getRequestDispatcher("homePage.jsp");
+				RequestDispatcher rd=request.getRequestDispatcher("login.jsp");
 				rd.forward(request, response);
 			}
 		}
@@ -101,7 +101,7 @@ public class Login extends HttpServlet {
 			if(f!=null)
 			{
 				session.setAttribute("farmer", f);
-				RequestDispatcher rd=request.getRequestDispatcher("#");
+				RequestDispatcher rd=request.getRequestDispatcher("famerDashboard.jsp");
 				rd.forward(request, response);
 			}
 			else

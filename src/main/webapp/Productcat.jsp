@@ -55,21 +55,8 @@
     </style>
 </head>
 <body>
-
-
 <%@ include file="header.jsp"%>
     <div class="container" style="margin: 50px 0px;">
-        <%
-        
-        
-        
-        // Fetching the list of product categories
-        ProductCatDAO pdao = new ProductCatDAOImp();
-        ArrayList<ProductCategory> productCategories = pdao.getProductCategory();
-        
-        // Checking if the list is not empty and displaying data
-        if (productCategories != null && !productCategories.isEmpty()) {
-        %>
         <table>
             <thead>
                 <tr>
@@ -80,36 +67,31 @@
                     <th>Status</th>
                 </tr>
             </thead>
+            <% ProductCategory pc = new ProductCategory();
+          ProductCatDAO pdao = new ProductCatDAOImp();
+          ArrayList<ProductCategory> al = pdao.getProductCategory();
+          Iterator<ProductCategory> itr = al.iterator();
+          if(itr.hasNext()){
+              pc = itr.next();
+        %>
             <tbody>
-            <%
-            // Iterating over the list of product categories
-            for (ProductCategory pc : productCategories) {
-                int id = pc.getProductCategory_id();
-                String category = pc.getCategory();
-                String image = pc.getImg();
-                String desc = pc.getDescription();
-                String status = pc.getStatus();
-            %>
                 <tr>
-                    <td><%= id %></td>
-                    <td><%= category %></td>
-                    <td><img src="<%= image %>" alt="<%= category %>"></td>
-                    <td><%= desc %></td>
-                    <td><%= status %></td>
-                </tr>
-            <%
-            }
-            %>
+                <td><%= pc.getProductCategory_id() %></td>
+                <td><%= pc.getCategory() %></td>
+                <td><img src="<%=pc.getImg()%>"></td>
+                <td><%= pc.getDescription() %></td>
+                <td><%= pc.getStatus() %></td>
+                </tr>    
             </tbody>
-        </table>
-        <%
-        } else {
+    <% 
+            } else {
+                out.println("<tr><td colspan='11'>Farmer data not found!</td></tr>");
+            }
         %>
-        <p>No product categories available.</p>
-        <%
-        }
-        %>
-    </div>
+        </tbody>
+    </table>
+</div>
+
     
     <%@ include file="footer.jsp"%>
 </body>
@@ -117,6 +99,7 @@
 
         
        
+        
         
 
 
