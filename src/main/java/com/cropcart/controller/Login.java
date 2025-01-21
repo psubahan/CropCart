@@ -101,7 +101,7 @@ public class Login extends HttpServlet {
 			if(f!=null)
 			{
 				session.setAttribute("farmer", f);
-				RequestDispatcher rd=request.getRequestDispatcher("#");
+				RequestDispatcher rd=request.getRequestDispatcher("famerDashboard.jsp");
 				rd.forward(request, response);
 			}
 			else
