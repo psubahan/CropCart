@@ -61,15 +61,19 @@
     <div class="container" style="margin: 50px 0px;">
         <%
         
-        
-        
-        // Fetching the list of product categories
+       
+        // Fetch the list of product categories
         ProductCatDAO pdao = new ProductCatDAOImp();
         ArrayList<ProductCategory> productCategories = pdao.getProductCategory();
-        
-        // Checking if the list is not empty and displaying data
-        if (productCategories != null && !productCategories.isEmpty()) {
-        %>
+
+        // Directly get the first category from the list, assuming it's not empty
+        ProductCategory pc = productCategories.get(0);  // Access the first element without any check
+        int id = pc.getProductCategory_id();
+        String category = pc.getCategory();
+        String image = pc.getImg();
+        String desc = pc.getDescription();
+        String status = pc.getStatus();
+    %>
         <table>
             <thead>
                 <tr>
@@ -81,15 +85,6 @@
                 </tr>
             </thead>
             <tbody>
-            <%
-            // Iterating over the list of product categories
-            for (ProductCategory pc : productCategories) {
-                int id = pc.getProductCategory_id();
-                String category = pc.getCategory();
-                String image = pc.getImg();
-                String desc = pc.getDescription();
-                String status = pc.getStatus();
-            %>
                 <tr>
                     <td><%= id %></td>
                     <td><%= category %></td>
@@ -97,19 +92,10 @@
                     <td><%= desc %></td>
                     <td><%= status %></td>
                 </tr>
-            <%
-            }
-            %>
             </tbody>
         </table>
-        <%
-        } else {
-        %>
-        <p>No product categories available.</p>
-        <%
-        }
-        %>
-    </div>
+   
+
     
     <%@ include file="footer.jsp"%>
 </body>
