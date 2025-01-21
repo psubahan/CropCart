@@ -1,3 +1,4 @@
+<%@page import="com.cropcart.DAO.ProductDAOImp"%>
 <%@ page import="com.cropcart.DAO.ProductDAOImp" %>
 <%@ page import="com.cropcart.DAO.ProductDAO" %>
 <%@ page import="com.cropcart.dto.ProductDetails" %>
@@ -92,7 +93,7 @@
 
                 // Create the DAO object and fetch the customer details
                 ProductDAO pdao = new ProductDAOImp();
-                ProductDetails product = pdao.getFarmer(product_id);
+                ProductDetails product = pdao.getProduct(product_id);
 
                 if (product != null) {
     %>

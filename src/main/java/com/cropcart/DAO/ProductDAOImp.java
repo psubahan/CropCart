@@ -15,7 +15,7 @@ public class ProductDAOImp implements ProductDAO
 {
 	private Connection con=null;
 	
-	public ProductDAOImp(Connection con) {
+	public ProductDAOImp() {
 		this.con = dbConnection.getConnection();
 	}
 
