@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cropcart.db.dbConnection;
-import com.cropcart.dto.ProductCategory;
 import com.cropcart.dto.ProductDetails;
 
 public class ProductDAOImp implements ProductDAO 

@@ -250,7 +250,7 @@
                 <label for="customerType">Customer Type</label>
                 <select id="customerType" name="customerType" required>
                     <option value="">Select</option>
-                    <option value="Farmer">WholeSale</option>
+                    <option value="WholeSale">WholeSale</option>
                     <option value="Retailer">Retailer</option>
                 </select>
             </div>
