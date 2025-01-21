@@ -131,7 +131,7 @@
                                     <label for="password" class="form-label">Password</label>
                                     <input type="password" class="form-control" name="password" id="password" placeholder="Enter your Password">
                                 </div>
-                                <input type="submit" class="btn login-btn w-100" name="customer" value="Login">
+                                <a href="customerDashboard.jsp"><input type="submit" class="btn login-btn w-100" name="customer" value="Login"></a>
                                 <div class="text-center mt-3">
                                      <a href="register.jsp?userRegister=Customer" class="text-decoration-none" style="color: #008000; font-weight: bold;">New User?</a>
                                      <br>
