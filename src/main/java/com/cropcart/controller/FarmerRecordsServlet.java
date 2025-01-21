@@ -35,7 +35,7 @@ public class FarmerRecordsServlet extends HttpServlet {
                 FarmerDAO farmerDAO = new FarmerDAOImp();
 
                 // Get customer details
-                Farmer farmer = FarmerDAO.getFarmer1(farmerId, farmerName); 
+                Farmer farmer = farmerDAO.getFarmer1(farmerId, farmerName); 
 
                 // Check if customer exists
                 if (farmer != null) {
