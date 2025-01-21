@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,9 +72,13 @@
 <body>
     <jsp:include page="header.jsp" />
     
-    <%if(request.getParameter("farmer")!=null){ %>
+    
     <div class="container" style="margin-top : 50px;">
         <h2>Add New Product</h2>
+        <%if(request.getAttribute("message")!=null){ %>
+         <h2 style= " margin:10px; color : blue; text-align : center;"><%=request.getAttribute("message")%></h2>
+         <%} %>
+          
         <form action="AddProduct" method="post">
             <div class="form-group">
                 <label for="category">Category</label>
@@ -128,7 +130,7 @@
             <button type="submit" class="btn button">Add Product</button>
         </form>
     </div>
-    <%} %>
+   
     <jsp:include page="footer.jsp" />
 </body>
 </html>
