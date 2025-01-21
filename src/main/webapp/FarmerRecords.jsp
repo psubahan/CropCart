@@ -1,7 +1,7 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.cropcart.dto.Customer" %>
-<%@ page import="com.cropcart.DAO.CustomerDAOImp" %>
-<%@ page import="com.cropcart.DAO.CustomerDAO" %>
+<%@ page import="com.cropcart.dto.Farmer" %>
+<%@ page import="com.cropcart.DAO.FarmerDAOImp" %>
+<%@ page import="com.cropcart.DAO.FarmerDAO" %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -9,8 +9,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Details</title>
+    <title>Farmer Details</title>
     <style>
+        /* CSS Styles for the page */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f4f4;
@@ -23,11 +24,9 @@
         }
 
         form {
-            margin-bottom: 8px;
-            margin-top: 50px;
+            margin-bottom: 20px;
             display: flex;
             gap: 10px;
-            justify-content: center;
         }
 
         input {
@@ -37,27 +36,10 @@
             border-radius: 5px;
         }
 
-        .button {
-            background: none;
-            border: none;
-            color: #008000; 
-            padding: 8px 16px;
-            font-size: 14px;
-            font-weight : bold;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .button:hover {
-            transform: scale(1.05);
-            
-        }
-        
-        .buttons {
+        button {
             background: linear-gradient(145deg, #008000, #66ff66);
             border: none;
-            color: black;
+            color: white;
             padding: 8px 16px;
             font-size: 14px;
             border-radius: 5px;
@@ -65,7 +47,7 @@
             transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .buttons:hover {
+        button:hover {
             transform: scale(1.05);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
@@ -77,17 +59,16 @@
             background: white;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            margin: 0 auto;
         }
 
         table.articles thead {
             background: linear-gradient(145deg, #008000, #66ff66);
-            color: black;
+            color: white;
         }
 
         table.articles th, table.articles td {
             padding: 15px;
-            text-align: center;
+            text-align: left;
         }
 
         table.articles tbody tr:nth-child(odd) {
@@ -110,43 +91,39 @@
     </style>
 </head>
 <body>
-    <jsp:include page="header.jsp" />
-    <form action="CustomerRecordsServlet" method="POST">
-        <input type="text" id="customer_id" name="customer_id" placeholder="Customer ID" required>
-        <input type="text" id="name" name="name" placeholder="Customer Name" required>
-        <button type="submit" class="buttons">Search</button>
+    <form action="FarmerRecordsServlet" method="POST">
+        <input type="text" id="farmer_id" name="farmer_id" placeholder="Farmer ID" required>
+        <input type="text" id="name" name="name" placeholder="Farmer Name" required>
+        <button type="submit">Search</button>
     </form>
 
-    <table class="articles" style="border-radius : 20px;">
+    <table class="articles">
         <thead>
             <tr>
-                <th>Customer ID</th>
-                <th>Customer Name</th>
-                <th>View Details</th>
-                <th>Delete</th>
+                <th>Farmer ID</th>
+                <th>Farmer Name</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <%
-                CustomerDAO cdao = new CustomerDAOImp();
-                List<Customer> customerList = cdao.getAllCoustomers();
+                FarmerDAO cdao = new FarmerDAOImp();
+                List<Farmer> farmerList = cdao.getAllFarmer();
 
-                if (customerList != null && !customerList.isEmpty()) {
-                    for (Customer customer : customerList) {
+                if (farmerList != null && !farmerList.isEmpty()) {
+                    for (Farmer farmer : farmerList) {
             %>
                         <tr>
-                            <td><%= customer.getCustomer_id() %></td>
-                            <td><%= customer.getName() %></td>
+                            <td><%= farmer.getFarmer_id() %></td>
+                            <td><%= farmer.getName() %></td>
                             <td>
-                                <form action="ViewCustomerDetails.jsp" method="get" style="display:inline;">
-                                    <input type="hidden" name="customer_id" value="<%= customer.getCustomer_id() %>">
-                                    <button type="submit" class="button">View Details</button>
+                                <form action="ViewFarmerDetails.jsp" method="get" style="display:inline;">
+                                    <input type="hidden" name="farmer_id" value="<%= farmer.getFarmer_id() %>">
+                                    <button type="submit">View Details</button>
                                 </form>
-                            </td>
-                            <td>
-                                <form action="DeleteCustomerServlet" method="post" style="display:inline;">
-                                    <input type="hidden" name="customer_id" value="<%= customer.getCustomer_id() %>">
-                                    <button type="submit" class="button">Delete</button>
+                                <form action="DeleteFarmerServlet" method="post" style="display:inline;">
+                                    <input type="hidden" name="farmer_id" value="<%= farmer.getFarmer_id() %>">
+                                    <button type="submit">Delete</button>
                                 </form>
                             </td>
                         </tr>
@@ -155,13 +132,12 @@
                 } else {
             %>
                     <tr>
-                        <td colspan="4" class="no-data">No customers found.</td>
+                        <td colspan="3" class="no-data">No farmers found.</td>
                     </tr>
             <%
                 }
             %>
         </tbody>
     </table>
-    <jsp:include page="footer.jsp" />
 </body>
 </html>

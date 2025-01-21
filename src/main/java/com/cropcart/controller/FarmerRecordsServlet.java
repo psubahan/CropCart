@@ -9,13 +9,13 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-import com.cropcart.DAO.CustomerDAO;
-import com.cropcart.DAO.CustomerDAOImp;
-import com.cropcart.dto.Customer;
+import com.cropcart.DAO.FarmerDAO;
+import com.cropcart.DAO.FarmerDAOImp;
+import com.cropcart.dto.Farmer;
 
-@WebServlet("/CustomerRecordsServlet")
+@WebServlet("/FarmerRecordsServlet")
 
-public class CustomerRecordsServlet extends HttpServlet {
+public class FarmerRecordsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -25,43 +25,44 @@ public class CustomerRecordsServlet extends HttpServlet {
 
         try {
             // Retrieve parameters from the request
-            String customerIdParam = request.getParameter("customer_id");
-            String customerName = request.getParameter("name");
+            String farmerIdParam = request.getParameter("farmer_id");
+            String farmerName = request.getParameter("name");
 
-            if (customerIdParam != null && !customerIdParam.isEmpty() && customerName != null && !customerName.isEmpty()) {
-                int customerId = Integer.parseInt(customerIdParam);
+            if (farmerIdParam != null && !farmerIdParam.isEmpty() && farmerName != null && !farmerName.isEmpty()) {
+                int farmerId = Integer.parseInt(farmerIdParam);
 
                 // DAO instance
-                CustomerDAO customerDAO = new CustomerDAOImp();
+                FarmerDAO farmerDAO = new FarmerDAOImp();
 
                 // Get customer details
-                Customer customer = customerDAO.getCustomer1(customerId, customerName);
+                Farmer farmer = farmerDAO.getFarmer1(farmerId, farmerName); 
 
                 // Check if customer exists
-                if (customer != null) {
+                if (farmer != null) {
                     // Set the customer object as an attribute to the request
-                    request.setAttribute("customer", customer);
+                    request.setAttribute("farmer", farmer);
                 } else {
                     request.setAttribute("errorMessage", "No customer found with the provided ID and name.");
                 }
-            } else {
+                }
+            else {
                 // Invalid or missing parameters
                 request.setAttribute("errorMessage", "Invalid input. Please provide a valid customer ID and name.");
             }
 
             // Forward the request to the JSP page
-            RequestDispatcher dispatcher = request.getRequestDispatcher("customerrecords.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("farmerrecords.jsp");
             dispatcher.forward(request, response);
 
         } catch (NumberFormatException e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Error: Invalid customer ID format.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("customerrecords.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("farmerrecords.jsp");
             dispatcher.forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Unexpected error occurred. Please try again later.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("customerrecords.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("farmerrecords.jsp");
             dispatcher.forward(request, response);
         }
     }

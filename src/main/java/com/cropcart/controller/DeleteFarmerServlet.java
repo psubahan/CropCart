@@ -1,3 +1,4 @@
+
 package com.cropcart.controller;
 
 import jakarta.servlet.ServletException;
@@ -8,11 +9,11 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-import com.cropcart.DAO.CustomerDAO;
-import com.cropcart.DAO.CustomerDAOImp;
+import com.cropcart.DAO.FarmerDAO;
+import com.cropcart.DAO.FarmerDAOImp;
 
-@WebServlet("/DeleteCustomerServlet")
-public class DeleteCustomerServlet extends HttpServlet {
+@WebServlet("/DeleteFarmerServlet")
+public class DeleteFarmerServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -22,37 +23,37 @@ public class DeleteCustomerServlet extends HttpServlet {
 
         try {
             // Retrieve the customer ID from the request
-            String customerIdParam = request.getParameter("customer_id");
+            String farmerIdParam = request.getParameter("farmer_id");
 
-            if (customerIdParam != null && !customerIdParam.isEmpty()) {
-                int customerId = Integer.parseInt(customerIdParam);
+            if (farmerIdParam != null && !farmerIdParam.isEmpty()) {
+                int farmerId = Integer.parseInt(farmerIdParam);
 
                 // Create a DAO instance
-                CustomerDAO customerDAO = new CustomerDAOImp();
+                FarmerDAO farmerDAO = new FarmerDAOImp();
 
                 // Perform the delete operation
-                String status = customerDAO.deleteCustomer(customerId);
+                String status = farmerDAO.deleteFarmer(farmerId);
 
                 if ("success".equalsIgnoreCase(status)) {
                     // Redirect to the main page with a success message
-                    request.setAttribute("successMessage", "Customer deleted successfully.");
+                    request.setAttribute("successMessage", "Farmer deleted successfully.");
                 } else {
                     // Redirect to the main page with an error message
-                    request.setAttribute("errorMessage", "Customer not found or could not be deleted.");
+                    request.setAttribute("errorMessage", "Farmer not found or could not be deleted.");
                 }
             } else {
                 // Invalid customer ID
-                request.setAttribute("errorMessage", "Invalid customer ID.");
+                request.setAttribute("errorMessage", "Invalid farmer ID.");
             }
 
             // Forward back to the customer records page
-            request.getRequestDispatcher("ViewCustomerDetails.jsp").forward(request, response);
+            request.getRequestDispatcher("FarmerRecords.jsp").forward(request, response);
 
         } catch (Exception e) {
             // Handle any unexpected exceptions
             e.printStackTrace();
             request.setAttribute("errorMessage", "Unexpected error occurred. Please try again later.");
-            request.getRequestDispatcher("ViewCustomerDetails.jsp").forward(request, response);
+            request.getRequestDispatcher("FarmerRecords.jsp").forward(request, response);
         }
     }
 }

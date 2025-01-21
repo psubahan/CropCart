@@ -20,7 +20,6 @@ body {
     margin-top : 30px;
 }
 
-/* TOP */
 .top {
     height: 580px;
 }
@@ -28,14 +27,14 @@ body {
 
 
 .nav {
-    width: 80%; /* Center the nav block horizontally */
+    width: 80%; 
     margin: 10px auto; 
     /* padding: 10px 20px;  */
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Distribute items (h3 and ul) */
-    background: rgba(255, 255, 255, 0.8); /* Semi-transparent background for contrast */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
+    justify-content: space-between; 
+    background: rgba(255, 255, 255, 0.8); 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
 .nav h3 {
@@ -55,7 +54,8 @@ ul {
 }
 
 ul li {
-    margin: 0 10px; 
+    position: relative; 
+    margin: 0 10px;
 }
 
 a {
@@ -66,12 +66,35 @@ a {
     transition: color 0.3s;
 }
 
-
-a:hover {
-    color: #008000; 
+.dropdown {
+    position: absolute;
+    top: 100%; 
+    left: 0;
+    display: none; /* Initially hidden */
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    padding: 10px 0;
+    min-width: 150px; 
 }
 
-       
+
+
+.dropdown a {
+    display: block;
+    padding: 10px 20px;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.dropdown a:hover {
+    background-color: #f0f0f0;
+}
+
+ul li:hover .dropdown {
+    display: block; 
+}
     </style>
 </head>
 <body>
@@ -84,12 +107,28 @@ a:hover {
                 <ul>
                     <li><a href="homePage.jsp">HOME</a></li>
                     <li><a href="">FARMER'S MARKET</a></li>
-                    <li><a href="articlesList.jsp">NEWS AND ARTICLES</a></li>
+                    <li>
+                        <a href="articlesList.jsp">NEWS AND ARTICLES</a>
+                        <div class="dropdown">
+                            <a href="AddArticles.jsp">Add Articles</a>
+                            <a href="editArticles.jsp">Edit Articles</a>
+                        </div>
+                    </li>
                     <li><a href="">MY ACCOUNT</a></li>
                     <li><a href="">CONTACT</a></li>
                 </ul>
                 <%}
-              
+                
+                else if(request.getParameter("farmer")!=null){ %>
+                <ul>
+                    <li><a href="homePage.jsp">HOME</a></li>
+                    <li><a href="addProduct.jsp">ADD PRODUCT</a></li>
+                    <li><a href="articles.jsp">NEWS AND ARTICLES</a></li>
+                    <li><a href="">MY ACCOUNT</a></li>
+                    <li><a href="">CONTACT</a></li>
+                </ul>
+                <%}
+                
                 else{ %>
                 <ul>
                     <li><a href="homePage.jsp">HOME</a></li>
