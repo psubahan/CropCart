@@ -108,7 +108,7 @@
         <tbody>
             <%
                 FarmerDAO cdao = new FarmerDAOImp();
-                List<Farmer> farmerList = cdao.getAllCoustomers();
+                List<Farmer> farmerList = cdao.getAllFarmer();
 
                 if (farmerList != null && !farmerList.isEmpty()) {
                     for (Farmer farmer : farmerList) {
