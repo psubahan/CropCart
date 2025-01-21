@@ -79,13 +79,14 @@
                               <input type="hidden" name="userType" value="<%= userType %>">
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
-                                    <input type="text" class="form-control" id="email" placeholder="Enter your Mail ID">
+                                    <input type="text" class="form-control" name="mail" id="email" placeholder="Enter your Mail ID">
                                 </div>
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="password" placeholder="Enter your Password">
+                                    <input type="password" class="form-control"name="password" id="password" placeholder="Enter your Password">
                                 </div>
-                                <input type="submit" class="btn login-btn w-100" value="Login" name="farmer">
+                                <input type="submit" class="btn login-btn w-100" value="Login" name="farmer"><a href="addProduct.jsp"></a>
+                                
                                 <div class="text-center mt-3">
                                     <a href="register.jsp?userRegister=Farmer" class="text-decoration-none" style="color: #008000; font-weight: bold;">New User?</a>
                                     <br>
@@ -124,11 +125,11 @@
                               <input type="hidden" name="userType" value="<%= userType %>">
                                 <div class="mb-3">
                                     <label for="loginID" class="form-label">Email</label>
-                                    <input type="text" class="form-control" id="email" placeholder="Enter your Mail ID">
+                                    <input type="text" class="form-control" name="mail" id="email" placeholder="Enter your Mail ID">
                                 </div>
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="password" placeholder="Enter your Password">
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Enter your Password">
                                 </div>
                                 <input type="submit" class="btn login-btn w-100" name="customer" value="Login">
                                 <div class="text-center mt-3">
