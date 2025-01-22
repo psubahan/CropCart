@@ -107,6 +107,11 @@
                                     <p><strong>State:</strong> <%= c.getState() %></p>
                                     <p><strong>City:</strong> <%= c.getCity() %></p>
                                     <p><strong>Pincode:</strong> <%= c.getPincode() %></p>
+                                     <p><strong>bank_name:</strong> <%= c.getBank_name() %></p>
+                                      <p><strong>branch:</strong> <%= c.getBranch() %></p>
+                                       <p><strong>ifsc:</strong> <%= c.getIfsc() %></p>
+                                        <p><strong>acc_no:</strong> <%= c.getAcc_no() %></p>
+                                    
                                 </div>
                                 
                                 <div class="card-footer text-center">
