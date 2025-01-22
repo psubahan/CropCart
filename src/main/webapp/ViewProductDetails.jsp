@@ -1,7 +1,7 @@
 <%@page import="com.cropcart.DAO.ProductDAOImp"%>
-<%@ page import="com.cropcart.DAO.ProductDAOImp" %>
 <%@ page import="com.cropcart.DAO.ProductDAO" %>
 <%@ page import="com.cropcart.dto.ProductDetails" %>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,77 +85,47 @@
 </head>
 <body>
     <%
-        try {
-            String productIdParam = request.getParameter("product_id");
+        ProductDAO pdao = new ProductDAOImp();
+        List<ProductDetails> products = pdao.getAllproducts();
 
-            if (productIdParam != null && !productIdParam.trim().isEmpty()) {
-                int product_id = Integer.parseInt(productIdParam);
-
-                // Create the DAO object and fetch the customer details
-                ProductDAO pdao = new ProductDAOImp();
-                ProductDetails product = pdao.getProduct(product_id);
-
-                if (product != null) {
+        if (products != null && !products.isEmpty()) {
     %>
-                    <h2>Product Details</h2>
-                    <table class="details">
-                        <tr>
-                            <th>Product ID</th>
-                            <td><%= product.getProduct_id() %></td>
-                        </tr>
-                        <tr>
-                            <th>Category</th>
-                            <td><%= product.getCategoty() %></td>
-                        </tr>
-                        <tr>
-                            <th>Title</th>
-                            <td><%= product.getTitle() %></td>
-                        </tr>
-                        <tr>
-                            <th>Image</th>
-                            <td><%= product.getImage() %></td>
-                        </tr>
-                        <tr>
-                            <th>Quantity</th>
-                            <td><%=product.getQuantity() %></td>
-                        </tr>
-                        <tr>
-                            <th>Description</th>
-                            <td><%= product.getDescription() %></td>
-                        </tr>
-                        <tr>
-                            <th>Quantity type</th>
-                            <td><%= product.getQuantity_type() %></td>
-                        </tr>
-                        <tr>
-                            <th>Price</th>
-                            <td><%= product.getPrice() %></td>
-                        </tr>
-                        <tr>
-                            <th>Status</th>
-                            <td><%= product.getStatus() %></td>
-                        </tr>
-                        
-                        
-                        
-                    </table>
-                    <button onclick="window.history.back();">Back</button>
+            <h2>All Products</h2>
+            <table class="details">
+                <tr>
+                    <th>Product ID</th>
+                    <th>Category</th>
+                    <th>Title</th>
+                    <th>Image</th>
+                    <th>Quantity</th>
+                    <th>Description</th>
+                    <th>Quantity Type</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                </tr>
+                <%
+                    for (ProductDetails product : products) {
+                %>
+                    <tr>
+                        <td><%= product.getProduct_id() %></td>
+                        <td><%= product.getCategoty() %></td>
+                        <td><%= product.getTitle() %></td>
+                        <td><%= product.getImage() %></td>
+                        <td><%= product.getQuantity() %></td>
+                        <td><%= product.getDescription() %></td>
+                        <td><%= product.getQuantity_type() %></td>
+                        <td><%= product.getPrice() %></td>
+                        <td><%= product.getStatus() %></td>
+                    </tr>
+                <%
+                    }
+                %>
+            </table>
+            <button onclick="window.history.back();">Back</button>
     <%
-                } else {
+        } else {
     %>
-                    <p>Product details not found. Please check the Product ID and try again.</p>
-                    <button onclick="window.history.back();">Back</button>
-    <%
-                }
-            } else {
-    %>
-                <p>Invalid or missing Product ID. Please go back and provide a valid ID.</p>
-                <button onclick="window.history.back();">Back</button>
-    <%
-            }
-        } catch (Exception e) {
-    %>
-            <p>An error occurred while processing the request: <%= e.getMessage() %></p>
+            <p>No products found.</p>
             <button onclick="window.history.back();">Back</button>
     <%
         }
