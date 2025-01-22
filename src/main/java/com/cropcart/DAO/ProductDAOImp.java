@@ -80,4 +80,40 @@ public class ProductDAOImp implements ProductDAO
 		    return pdl; 
 	}
 	
-}
+  @Override
+   public boolean addProduct(ProductDetails product) {
+	        PreparedStatement ps = null;
+	        String query = "INSERT INTO product_details (categoty, title, image, quantity, description, quantity_type, price, status) "
+	                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	        boolean isProductAdded = false;
+
+	        try {
+	            ps = con.prepareStatement(query);
+	            ps.setString(1, product.getCategoty());
+	            ps.setString(2, product.getTitle());
+	            ps.setString(3, product.getImage());
+	            ps.setInt(4, product.getQuantity());
+	            ps.setString(5, product.getDescription());
+	            ps.setString(6, product.getQuantity_type());
+	            ps.setLong(7, product.getPrice());
+	            ps.setString(8, product.getStatus());
+
+	            int rowsAffected = ps.executeUpdate();
+
+	            
+	            if (rowsAffected > 0) {
+	                isProductAdded = true;
+	            }
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } 
+
+	        return isProductAdded;
+	    }
+	}
+
+	
+	
+	
+

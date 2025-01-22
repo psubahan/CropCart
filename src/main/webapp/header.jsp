@@ -129,6 +129,16 @@ ul li:hover .dropdown {
                 </ul>
                 <%}
                 
+                else if(request.getParameter("customer")!=null){ %>
+                <ul>
+                    <li><a href="homePage.jsp">HOME</a></li>
+                    <li><a href="ViewProductDetails.jsp">VIEW PRODUCTS</a></li>
+                    <li><a href="articles.jsp">NEWS AND ARTICLES</a></li>
+                    <li><a href="">MY ACCOUNT</a></li>
+                    <li><a href="">CONTACT</a></li>
+                </ul>
+                <%}
+                
                 else{ %>
                 <ul>
                     <li><a href="homePage.jsp">HOME</a></li>
