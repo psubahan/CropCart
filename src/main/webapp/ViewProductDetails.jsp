@@ -8,127 +8,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Product Details</title>
+    <title>Product Details</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
+            font-family: 'Roboto', sans-serif;
+            background-color: #fdf6e3;
             margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+        .product-container {
             display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
         }
-
-        h2 {
-            margin-bottom: 20px;
+        .product-card {
+            background-color: #ffffff;
+            border: 2px solid #008000;
+            border-radius: 15px;
+            margin: 20px;
+            padding: 20px;
+            width: 300px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
         }
-
-        table.details {
-            width: 80%;
-            max-width: 600px;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: white;
+        .product-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        .product-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
-
-        table.details th, table.details td {
-            padding: 10px 15px;
-            text-align: left;
+        .product-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 15px 0;
         }
-
-        table.details th {
-            background-color: #008000;
-            color: white;
+        .price {
+            color: #008000;
+            font-size: 1.2em;
             font-weight: bold;
         }
-
-        table.details td {
-            border-bottom: 1px solid #ddd;
+        .product-description {
+            font-size: 0.9em;
+            color: #555;
+            margin: 10px 0;
         }
-
-        table.details tr:last-child td {
-            border-bottom: none;
+        .button-container {
+            margin-top: 15px;
         }
-
-        p {
-            color: #d32f2f;
-            font-size: 16px;
-            margin-top: 20px;
-        }
-
-        button {
-            background: linear-gradient(145deg, #008000, #66ff66);
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            font-size: 14px;
+        .quantity-input {
+            width: 60px;
+            padding: 5px;
+            font-size: 1em;
+            border: 2px solid #008000;
             border-radius: 5px;
+        }
+        .add-to-cart {
+            background-color: #008000;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: background-color 0.3s, transform 0.3s;
         }
-
-        button:hover {
+        .add-to-cart:hover {
+            background-color: #66cc66;
             transform: scale(1.05);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        button:active {
-            transform: scale(1);
-            box-shadow: none;
         }
     </style>
 </head>
 <body>
-    <%
-        ProductDAO pdao = new ProductDAOImp();
-        List<ProductDetails> products = pdao.getAllproducts();
+<%@ include file="header.jsp" %>
+<div class="container">
+    <div class="product-container">
+        <%
+            ProductDAO pdao = new ProductDAOImp();
+            List<ProductDetails> products = pdao.getAllproducts();
 
-        if (products != null && !products.isEmpty()) {
-    %>
-            <h2>All Products</h2>
-            <table class="details">
-                <tr>
-                    <th>Product ID</th>
-                    <th>Category</th>
-                    <th>Title</th>
-                    <th>Image</th>
-                    <th>Quantity</th>
-                    <th>Description</th>
-                    <th>Quantity Type</th>
-                    <th>Price</th>
-                    <th>Status</th>
-                </tr>
-                <%
-                    for (ProductDetails product : products) {
-                %>
-                    <tr>
-                        <td><%= product.getProduct_id() %></td>
-                        <td><%= product.getCategoty() %></td>
-                        <td><%= product.getTitle() %></td>
-                        <td><%= product.getImage() %></td>
-                        <td><%= product.getQuantity() %></td>
-                        <td><%= product.getDescription() %></td>
-                        <td><%= product.getQuantity_type() %></td>
-                        <td><%= product.getPrice() %></td>
-                        <td><%= product.getStatus() %></td>
-                    </tr>
-                <%
-                    }
-                %>
-            </table>
-            <button onclick="window.history.back();">Back</button>
-    <%
-        } else {
-    %>
-            <p>No products found.</p>
-            <button onclick="window.history.back();">Back</button>
-    <%
-        }
-    %>
+            if (products != null && !products.isEmpty()) {
+                for (ProductDetails product : products) {
+        %>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="<%= product.getImage() %>" alt="<%= product.getTitle() %>">
+                        </div>
+                        <h2 class="product-title"><%= product.getTitle() %></h2>
+                        <p class="price">₹<%= product.getPrice() %></p>
+                        <p class="product-description"><%= product.getDescription() %></p>
+                        <form action="addToCart" method="post">
+                            <input type="hidden" name="product_id" value="<%= product.getProduct_id() %>">
+                            <div class="button-container">
+                                <input type="number" name="quantity" class="quantity-input" placeholder="Qty" min="1" required>
+                              <button type="submit" class="add-to-cart">Add to Cart</button>  
+                            </div>
+                            
+                        </form>
+                    </div>
+        <%
+                }
+            } else {
+        %>
+            <p>No products available.</p>
+        <%
+            }
+        %>
+    </div>
+</div>
+<%@ include file="footer.jsp" %>
 </body>
 </html>
