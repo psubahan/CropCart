@@ -73,11 +73,11 @@
     <jsp:include page="header.jsp" />
     <div class="container" style="margin-top : 50px;">
         <h2>Add New Article</h2>
-        <form action="AddArticles" method="post" enctype="multipart/form-data">
+        <form action="AddArticles" method="post">
             <div class="form-group">
                 <label for="articleType">Article Type</label>
                 <select id="articleType" name="articleType" required>
-                    <option value="">Select Article Type</option>
+                   <option value="">Select Article Type</option>
                     <option value="Articles">Articles</option>
                     <option value="News">News</option>
                 </select>
