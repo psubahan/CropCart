@@ -51,18 +51,18 @@ public class FarmerRecordsServlet extends HttpServlet {
             }
 
             // Forward the request to the JSP page
-            RequestDispatcher dispatcher = request.getRequestDispatcher("farmerrecords.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("FarmerRecords.jsp");
             dispatcher.forward(request, response);
 
         } catch (NumberFormatException e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Error: Invalid customer ID format.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("farmerrecords.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("FarmerRecords.jsp");
             dispatcher.forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Unexpected error occurred. Please try again later.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("farmerrecords.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("FarmerRecords.jsp");
             dispatcher.forward(request, response);
         }
     }
