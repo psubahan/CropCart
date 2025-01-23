@@ -1,3 +1,4 @@
+<%@page import="com.cropcart.dto.Farmer"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -71,7 +72,7 @@
 </head>
 <body>
     <jsp:include page="header.jsp" />
-    
+    <%Farmer f = (Farmer)session.getAttribute("farmer");%>
     
     <div class="container" style="margin-top : 50px;">
         <h2>Add New Product</h2>
@@ -127,6 +128,7 @@
                     <option value="Out of Stock">Out of Stock</option>
                 </select>
             </div>
+            <input type="hidden" value=<%=f.getFarmer_id()%> name="farmerid">
             <button type="submit" class="btn button">Add Product</button>
         </form>
     </div>

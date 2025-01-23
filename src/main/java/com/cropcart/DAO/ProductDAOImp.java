@@ -83,8 +83,8 @@ public class ProductDAOImp implements ProductDAO
   @Override
    public boolean addProduct(ProductDetails product) {
 	        PreparedStatement ps = null;
-	        String query = "INSERT INTO product_details (categoty, title, image, quantity, description, quantity_type, price, status) "
-	                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	        String query = "INSERT INTO product_details (categoty, title, image, quantity, description, quantity_type, price, status,FARMER_ID) "
+	                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
 	        boolean isProductAdded = false;
 
 	        try {
@@ -97,7 +97,7 @@ public class ProductDAOImp implements ProductDAO
 	            ps.setString(6, product.getQuantity_type());
 	            ps.setString(7, product.getPrice());
 	            ps.setString(8, product.getStatus());
-
+	            ps.setInt(9, product.getFarmer_id());
 	            int rowsAffected = ps.executeUpdate();
 
 	            
