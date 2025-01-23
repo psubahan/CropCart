@@ -178,19 +178,18 @@ public class CustomerDAOImp implements CustomerDAO
 		PreparedStatement ps=null;
 		String status="";
 		int res=0;
-		String query="UPDATE CUSTOMER SET NAME=?,PHONE=?,MAIL=?,PASSWORD=?,ADDRESS=?,STATE=?,CITY=?,PINCODE=?,CUSTOMER_TYPE=? WHERE CUSTOMER_ID=?";
+		String query="UPDATE CUSTOMER SET NAME=?,PHONE=?,MAIL=?,ADDRESS=?,STATE=?,CITY=?,PINCODE=?,CUSTOMER_TYPE=? WHERE CUSTOMER_ID=?";
 		try {
 			ps=con.prepareStatement(query);
 			ps.setString(1, c.getName());
 			ps.setLong(2, c.getPhone());
 			ps.setString(3, c.getMail());
-			ps.setString(4, c.getPassword());
-			ps.setString(5, c.getAddress());
-			ps.setString(6, c.getState());
-			ps.setString(7, c.getCity());
-			ps.setLong(8, c.getPincode());
-			ps.setString(9, c.getCustomer_type());
-			ps.setInt(10, c.getCustomer_id());
+			ps.setString(4, c.getAddress());
+			ps.setString(5, c.getState());
+			ps.setString(6, c.getCity());
+			ps.setLong(7,c.getPincode());
+			ps.setString(8, c.getCustomer_type());
+			ps.setInt(9, c.getCustomer_id());
 			res=ps.executeUpdate();
 			if(res>0)
 			{
@@ -273,8 +272,8 @@ public class CustomerDAOImp implements CustomerDAO
 		}
 		return c;
 	}
-@Override
-	
+
+	@Override
 	public Customer getCustomer1(int customer_id,String name) {
 		String query="SELECT * FROM CUSTOMER WHERE CUSTOMER_ID=? AND NAME=?";
 		Customer c=null;
@@ -299,5 +298,56 @@ public class CustomerDAOImp implements CustomerDAO
 		}
 		return c;
 	}
+	
+	@Override
+	public String updatePassword(String email, String oldPassword, String newPassword) {
+
+	    String queryCheckEmail = "SELECT * FROM CUSTOMER WHERE MAIL = ?";
+	    String queryCheckOldPassword = "SELECT * FROM CUSTOMER WHERE MAIL = ? AND PASSWORD = ?";
+	    String queryUpdatePassword = "UPDATE CUSTOMER SET PASSWORD = ? WHERE MAIL = ?";
+	    
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+	    String status = "";
+
+	    try {
+	        // Check if email exists
+	        ps = con.prepareStatement(queryCheckEmail);
+	        ps.setString(1, email);
+	        rs = ps.executeQuery();
+
+	        if (rs.next()) {
+	            // Email exists, now check if old password is correct
+	            ps = con.prepareStatement(queryCheckOldPassword);
+	            ps.setString(1, email);
+	            ps.setString(2, oldPassword);
+	            rs = ps.executeQuery();
+	            
+	            if (rs.next()) {
+	                // Old password is correct, proceed to update with the new password
+	                ps = con.prepareStatement(queryUpdatePassword);
+	                ps.setString(1, newPassword);  // New password
+	                ps.setString(2, email);        // Identifying customer by email
+
+	                int res = ps.executeUpdate();
+	                if (res > 0) {
+	                    status = "PasswordUpdated";
+	                } else {
+	                    status = "UpdateFailed";
+	                }
+	            } else {
+	                status = "IncorrectOldPassword";
+	            }
+	        } else {
+	            status = "EmailNotFound";
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        status = "Error";
+	    }
+
+	    return status;
+	}
+
 
 }

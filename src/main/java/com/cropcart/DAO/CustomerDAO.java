@@ -14,4 +14,5 @@ public interface CustomerDAO
 	public String updateCustomer(Customer c);
 	public List<Customer> getAllCoustomers();
 	public Customer getCustomer1(int customer_id,String name);
+	String updatePassword(String email, String oldPassword, String newPassword);
 }

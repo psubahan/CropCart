@@ -53,4 +53,24 @@
     <servlet-name>AddProduct</servlet-name>
     <url-pattern>/AddProduct</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditProfile</display-name>
+    <servlet-name>EditProfile</servlet-name>
+    <servlet-class>com.cropcart.controller.EditProfile</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditProfile</servlet-name>
+    <url-pattern>/EditProfile</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ChangePassword</display-name>
+    <servlet-name>ChangePassword</servlet-name>
+    <servlet-class>com.cropcart.controller.ChangePassword</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChangePassword</servlet-name>
+    <url-pattern>/ChangePassword</url-pattern>
+  </servlet-mapping>
 </web-app>

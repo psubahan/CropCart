@@ -100,6 +100,57 @@ public class AdminDAOImp implements AdminDAO {
 		}
 		return a;
 	}
+	
+	@Override
+	public String updatePassword(String email, String oldPassword, String newPassword) {
+
+	    String queryCheckEmail = "SELECT * FROM ADMIN WHERE MAIL = ?";
+	    String queryCheckOldPassword = "SELECT * FROM ADMIN WHERE MAIL = ? AND PASSWORD = ?";
+	    String queryUpdatePassword = "UPDATE ADMIN SET PASSWORD = ? WHERE MAIL = ?";
+	    
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+	    String status = "";
+
+	    try {
+	        // Check if email exists
+	        ps = con.prepareStatement(queryCheckEmail);
+	        ps.setString(1, email);
+	        rs = ps.executeQuery();
+
+	        if (rs.next()) {
+	            // Email exists, now check if old password is correct
+	            ps = con.prepareStatement(queryCheckOldPassword);
+	            ps.setString(1, email);
+	            ps.setString(2, oldPassword);
+	            rs = ps.executeQuery();
+	            
+	            if (rs.next()) {
+	                // Old password is correct, proceed to update with the new password
+	                ps = con.prepareStatement(queryUpdatePassword);
+	                ps.setString(1, newPassword);  // New password
+	                ps.setString(2, email);        // Identifying admin by email
+
+	                int res = ps.executeUpdate();
+	                if (res > 0) {
+	                    status = "PasswordUpdated";
+	                } else {
+	                    status = "UpdateFailed";
+	                }
+	            } else {
+	                status = "IncorrectOldPassword";
+	            }
+	        } else {
+	            status = "EmailNotFound";
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        status = "Error";
+	    }
+
+	    return status;
+	}
+
 //	@Override
 //	public Admin getAdmin(String mail, String Password) {
 //		String query="SELECT * FROM ADMIN WHERE MAIL=? AND PASSWORD=?";

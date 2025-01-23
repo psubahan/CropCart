@@ -189,22 +189,21 @@ public class FarmerDAOImp implements FarmerDAO
 		PreparedStatement ps=null;
 		String status="";
 		int res=0;
-		String query="UPDATE FARMER SET NAME=?,PHONE=?,EMAIL=?,PASSWORD=?,ADDRESS=?,STATE=?,CITY=?,PINCODE=?,BANK_NAME=?,BRANCH=?,IFSC=?,ACC_NO=? WHERE FARMER_ID=?";
+		String query="UPDATE FARMER SET NAME=?,PHONE=?,EMAIL=?,ADDRESS=?,STATE=?,CITY=?,PINCODE=?,BANK_NAME=?,BRANCH=?,IFSC=?,ACC_NO=? WHERE FARMER_ID=?";
 		try {
 			ps=con.prepareStatement(query);
 			ps.setString(1, f.getName());
 			ps.setLong(2, f.getPhone());
 			ps.setString(3, f.getEmail());
-			ps.setString(4, f.getPassword());
-			ps.setString(5, f.getAddress());
-			ps.setString(6, f.getState());
-			ps.setString(7, f.getCity());
-			ps.setLong(8, f.getPincode());
-			ps.setString(9, f.getBank_name());
-			ps.setString(10, f.getBranch());
-			ps.setString(11, f.getIfsc());
-			ps.setLong(12, f.getAcc_no());
-			ps.setInt(13, f.getFarmer_id());
+			ps.setString(4, f.getAddress());
+			ps.setString(5, f.getState());
+			ps.setString(6, f.getCity());
+			ps.setLong(7, f.getPincode());
+			ps.setString(8, f.getBank_name());
+			ps.setString(9, f.getBranch());
+			ps.setString(10, f.getIfsc());
+			ps.setLong(11, f.getAcc_no());
+			ps.setInt(12, f.getFarmer_id());
 			res=ps.executeUpdate();
 			if(res>0)
 			{
@@ -320,6 +319,57 @@ public class FarmerDAOImp implements FarmerDAO
 			e.printStackTrace();
 		}
 		return c;
+	}
+
+	
+	@Override
+	public String updatePassword(String email, String oldPassword, String newPassword) {
+
+	    String queryCheckEmail = "SELECT * FROM FARMER WHERE EMAIL = ?";
+	    String queryCheckOldPassword = "SELECT * FROM FARMER WHERE EMAIL = ? AND PASSWORD = ?";
+	    String queryUpdatePassword = "UPDATE FARMER SET PASSWORD = ? WHERE EMAIL = ?";
+	    
+	    PreparedStatement ps=null;
+		ResultSet rs=null;
+		String status="";
+	    
+	    try {
+	        // Check if email exists
+	        ps = con.prepareStatement(queryCheckEmail);
+	        ps.setString(1, email);
+	        rs = ps.executeQuery();
+
+	        if (rs.next()) {
+	            // Email exists, now check if old password is correct
+	            ps = con.prepareStatement(queryCheckOldPassword);
+	            ps.setString(1, email);
+	            ps.setString(2, oldPassword);
+	            rs = ps.executeQuery();
+	            
+	            if (rs.next()) {
+	                // Old password is correct, proceed to update with the new password
+	                ps = con.prepareStatement(queryUpdatePassword);
+	                ps.setString(1, newPassword);  // New password
+	                ps.setString(2, email);        // Identifying farmer by email
+
+	                int res = ps.executeUpdate();
+	                if (res > 0) {
+	                    status = "PasswordUpdated";
+	                } else {
+	                    status = "UpdateFailed";
+	                }
+	            } else {
+	                status = "IncorrectOldPassword";
+	            }
+	        } else {
+	            status = "EmailNotFound";
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        status = "Error";
+	    }
+
+	    return status;
 	}
 
 }
