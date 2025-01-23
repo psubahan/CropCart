@@ -1,164 +1,128 @@
 <%@page import="com.cropcart.DAO.ProductDAOImp"%>
-<%@ page import="com.cropcart.DAO.ProductDAOImp" %>
 <%@ page import="com.cropcart.DAO.ProductDAO" %>
 <%@ page import="com.cropcart.dto.ProductDetails" %>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Product Details</title>
+    <title>Product Details</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
+            font-family: 'Roboto', sans-serif;
+            background-color: #fdf6e3;
             margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+        .product-container {
             display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
         }
-
-        h2 {
-            margin-bottom: 20px;
+        .product-card {
+            background-color: #ffffff;
+            border: 2px solid #008000;
+            border-radius: 15px;
+            margin: 20px;
+            padding: 20px;
+            width: 300px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
         }
-
-        table.details {
-            width: 80%;
-            max-width: 600px;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: white;
+        .product-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        .product-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
-
-        table.details th, table.details td {
-            padding: 10px 15px;
-            text-align: left;
+        .product-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 15px 0;
         }
-
-        table.details th {
-            background-color: #008000;
-            color: white;
+        .price {
+            color: #008000;
+            font-size: 1.2em;
             font-weight: bold;
         }
-
-        table.details td {
-            border-bottom: 1px solid #ddd;
+        .product-description {
+            font-size: 0.9em;
+            color: #555;
+            margin: 10px 0;
         }
-
-        table.details tr:last-child td {
-            border-bottom: none;
+        .button-container {
+            margin-top: 15px;
         }
-
-        p {
-            color: #d32f2f;
-            font-size: 16px;
-            margin-top: 20px;
-        }
-
-        button {
-            background: linear-gradient(145deg, #008000, #66ff66);
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            font-size: 14px;
+        .quantity-input {
+            width: 60px;
+            padding: 5px;
+            font-size: 1em;
+            border: 2px solid #008000;
             border-radius: 5px;
+        }
+        .add-to-cart {
+            background-color: #008000;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: background-color 0.3s, transform 0.3s;
         }
-
-        button:hover {
+        .add-to-cart:hover {
+            background-color: #66cc66;
             transform: scale(1.05);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        button:active {
-            transform: scale(1);
-            box-shadow: none;
         }
     </style>
 </head>
 <body>
-    <%
-        try {
-            String productIdParam = request.getParameter("product_id");
+<%@ include file="header.jsp" %>
+<div class="container">
+    <div class="product-container">
+        <%
+            ProductDAO pdao = new ProductDAOImp();
+            List<ProductDetails> products = pdao.getAllproducts();
 
-            if (productIdParam != null && !productIdParam.trim().isEmpty()) {
-                int product_id = Integer.parseInt(productIdParam);
-
-                // Create the DAO object and fetch the customer details
-                ProductDAO pdao = new ProductDAOImp();
-                ProductDetails product = pdao.getProduct(product_id);
-
-                if (product != null) {
-    %>
-                    <h2>Product Details</h2>
-                    <table class="details">
-                        <tr>
-                            <th>Product ID</th>
-                            <td><%= product.getProduct_id() %></td>
-                        </tr>
-                        <tr>
-                            <th>Category</th>
-                            <td><%= product.getCategoty() %></td>
-                        </tr>
-                        <tr>
-                            <th>Title</th>
-                            <td><%= product.getTitle() %></td>
-                        </tr>
-                        <tr>
-                            <th>Image</th>
-                            <td><%= product.getImage() %></td>
-                        </tr>
-                        <tr>
-                            <th>Quantity</th>
-                            <td><%=product.getQuantity() %></td>
-                        </tr>
-                        <tr>
-                            <th>Description</th>
-                            <td><%= product.getDescription() %></td>
-                        </tr>
-                        <tr>
-                            <th>Quantity type</th>
-                            <td><%= product.getQuantity_type() %></td>
-                        </tr>
-                        <tr>
-                            <th>Price</th>
-                            <td><%= product.getPrice() %></td>
-                        </tr>
-                        <tr>
-                            <th>Status</th>
-                            <td><%= product.getStatus() %></td>
-                        </tr>
-                        
-                        
-                        
-                    </table>
-                    <button onclick="window.history.back();">Back</button>
-    <%
-                } else {
-    %>
-                    <p>Product details not found. Please check the Product ID and try again.</p>
-                    <button onclick="window.history.back();">Back</button>
-    <%
+            if (products != null && !products.isEmpty()) {
+                for (ProductDetails product : products) {
+        %>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="<%= product.getImage() %>" alt="<%= product.getTitle() %>">
+                        </div>
+                        <h2 class="product-title"><%= product.getTitle() %></h2>
+                        <p class="price">₹<%= product.getPrice() %></p>
+                        <p class="product-description"><%= product.getDescription() %></p>
+                        <form action="addToCart" method="post">
+                            <input type="hidden" name="product_id" value="<%= product.getProduct_id() %>">
+                            <div class="button-container">
+                                <input type="number" name="quantity" class="quantity-input" placeholder="Qty" min="1" required>
+                              <button type="submit" class="add-to-cart">Add to Cart</button>  
+                            </div>
+                            
+                        </form>
+                    </div>
+        <%
                 }
             } else {
-    %>
-                <p>Invalid or missing Product ID. Please go back and provide a valid ID.</p>
-                <button onclick="window.history.back();">Back</button>
-    <%
+        %>
+            <p>No products available.</p>
+        <%
             }
-        } catch (Exception e) {
-    %>
-            <p>An error occurred while processing the request: <%= e.getMessage() %></p>
-            <button onclick="window.history.back();">Back</button>
-    <%
-        }
-    %>
+        %>
+    </div>
+</div>
+<%@ include file="footer.jsp" %>
 </body>
 </html>
