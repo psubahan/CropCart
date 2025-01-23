@@ -33,13 +33,13 @@ public class ProductDAOImp implements ProductDAO
 	        if (rs.next()) {
 	            pd = new ProductDetails();
 	            pd.setProduct_id(rs.getInt("product_id")); 
-	            pd.setCategoty(rs.getString("category"));
+	            pd.setCategoty(rs.getString("categoty"));
 	            pd.setTitle(rs.getString("title"));
 	            pd.setImage(rs.getString("image"));
 	            pd.setQuantity(rs.getInt("quantity"));
 	            pd.setDescription(rs.getString("description"));
 	            pd.setQuantity_type(rs.getString("quantity_type"));
-	            pd.setPrice(rs.getLong("price"));
+	            pd.setPrice(rs.getString("price"));
 	            pd.setStatus(rs.getString("status"));
 	        }
 	    } catch (SQLException e) {
@@ -70,7 +70,7 @@ public class ProductDAOImp implements ProductDAO
 		            pd.setQuantity(rs.getInt("quantity"));
 		            pd.setDescription(rs.getString("description"));
 		            pd.setQuantity_type(rs.getString("quantity_type"));
-		            pd.setPrice(rs.getLong("price"));
+		            pd.setPrice(rs.getString("price"));
 		            pd.setStatus(rs.getString("status"));
 		            pdl.add(pd);
 		        }
@@ -95,7 +95,7 @@ public class ProductDAOImp implements ProductDAO
 	            ps.setInt(4, product.getQuantity());
 	            ps.setString(5, product.getDescription());
 	            ps.setString(6, product.getQuantity_type());
-	            ps.setLong(7, product.getPrice());
+	            ps.setString(7, product.getPrice());
 	            ps.setString(8, product.getStatus());
 
 	            int rowsAffected = ps.executeUpdate();
