@@ -12,44 +12,56 @@
         body {
             font-family: Arial, sans-serif;
             color: #333;
-            margin: 0;
-            padding: 0;
             background-color: #f9f9f9;
         }
         .container {
             max-width: 1000px;
             margin: 30px auto;
-            background: white;
             padding: 20px;
+        }
+        .list-item {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .list-item img {
+            width: 80px;
+            height: 80px;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-right: 20px;
         }
-        h2 {
+        .item-details {
+            flex: 1;
+        }
+        .item-details h3 {
+            margin: 0;
+            color: #333;
+        }
+        .item-details p {
+            font-size: 14px;
+            color: #555;
+            margin: 5px 0;
+        }
+        .item-details .price {
+            font-weight: bold;
+            color: #4caf50;
+        }
+        .back-button {
             text-align: center;
-            color: #2e7d32;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
             margin-top: 20px;
         }
-        table th, table td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: center;
-        }
-        table th {
+        .btn {
             background-color: #4caf50;
             color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
         }
-        table tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        .message {
-            text-align: center;
-            color: #999;
-            margin-top: 20px;
-            font-size: 18px;
+        .btn:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
@@ -65,28 +77,22 @@
                 if (ordersList != null && !ordersList.isEmpty()) {
         %>
         <h2>Requested Products</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Order ID</th>
-                    <th>Product Name</th>
-                    <th>Total Price</th>
-                    <th>Status</th>
-                    <th>Order Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% for (Orders order : ordersList) { %>
-                <tr>
-                    <td><%= order.getOrder_Id() %></td>
-                    <td><%= order.getProduct_Name()%></td>
-                    <td>&#8377;<%= order.getCart_Cost() %></td>
-                    <td><%= order.getStatus() %></td>
-                    <td><%= order.getOrder_date() %></td>
-                </tr>
-                <% } %>
-            </tbody>
-        </table>
+        <% for (Orders order : ordersList) { %>
+        <div class="list-item">
+            <img src="<%= order.getProduct_Image() %>" alt="Product Image">
+            <div class="item-details">
+                <h3><%= order.getProduct_Name() %></h3>
+                <p class="price">&#8377;<%= order.getCart_Cost() %></p>
+                <p>Status: <%= order.getStatus() %></p>
+                <p>Order Date: <%= order.getOrder_date() %></p>
+            </div>
+        </div>
+        <% } %>
+
+        <div class="back-button">
+            <a href="ViewProductDetails.jsp" class="btn">Back</a>
+        </div>
+
         <% } else { %>
         <div class="message">No requested products found.</div>
         <% } %>
