@@ -28,6 +28,7 @@ public class AddProductServlet extends HttpServlet {
         String description = request.getParameter("description");
         String price = request.getParameter("price");
         String status = request.getParameter("status");
+        int farmer_id=Integer.parseInt(request.getParameter("farmerid"));
 
         try {
             // Store the product in the database (replace with actual database code)
@@ -42,6 +43,7 @@ public class AddProductServlet extends HttpServlet {
             po.setDescription(description);
             po.setPrice(price);
             po.setStatus(status);
+            po.setFarmer_id(farmer_id);
             boolean isAdded=pdao.addProduct(po);
 
             if (isAdded) {
