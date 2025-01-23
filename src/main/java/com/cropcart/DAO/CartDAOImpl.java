@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class CartDAOImpl implements CartDAO{
 	    return status;
 	}
 	@Override
-	public List<Cart> getCartInfo(int cid) {
+	public List<Cart> getCartInfo(int customer_id) {
 	    List<Cart> cartList = new ArrayList<>();
 	    PreparedStatement ps = null;
 	    ResultSet rs = null;
@@ -54,12 +55,13 @@ public class CartDAOImpl implements CartDAO{
 	    
 	    try {
 	        ps = con.prepareStatement(query);
-	        ps.setInt(1, cid);
+	        ps.setInt(1, customer_id);
 	        ps.setString(2, "pending");
 	        rs = ps.executeQuery();
 	        
 	        while (rs.next()) {
 	            Cart cart = new Cart();
+	            cart.setCart_Id(rs.getInt("cart_id"));
 	            cart.setProduct_Image(rs.getString("PRODUCT_IMAGE"));
 	            cart.setProduct_Title(rs.getString("PRODUCT_TITLE"));
 	            cart.setProduct_Category(rs.getString("PRODUCT_CATEGORY"));
@@ -75,7 +77,20 @@ public class CartDAOImpl implements CartDAO{
 	    }
 	    return cartList;
 	}
+	@Override
+	public int deleteCart(int cart_id) {
+	    int status = 0;
+	    String qry = "UPDATE cart SET status = 'deleted' WHERE cart_id = ?";
+	    PreparedStatement ps = null;
 
+	    try {
+	        ps = con.prepareStatement(qry);
+	        ps.setInt(1, cart_id);
+	        status = ps.executeUpdate(); // Executes the query and returns the number of rows affected
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return status; // Return the number of rows affected (1 if successful, 0 if not)
+	}
 
-	
 }

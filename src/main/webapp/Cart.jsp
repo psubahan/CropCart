@@ -11,6 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>User Cart</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -29,7 +30,7 @@
     }
 
     h2 {
-        color: #388e3c; /* Grass green heading color */
+        color: #008000; /* Grass green heading color */
         text-align: center;
     }
 
@@ -46,7 +47,7 @@
     }
 
     table th {
-        background-color: #81c784; /* Light green for headers */
+        background-color: #008000; /* Light green for headers */
         color: white;
     }
 
@@ -57,7 +58,7 @@
     .btn {
         display: inline-block;
         text-decoration: none;
-        background-color: #4caf50; /* Grass green button background */
+        background-color: #008000; /* Grass green button background */
         color: white;
         padding: 12px 24px; /* Increased padding for buttons */
         border-radius: 5px;
@@ -69,6 +70,10 @@
 
     .btn:hover {
         background-color: #388e3c; /* Darker green on hover */
+    }
+
+    .btn i {
+        margin-right: 5px; /* Add some space between the icon and text */
     }
 
     .total-cost {
@@ -91,6 +96,16 @@
 </head>
 <body>
     <%@include file="header.jsp" %>
+    <% 
+    String message = (String) session.getAttribute("message");
+    if (message != null) { 
+%>
+    <div style="color: green; text-align: center; margin-bottom: 10px;"><%= message %></div>
+<%
+        session.removeAttribute("message");
+    } 
+%>
+    
     <div class="container">
         <% Customer c = (Customer) session.getAttribute("customer"); %>
         <% if (c != null) { %>
@@ -124,9 +139,11 @@
                         <td><%=s.getQuantity() %></td>
                         <td>&#8377;<%=itemTotalCost%></td>
                         <td>
-                            <form action="addtocart" method="post" style="display:inline;">
-                                <input type="hidden" name="cid" value="<%=s.getCustomer_Id()%>"/>
-                                <button type="submit" name="delete" class="btn"><i class="fas fa-trash"></i> Remove</button>
+                            <form action="addToCart" method="post" style="display:inline;">
+                                <input type="hidden" name="cart_id" value="<%=s.getCart_Id()%>"/>
+                                <button type="submit" name="delete" class="btn">
+                                    <i class="fas fa-trash-alt"></i> <!-- Font Awesome Trash Icon -->
+                                </button>
                             </form>
                         </td>
                     </tr>
@@ -142,6 +159,10 @@
             <h2>Please log in to view your cart.</h2>
         <% } %>
     </div>
+    <% 
+        // Clear the session attribute to prevent duplicate additions
+        session.removeAttribute("lastAddedProductId"); 
+    %>
     <%@include file="footer.jsp" %>
 </body>
 </html>

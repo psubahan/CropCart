@@ -2,7 +2,6 @@ package com.cropcart.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import com.cropcart.DAO.CartDAO;
 import com.cropcart.DAO.CartDAOImpl;
@@ -19,7 +18,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-
 @WebServlet("/addToCart")
 public class AddToCart extends HttpServlet {
     @Override
@@ -38,43 +36,60 @@ public class AddToCart extends HttpServlet {
                     ProductDetails productDetails = productDAO.getProduct(productId);
 
                     if (productDetails != null) {
+                        // Add the product to the cart
+                        Cart cart = new Cart();
+                        cart.setProduct_Image(productDetails.getImage());
+                        cart.setProduct_Title(productDetails.getTitle());
+                        cart.setProduct_Category(productDetails.getCategoty());
+                        cart.setCustomer_Id(customer.getCustomer_id());
+                        cart.setCustomer_Name(customer.getName());
+                        cart.setQuantity(quantity);
+                        cart.setProduct_Cost(productDetails.getPrice());
+
                         CartDAO cartDAO = new CartDAOImpl();
+                        String status = cartDAO.addToCart(cart);
 
-                        // Check if the product is already in the cart
-                        List<Cart> cartItems = cartDAO.getCartInfo(customer.getCustomer_id());
-                        boolean productExists = cartItems.stream()
-                                .anyMatch(cart -> cart.getProduct_Title().equals(productDetails.getTitle()));
-
-                        if (!productExists) {
-                            // Add new product to cart
-                            Cart cart = new Cart();
-                            cart.setProduct_Image(productDetails.getImage());
-                            cart.setProduct_Title(productDetails.getTitle());
-                            cart.setProduct_Category(productDetails.getCategoty());
-                            cart.setCustomer_Id(customer.getCustomer_id());
-                            cart.setCustomer_Name(customer.getName());
-                            cart.setQuantity(quantity);
-                            cart.setProduct_Cost(productDetails.getPrice());
-
-                            String status = cartDAO.addToCart(cart);
-
-                            if (!status.equalsIgnoreCase("success")) {
-                                req.setAttribute("error", "Failed to add the product to the cart.");
-                            }
+                        if (status.equalsIgnoreCase("success")) {
+                            // Store a flag in the session to track the added product
+                            session.setAttribute("lastAddedProductId", productId);
                         } else {
-                            req.setAttribute("error", "Product already exists in the cart.");
+                            req.setAttribute("error", "Failed to add the product to the cart.");
                         }
                     } else {
                         req.setAttribute("error", "Product not found.");
                     }
 
-                    // Redirect to the cart page after adding the product
+                    // Redirect to the cart page to prevent resubmission
                     resp.sendRedirect("Cart.jsp");
                 } catch (NumberFormatException e) {
                     req.setAttribute("error", "Invalid product ID or quantity.");
                     resp.sendRedirect("ViewProductDetails.jsp");
                 }
-            } else {
+            } 
+            else if (req.getParameter("delete") != null) {
+                try {
+                    CartDAO cartDAO = new CartDAOImpl();
+                    int cartId = Integer.parseInt(req.getParameter("cart_id"));
+                    System.out.println(cartId);
+                    int status = cartDAO.deleteCart(cartId); // Delete item from cart
+
+                    if (status > 0) {
+                        // Redirect to Cart.jsp after successful deletion
+                        resp.sendRedirect("Cart.jsp");
+                    } else {
+                        // Handle deletion failure
+                        req.setAttribute("error", "Failed to delete item from cart.");
+                        RequestDispatcher rd = req.getRequestDispatcher("Cart.jsp");
+                        rd.forward(req, resp);
+                    }
+                } catch (NumberFormatException e) {
+                    req.setAttribute("error", "Invalid cart ID.");
+                    RequestDispatcher rd = req.getRequestDispatcher("Cart.jsp");
+                    rd.forward(req, resp);
+                }
+            }
+
+            else {
                 req.setAttribute("error", "Invalid request.");
                 resp.sendRedirect("ViewProductDetails.jsp");
             }
