@@ -118,6 +118,7 @@
                         <p class="product-description"><%= product.getDescription() %></p>
                         <form action="addToCart" method="post">
                             <input type="hidden" name="product_id" value="<%= product.getProduct_id() %>">
+                            <input type="hidden" name="farmer_id" value="<%= product.getFarmer_id() %>">
                             <div class="button-container">
                                 <input type="number" name="quantity" class="quantity-input" placeholder="Qty" min="1" required>
                                 <button type="submit" name="addToCart" class="add-to-cart">Add to Cart</button>  

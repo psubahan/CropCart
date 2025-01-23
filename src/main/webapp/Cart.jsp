@@ -152,7 +152,7 @@
             </table>
             <div class="total-cost">Total: &#8377;<%=tcost%></div>
             <div class="checkout-button">
-                <a href="Request.jsp" class="btn">Proceed to Request</a>
+                <a href="RequestingProducts.jsp" class="btn">Proceed to Request</a>
                 <a href="ViewProductDetails.jsp" class="btn">Back</a>
             </div>
         <% } else { %>
