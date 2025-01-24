@@ -16,7 +16,7 @@ public class ProductDetails
 	private int quantity;
 	private String description;
 	private String quantity_type;
-	private long price;
+	private String price;
 	private String status;
-
+	private int farmer_id;
 }
