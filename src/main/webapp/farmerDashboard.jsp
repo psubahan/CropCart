@@ -14,7 +14,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Farmer Dashboard</title>
 
-    <!-- Bootstrap for layout styling -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Chart.js for Graphs -->
@@ -51,7 +50,6 @@
             padding: 2rem;
         }
 
-        /* Reduce the size of all headings (h4, h5) */
         h4, h5 {
             font-size: 1.2rem; /* Adjust size as needed */
         }

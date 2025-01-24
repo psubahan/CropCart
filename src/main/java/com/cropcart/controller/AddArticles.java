@@ -19,12 +19,13 @@ public class AddArticles extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Retrieve form data from the request
-        String articleType = request.getParameter("articleType");
+        String articleType1 = request.getParameter("articleType");
         String title = request.getParameter("title");
         String publishDate = request.getParameter("publishDate");
         String titleDescription = request.getParameter("titleDescription");
         String articleImage = request.getParameter("articleImage");
         HttpSession session = request.getSession(false);
+        System.out.println(articleType1);
 
         // Validate session (optional, can be removed if session is not required)
         if (session == null) {
@@ -33,23 +34,23 @@ public class AddArticles extends HttpServlet {
         }
 
         Articles art = new Articles();
-        art.setArticle_type(articleType);
+        art.setArticle_type(articleType1);
         art.setTitle(title);
         art.setDescription(titleDescription);
         art.setPublish_Date(publishDate);
         art.setArticle_image(articleImage);
-
+        
         ArticlesDAO adao = new ArticlesDAOImp();
         boolean res = adao.addArticles(art);
 
         if (res) {
             request.setAttribute("successMessage", "Article added successfully!");
-            RequestDispatcher rd=request.getRequestDispatcher("addArticle.jsp");
+            RequestDispatcher rd=request.getRequestDispatcher("AddArticles.jsp");
             rd.forward(request, response);
         }
         else {
         	request.setAttribute("errorMessage", "Failed to add the article. Please try again.");
-            RequestDispatcher rd=request.getRequestDispatcher("addArticle.jsp");
+            RequestDispatcher rd=request.getRequestDispatcher("AddArticles.jsp");
             rd.forward(request, response);
         }
     }

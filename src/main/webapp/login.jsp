@@ -9,6 +9,8 @@
     <style>
         body {
             background-color: #f9f9f9;
+            margin :0px;
+            padding : 0px;
         }
         .login-container {
             margin-top: 50px;
@@ -17,8 +19,8 @@
             border: 1px solid #ddd;
             border-radius: 10px;
             padding: 20px;
-            background: #fff; /* White with slight transparency */
-            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+            background: #fff; 
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15); 
             height: 100%;
         }
         .login-panel {

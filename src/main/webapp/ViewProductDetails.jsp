@@ -20,6 +20,11 @@
             padding: 20px;
             text-align: center;
         }
+        .error-message {
+            color: red;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
         .product-container {
             display: flex;
             flex-wrap: wrap;
@@ -89,6 +94,13 @@
 <body>
 <%@ include file="header.jsp" %>
 <div class="container">
+    <% 
+        // Display error message if available
+        String errorMessage = (String) request.getAttribute("error");
+        if (errorMessage != null) { 
+    %>
+        <div class="error-message"><%= errorMessage %></div>
+    <% } %>
     <div class="product-container">
         <%
             ProductDAO pdao = new ProductDAOImp();
@@ -106,11 +118,11 @@
                         <p class="product-description"><%= product.getDescription() %></p>
                         <form action="addToCart" method="post">
                             <input type="hidden" name="product_id" value="<%= product.getProduct_id() %>">
+                            <input type="hidden" name="farmer_id" value="<%= product.getFarmer_id() %>">
                             <div class="button-container">
                                 <input type="number" name="quantity" class="quantity-input" placeholder="Qty" min="1" required>
-                              <button type="submit" class="add-to-cart">Add to Cart</button>  
+                                <button type="submit" name="addToCart" class="add-to-cart">Add to Cart</button>  
                             </div>
-                            
                         </form>
                     </div>
         <%

@@ -105,7 +105,7 @@ ul li:hover .dropdown {
                 
                 <%if(session.getAttribute("Admin")!=null){ %>
                 <ul>
-                    <li><a href="homePage.jsp">HOME</a></li>
+                    <li><a href="adminDashboard.jsp">HOME</a></li>
                     <li><a href="">FARMER'S MARKET</a></li>
                     <li>
                         <a href="articlesList.jsp">NEWS AND ARTICLES</a>
@@ -114,37 +114,33 @@ ul li:hover .dropdown {
                             <a href="editArticles.jsp">Edit Articles</a>
                         </div>
                     </li>
-                    <li><a href="">MY ACCOUNT</a></li>
-                    <li><a href="">CONTACT</a></li>
+                    <li><a href="changePassword.jsp">CHANGE PASSWORD</a></li>
+                    <li><a href="">	QUERIES</a></li>
+                    <li><a href="">LOGOUT</a></li>
                 </ul>
-                <%}
-                
-                else if(request.getParameter("farmer")!=null){ %>
+                <%}else if(request.getParameter("farmer")!=null){ %>
                 <ul>
                     <li><a href="homePage.jsp">HOME</a></li>
                     <li><a href="addProduct.jsp">ADD PRODUCT</a></li>
                     <li><a href="articles.jsp">NEWS AND ARTICLES</a></li>
-                    <li><a href="">MY ACCOUNT</a></li>
+                    <li><a href="editProfile.jsp">EDIT PROFILE</a></li>
                     <li><a href="">CONTACT</a></li>
+                    <li><a href="">	LOGOUT</a></li>
                 </ul>
-                <%}
-                
-                else if(request.getParameter("customer")!=null){ %>
+                <%}else if(request.getParameter("customer")!=null){ %>
                 <ul>
                     <li><a href="homePage.jsp">HOME</a></li>
                     <li><a href="ViewProductDetails.jsp">VIEW PRODUCTS</a></li>
                     <li><a href="articles.jsp">NEWS AND ARTICLES</a></li>
-                    <li><a href="">MY ACCOUNT</a></li>
+                    <li><a href="editProfile.jsp">EDIT PROFILE</a></li>
                     <li><a href="">CONTACT</a></li>
+                    <li><a href="">LOGOUT</a></li>
                 </ul>
-                <%}
-                
-                else{ %>
+                <%}else{ %>
                 <ul>
                     <li><a href="homePage.jsp">HOME</a></li>
                     <li><a href="">FARMER'S MARKET</a></li>
                     <li><a href="articles.jsp">NEWS AND ARTICLES</a></li>
-                    <li><a href="">MY ACCOUNT</a></li>
                     <li><a href="">CONTACT</a></li>
                 </ul>
                 <%} %>

@@ -17,12 +17,11 @@
             width: 100%;
         }
 
-        /* Cool Green Gradient Background for .contents */
         .contents {
             margin-top: 70px;
             width: 90%;
             max-width: 1000px;
-            background: linear-gradient(145deg, #008000, #66ff66); /* Green gradient from #008000 to a lighter vibrant green (#66ff66) */
+            background: linear-gradient(145deg, #008000, #66ff66); 
             border-radius: 6px;
             box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2), -4px -4px 10px rgba(255, 255, 255, 0.7);
             padding: 20px;
@@ -50,6 +49,10 @@
             gap: 15px;
             width: 100%;
         }
+        
+        .record-type{
+             font-weight : bold;
+        }
 
         .record-row {
             display: grid;
@@ -75,7 +78,7 @@
         .record-row .record-count {
             font-size: 18px;
             font-weight: bold;
-            color: #008000; /* Green for numbers */
+            color: #008000; 
             text-align: right;
         }
         
@@ -91,7 +94,11 @@
         <h1>Admin Dashboard</h1>
         <div class="table-container">
             <div class="record-row">
-                <a href="FarmerRecords.jsp"><div class="record-type">Number of Farmer records</div></a>
+
+                <div class="record-type"><a href="FarmerRecords.jsp">Number of Farmer records</a></div>
+
+                <a href="ViewFarmerDetails.jsp"><div class="record-type">Number of Farmer records</div></a>
+
                 <div class="record-count">1</div>
             </div>
             <div class="record-row">
@@ -104,7 +111,7 @@
             </div>
             <div class="record-row">
                 <a href=""><div class="record-type">Number of Produce records</div></a>
-                <div class="record-count">179</div>
+                <div class="record-count">1</div>
             </div>
             <div class="record-row">
                 <a href=""><div class="record-type">Number of Purchase Order records</div></a>

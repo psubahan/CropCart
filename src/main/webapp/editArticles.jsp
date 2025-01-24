@@ -130,6 +130,14 @@
         textarea {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+        
+        .success{
+        	color : green;
+        }
+        
+        .failure{
+            color : red;
+        }
     </style>
 </head>
 <body>
@@ -144,6 +152,13 @@
  <form action="editArticle" method="post">
      <div class="edit-container">
         <h2>EDIT ARTICLE HERE</h2>
+        <%if(request.getAttribute("isUpdated")!=null){ %>
+        <h3 class="success"><%=request.getAttribute("isUpdated")%></h3>
+        <%} %>
+         
+        <%if(request.getAttribute("notUpdated")!=null){ %>
+        <h3 class="failure"><%=request.getAttribute("notUpdated") %></h3>
+        <%} %>
         <div class="form-left">
             <div class="form-group">
                 <label for="articleId">Article ID</label>

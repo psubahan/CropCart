@@ -22,6 +22,7 @@
         .container {
             display: flex;
             flex-wrap: wrap;
+            width : 1300px;
             gap: 20px;
             justify-content: center;
         }
@@ -81,12 +82,9 @@
 }
 
 .card .button:hover {
-    background-color: #005700; /* Change background color on hover */
+    background-color: #005700; 
     
 }
-
-
-
 
         @keyframes fadeIn {
             from {

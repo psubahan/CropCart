@@ -91,10 +91,10 @@
          text-decoration: none;
      }
 
-     .update-link a:hover {
-         color: red !important;
+    /* .update-link a:hover {
+         color: red ;
          text-decoration: underline;
-     }
+     } */
  </style>
 </head>
 <body>
@@ -155,7 +155,7 @@
                                  for (ProductDetails product : products) {
                              %>
                              <tr>
-                                 <td>product Id</td>
+                                 <td></td>
                                  <td><%= product.getCategoty() %></td>
                                  <td><%= product.getStatus() %></td>
                              </tr>
