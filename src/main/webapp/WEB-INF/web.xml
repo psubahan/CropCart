@@ -44,16 +44,7 @@
     <url-pattern>/EditArticle</url-pattern>
   </servlet-mapping>
 
-  <servlet>
-    <description></description>
-    <display-name>AddProduct</display-name>
-    <servlet-name>AddProduct</servlet-name>
-    <servlet-class>com.cropcart.controller.AddProduct</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddProduct</servlet-name>
-    <url-pattern>/AddProduct</url-pattern>
-  </servlet-mapping>
+  
   <servlet>
     <description></description>
     <display-name>EditProfile</display-name>
