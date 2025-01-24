@@ -120,7 +120,7 @@ ul li:hover .dropdown {
                 </ul>
                 <%}else if(request.getParameter("farmer")!=null){ %>
                 <ul>
-                    <li><a href="homePage.jsp">HOME</a></li>
+                    <li><a href="farmerDashboard.jsp">HOME</a></li>
                     <li><a href="addProduct.jsp">ADD PRODUCT</a></li>
                     <li><a href="articles.jsp">NEWS AND ARTICLES</a></li>
                     <li><a href="editProfile.jsp">EDIT PROFILE</a></li>
@@ -129,7 +129,7 @@ ul li:hover .dropdown {
                 </ul>
                 <%}else if(request.getParameter("customer")!=null){ %>
                 <ul>
-                    <li><a href="homePage.jsp">HOME</a></li>
+                    <li><a href="customerDashboard.jsp">HOME</a></li>
                     <li><a href="ViewProductDetails.jsp">VIEW PRODUCTS</a></li>
                     <li><a href="articles.jsp">NEWS AND ARTICLES</a></li>
                     <li><a href="editProfile.jsp">EDIT PROFILE</a></li>
