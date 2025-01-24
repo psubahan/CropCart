@@ -44,7 +44,6 @@
     <url-pattern>/EditArticle</url-pattern>
   </servlet-mapping>
 
-  
   <servlet>
     <description></description>
     <display-name>EditProfile</display-name>
