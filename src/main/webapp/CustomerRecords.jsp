@@ -117,7 +117,6 @@
         <button type="submit" class="buttons">Search</button>
     </form>
 
-    <table class="articles" style="border-radius : 20px;">
         <thead>
             <tr>
                 <th>Customer ID</th>
