@@ -1,0 +1,203 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="com.cropcart.DAO.CartDAOImpl"%>
+<%@page import="com.cropcart.DAO.CartDAO"%>
+<%@page import="com.cropcart.dto.Cart"%>
+<%@page import="com.cropcart.dto.Customer"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Requesting Products</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        color: #2e7d32;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        padding: 20px;
+        margin: auto;
+        max-width: 1000px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        color: #008000;
+        text-align: center;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    table th, table td {
+        border: 2px solid #4caf50;
+        padding: 12px;
+        text-align: center;
+    }
+
+    table th {
+        background-color: #008000;
+        color: white;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #f1f8e9;
+    }
+
+    .btn {
+        display: inline-block;
+        text-decoration: none;
+        background-color: #008000;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: #388e3c;
+    }
+
+    .btn i {
+        margin-right: 5px;
+    }
+
+    .total-cost {
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: right;
+        color: #2e7d32;
+    }
+
+    .request-button {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .input-group {
+        margin-top: 20px;
+    }
+
+    .input-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #2e7d32;
+    }
+
+    .input-group input, .input-group select, .input-group textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .input-group textarea {
+        resize: vertical;
+    }
+</style>
+</head>
+<body>
+    <%@include file="header.jsp" %>
+    <div class="container">
+        <% Customer c = (Customer) session.getAttribute("customer"); %>
+        <% if (c != null) { %>
+            <h2>Request Your Products</h2>
+            <form action="RequestServlet" method="post">
+                <h3>Customer: <%= c.getName() %></h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Product Name</th>
+                            <th>Cost (&#8377;)</th>
+                            <th>Quantity</th>
+                            <th>Total (&#8377;)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% 
+                            int totalCost = 0;
+                            CartDAO cdao = new CartDAOImpl();
+                            List<Cart> cartItems = cdao.getCartInfo(c.getCustomer_id());
+                            Iterator<Cart> itr = cartItems.iterator();
+                            while (itr.hasNext()) {
+                                Cart cartItem = itr.next();
+                                int itemTotalCost = Integer.parseInt(cartItem.getProduct_Cost()) * Integer.parseInt(cartItem.getQuantity());
+                                totalCost += itemTotalCost;
+                        %>
+                        <tr>
+                            <td>
+                                <img src="<%= cartItem.getProduct_Image() %>" alt="<%= cartItem.getProduct_Title() %>" style="height: 80px; width: auto; border-radius: 10px;">
+                            </td>
+                            <td><%= cartItem.getProduct_Title() %></td>
+                            <td>&#8377;<%= cartItem.getProduct_Cost() %></td>
+                            <td><%= cartItem.getQuantity() %></td>
+                            <td>&#8377;<%= itemTotalCost %></td>
+                        </tr>
+                        <input type="hidden" name="farmerid" value="<%= cartItem.getFarmer_Id() %>">
+                        <input type="hidden" name="customerid" value="<%= c.getCustomer_id() %>">
+                        <input type="hidden" name="customerName" value="<%= c.getName() %>">
+                        <input type="hidden" name="cartId" value="<%= cartItem.getCart_Id() %>">
+                        <input type="hidden" name="productImage" value="<%= cartItem.getProduct_Image() %>">
+                        <input type="hidden" name="ProductName" value="<%= cartItem.getProduct_Title() %>">
+                        <% } %>
+                    </tbody>
+                </table>
+
+                <div class="total-cost">Total: &#8377;<%= totalCost %></div>
+                
+                <!-- Input Fields for Payment Mode, Address, State, and City -->
+                <div class="input-group">
+                    <label for="paymentMode">Payment Mode</label>
+                    <select name="paymentMode" id="paymentMode" required>
+                        <option value="">--Select Payment Mode--</option>
+                        <option value="Cash on Delivery">Cash on Delivery</option>
+                        <option value="Online Payment">Online Payment</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="deliveryAddress">Delivery Address</label>
+                    <textarea name="deliveryAddress" id="deliveryAddress" rows="4" placeholder="Enter your delivery address" required></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="state">State</label>
+                    <input type="text" name="state" id="state" placeholder="Enter your state" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="city">City</label>
+                    <input type="text" name="city" id="city" placeholder="Enter your city" required>
+                </div>
+
+                <div class="request-button">
+                    <button type="submit" class="btn">
+                        <i class="fas fa-paper-plane"></i> Place Request
+                    </button>
+                    <a href="Cart.jsp" class="btn">Back to Cart</a>
+                </div>
+            </form>
+        <% } else { %>
+            <h2>Please log in to request your products.</h2>
+        <% } %>
+    </div>
+    <%@include file="footer.jsp" %>
+</body>
+</html>

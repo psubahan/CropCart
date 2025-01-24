@@ -1,7 +1,6 @@
 package com.cropcart.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import com.cropcart.DAO.CartDAO;
 import com.cropcart.DAO.CartDAOImpl;
@@ -23,7 +22,7 @@ public class AddToCart extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
-
+       
         if (session != null && session.getAttribute("customer") != null) {
             Customer customer = (Customer) session.getAttribute("customer");
 
@@ -31,7 +30,7 @@ public class AddToCart extends HttpServlet {
                 try {
                     int productId = Integer.parseInt(req.getParameter("product_id"));
                     String quantity = req.getParameter("quantity");
-
+                    String former_id=req.getParameter("farmer_id");
                     ProductDAO productDAO = new ProductDAOImp();
                     ProductDetails productDetails = productDAO.getProduct(productId);
 
@@ -45,7 +44,7 @@ public class AddToCart extends HttpServlet {
                         cart.setCustomer_Name(customer.getName());
                         cart.setQuantity(quantity);
                         cart.setProduct_Cost(productDetails.getPrice());
-
+                        cart.setFarmer_Id(former_id);
                         CartDAO cartDAO = new CartDAOImpl();
                         String status = cartDAO.addToCart(cart);
 
@@ -70,7 +69,6 @@ public class AddToCart extends HttpServlet {
                 try {
                     CartDAO cartDAO = new CartDAOImpl();
                     int cartId = Integer.parseInt(req.getParameter("cart_id"));
-                    System.out.println(cartId);
                     int status = cartDAO.deleteCart(cartId); // Delete item from cart
 
                     if (status > 0) {

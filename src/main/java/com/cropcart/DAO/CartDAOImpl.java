@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class CartDAOImpl implements CartDAO{
 	    String status = "";
 	    PreparedStatement ps = null;
 	    int res = 0;
-	    String query = "INSERT INTO CART(PRODUCT_IMAGE, PRODUCT_TITLE, PRODUCT_CATEGORY, QUANTITY, CUSTOMER_ID, CUSTOMER_NAME,PRODUCT_COST,status) VALUES(?, ?, ?, ?, ?, ?,?,?)";
+	    String query = "INSERT INTO CART(PRODUCT_IMAGE, PRODUCT_TITLE, PRODUCT_CATEGORY, QUANTITY, CUSTOMER_ID, CUSTOMER_NAME,PRODUCT_COST,status,FARMER_ID) VALUES(?, ?, ?, ?, ?, ?,?,?,?)";
 	    
 	    try {
 	        ps = con.prepareStatement(query);
@@ -34,6 +33,7 @@ public class CartDAOImpl implements CartDAO{
 	        ps.setString(6, c.getCustomer_Name());
 	        ps.setString(7, c.getProduct_Cost());
 	        ps.setString(8, "pending");
+	        ps.setString(9, c.getFarmer_Id());
 	        res = ps.executeUpdate();
 	        if (res > 0) {
 	            status = "success";
@@ -69,7 +69,7 @@ public class CartDAOImpl implements CartDAO{
 	            cart.setCustomer_Id(rs.getInt("CUSTOMER_ID"));
 	            cart.setCustomer_Name(rs.getString("CUSTOMER_NAME"));
 	            cart.setProduct_Cost(rs.getString("PRODUCT_COST"));
-	            
+	            cart.setFarmer_Id(rs.getString("Farmer_id"));
 	            cartList.add(cart);
 	        }
 	    } catch (SQLException e) {

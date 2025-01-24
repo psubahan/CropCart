@@ -41,6 +41,7 @@ public class ProductDAOImp implements ProductDAO
 	            pd.setQuantity_type(rs.getString("quantity_type"));
 	            pd.setPrice(rs.getString("price"));
 	            pd.setStatus(rs.getString("status"));
+	            pd.setFarmer_id(rs.getInt("farmer_id"));
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -72,6 +73,7 @@ public class ProductDAOImp implements ProductDAO
 		            pd.setQuantity_type(rs.getString("quantity_type"));
 		            pd.setPrice(rs.getString("price"));
 		            pd.setStatus(rs.getString("status"));
+		            pd.setFarmer_id(rs.getInt("farmer_id"));
 		            pdl.add(pd);
 		        }
 		    } catch (SQLException e) {

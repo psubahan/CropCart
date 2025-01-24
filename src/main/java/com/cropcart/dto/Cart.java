@@ -18,4 +18,5 @@ public class Cart
 	private int customer_Id;
 	private String customer_Name;
 	private String product_Cost;
+	private String farmer_Id;
 }
