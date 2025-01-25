@@ -15,61 +15,49 @@
     body {
         font-family: Arial, sans-serif;
         color: #2e7d32;
+        background-color: #f5f9f6;
         margin: 0;
         padding: 0;
     }
 
     .container {
         padding: 20px;
-        margin: auto;
-        max-width: 1000px;
+        margin: 40px auto;
+        max-width: 77%;
         background-color: #ffffff;
-        border-radius: 10px;
+        border-radius: 2px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
-    h2 {
+    .h2 {
         color: #008000;
         text-align: center;
+        margin:10px;
     }
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
-
-    table th, table td {
-        border: 2px solid #4caf50;
-        padding: 12px;
-        text-align: center;
-    }
-
-    table th {
-        background-color: #008000;
-        color: white;
-    }
-
-    table tr:nth-child(even) {
-        background-color: #f1f8e9;
-    }
+    
 
     .btn {
-        display: inline-block;
-        text-decoration: none;
-        background-color: #008000;
-        color: white;
-        padding: 12px 24px;
-        border-radius: 5px;
-        border: none;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background-color 0.3s ease;
-    }
+    display: inline-block;
+    text-decoration: none; /* Ensures no underline for <a> */
+    background-color: #008000;
+    color: white;
+    padding: 9px 24px; /* Make sure padding is same as the "Back to Cart" button */
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
 
-    .btn:hover {
-        background-color: #388e3c;
-    }
+.btn:hover {
+    background-color: #388e3c;
+}
+
+.btn i {
+    margin-right: 5px;
+}
+
 
     .btn i {
         margin-right: 5px;
@@ -86,6 +74,14 @@
     .request-button {
         text-align: center;
         margin-top: 20px;
+        display : flex;
+        justify-content: space-between;
+    }
+    
+    .request-button a{
+        text-align: center;
+        margin-top: 20px;
+        padding : 9px 24px;
     }
 
     .input-group {
@@ -99,17 +95,62 @@
         color: #2e7d32;
     }
 
-    .input-group input, .input-group select, .input-group textarea {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 16px;
-    }
+    .input-group input,
+.input-group select,
+.input-group textarea {
+    width: 100%;  /* Ensure all fields take full available width */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;  /* Include padding and border in width */
+}
+
 
     .input-group textarea {
         resize: vertical;
     }
+    
+    .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 15px;
+            border: 1px solid #e0e0e0;
+            margin-top : 10px;
+            background-color: #f5f9f6;
+            
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-details {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .item-details img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .item-info h2 {
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .item-info p {
+            font-size: 14px;
+            margin: 5px 0 0;
+            color: #666;
+        }
+        
+        
 </style>
 </head>
 <body>
@@ -117,21 +158,11 @@
     <div class="container">
         <% Customer c = (Customer) session.getAttribute("customer"); %>
         <% if (c != null) { %>
-            <h2>Request Your Products</h2>
+            <h2 class="h2">REQUEST YOUR PRODUCT</h2>
             <form action="RequestServlet" method="post">
-                <h3>Customer: <%= c.getName() %></h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Image</th>
-                            <th>Product Name</th>
-                            <th>Cost (&#8377;)</th>
-                            <th>Quantity</th>
-                            <th>Total (&#8377;)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% 
+                <h3 style="text-align : center;">Customer: <%= c.getName() %></h3>
+                <div class="containers">
+                    <% 
                             int totalCost = 0;
                             CartDAO cdao = new CartDAOImpl();
                             List<Cart> cartItems = cdao.getCartInfo(c.getCustomer_id());
@@ -141,25 +172,28 @@
                                 int itemTotalCost = Integer.parseInt(cartItem.getProduct_Cost()) * Integer.parseInt(cartItem.getQuantity());
                                 totalCost += itemTotalCost;
                         %>
-                        <tr>
-                            <td>
-                                <img src="<%= cartItem.getProduct_Image() %>" alt="<%= cartItem.getProduct_Title() %>" style="height: 80px; width: auto; border-radius: 10px;">
-                            </td>
-                            <td><%= cartItem.getProduct_Title() %></td>
-                            <td>&#8377;<%= cartItem.getProduct_Cost() %></td>
-                            <td><%= cartItem.getQuantity() %></td>
-                            <td>&#8377;<%= itemTotalCost %></td>
-                        </tr>
-                        <input type="hidden" name="farmerid" value="<%= cartItem.getFarmer_Id() %>">
-                        <input type="hidden" name="customerid" value="<%= c.getCustomer_id() %>">
-                        <input type="hidden" name="customerName" value="<%= c.getName() %>">
-                        <input type="hidden" name="cartId" value="<%= cartItem.getCart_Id() %>">
-                        <input type="hidden" name="productImage" value="<%= cartItem.getProduct_Image() %>">
-                        <input type="hidden" name="ProductName" value="<%= cartItem.getProduct_Title() %>">
-                        <% } %>
-                    </tbody>
-                </table>
-
+							<div class="cart-item">
+					            <div class="item-details">
+					                <img src="<%= cartItem.getProduct_Image() %>" alt="Product Image">
+					                <div class="item-info">
+					                    <h2 style="color : black;"><%= cartItem.getProduct_Title() %></h2>
+					                    <p><%=cartItem.getProduct_Category()%></p>
+					                </div>
+					            </div>
+					
+								<div class="item-info">
+					                    <h2  style="color : black;">Quantity</h2>
+					                    <span><%= cartItem.getQuantity() %></span>
+					            </div>
+					            
+					            <div class="item-info">
+					                    <h2 style="color : black;">Cost</h2>
+					                    <span><%= itemTotalCost %></span>
+					           </div>
+			               </div> 
+			            <%} %>
+			     </div>         
+       
                 <div class="total-cost">Total: &#8377;<%= totalCost %></div>
                 
                 <!-- Input Fields for Payment Mode, Address, State, and City -->
@@ -188,11 +222,12 @@
                 </div>
 
                 <div class="request-button">
-                    <button type="submit" class="btn">
-                        <i class="fas fa-paper-plane"></i> Place Request
-                    </button>
-                    <a href="Cart.jsp" class="btn">Back to Cart</a>
-                </div>
+				    <a href="Cart.jsp" class="btn">Back to Cart</a>
+				    <button type="submit" class="btn">
+				        <i class="fas fa-paper-plane"></i> Place Request
+				    </button>
+				</div>
+
             </form>
         <% } else { %>
             <h2>Please log in to request your products.</h2>
