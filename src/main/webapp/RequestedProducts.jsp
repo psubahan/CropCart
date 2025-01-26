@@ -85,6 +85,16 @@
                 <p class="price">&#8377;<%= order.getCart_Cost() %></p>
                 <p>Status: <%= order.getStatus() %></p>
                 <p>Order Date: <%= order.getOrder_date() %></p>
+                <%if(order.getStatus().equalsIgnoreCase("declined")){ %>
+                <p>delivered by: --//-- </p>
+                <%}else if(order.getDelivary_Date()==null){ %>
+                <p>delivered by: Waiting For The Update </p>
+                <%}else{ %>
+                <p>delivered by:<%=order.getDelivary_Date() %> </p>
+                <%} %>
+                <%if(order.getStatus().equalsIgnoreCase("declined")){ %>
+                <p>Order_Declined: <%=order.getDecline_reason() %></p>
+                <%} %>
             </div>
         </div>
         <% } %>

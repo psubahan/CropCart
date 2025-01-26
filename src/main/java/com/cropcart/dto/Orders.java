@@ -23,4 +23,6 @@ public class Orders {
 	private String status;
 	private String farmer_id;
 	private String paymet_mode;
+	private Date delivary_Date;
+	private String decline_reason;
 }

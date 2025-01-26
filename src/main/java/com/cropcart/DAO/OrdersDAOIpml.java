@@ -123,6 +123,8 @@ public class OrdersDAOIpml implements OrderDAO
 	            o.setPaymet_mode(rs.getString("payment"));
 	            o.setProduct_Image(rs.getString("product_image"));
 	            o.setProduct_Name(rs.getString("product_name"));
+	            o.setDelivary_Date(rs.getDate("Delivery_date"));
+	            o.setDecline_reason(rs.getString("Decline_Reason"));
 	            orderList.add(o);
 	        }
 	    } catch (SQLException e) {
@@ -159,6 +161,8 @@ public class OrdersDAOIpml implements OrderDAO
 		            o.setPaymet_mode(rs.getString("payment"));
 		            o.setProduct_Image(rs.getString("product_image"));
 		            o.setProduct_Name(rs.getString("product_name"));
+		            o.setDelivary_Date(rs.getDate("Delivery_date"));
+		            o.setDecline_reason(rs.getString("Decline_Reason"));
 		            orderList.add(o);
 		        }
 		    } catch (SQLException e) {
@@ -195,6 +199,8 @@ public class OrdersDAOIpml implements OrderDAO
 		            o.setPaymet_mode(rs.getString("payment"));
 		            o.setProduct_Image(rs.getString("product_image"));
 		            o.setProduct_Name(rs.getString("product_name"));
+		            o.setDelivary_Date(rs.getDate("Delivery_date"));
+		            o.setDecline_reason(rs.getString("Decline_Reason"));
 		            orderList.add(o);
 		        }
 		    } catch (SQLException e) {
