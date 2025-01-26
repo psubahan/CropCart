@@ -19,10 +19,11 @@ public class Orders {
 	private String order_city;
 	private int customer_Id;
 	private String customer_Name;
-	private Date order_date;
+	private String order_date;
 	private String status;
 	private String farmer_id;
 	private String paymet_mode;
-	private Date delivary_Date;
+	private String delivary_Date;
 	private String decline_reason;
+	private String quantity;
 }

@@ -159,6 +159,8 @@ ul li a:hover{
                 <ul>
                     <li><a href="customerDashboard.jsp">HOME</a></li>
                     <li><a href="ViewProductDetails.jsp">VIEW PRODUCTS</a></li>
+                    <li><a href="RequestedProducts.jsp">VIEW ORDERS</a></li>
+                    <li><a href="Cart.jsp">CART</a></li>
                     <li><a href="articles.jsp">NEWS & ARTICLES</a></li>
                     <li><a href="editProfile.jsp">EDIT PROFILE</a></li>
                     <li><a href="">CONTACT</a></li>

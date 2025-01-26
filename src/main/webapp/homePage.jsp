@@ -1,3 +1,10 @@
+<%@page import="com.cropcart.DAO.ArticlesDAOImp"%>
+<%@page import="com.cropcart.DAO.AdminDAOImp"%>
+<%@page import="com.cropcart.DAO.ArticlesDAO"%>
+<%@page import="com.cropcart.dto.Articles"%>
+<%@page import="com.cropcart.dto.ProductDetails"%>
+<%@page import="com.cropcart.DAO.ProductDAOImp"%>
+<%@page import="com.cropcart.DAO.ProductDAO"%>
 <%@page import="com.cropcart.dto.Farmer"%>
 <%@page import="com.cropcart.DAO.FarmerDAOImp"%>
 <%@page import="com.cropcart.DAO.FarmerDAO"%>
@@ -11,6 +18,10 @@
 	List<Customer> cl=cdao.getAllCoustomers();
 	FarmerDAO fdao=new FarmerDAOImp();
 	List<Farmer>fl=fdao.getAllFarmer();
+	ProductDAO pdao=new ProductDAOImp();
+	List<ProductDetails>pl=pdao.getAllproducts();
+	ArticlesDAO adao=new ArticlesDAOImp();
+	List<Articles>al=adao.getArticles();
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -378,7 +389,6 @@ a:hover {
                     <li><a href="#top">HOME</a></li>
                     <li><a href="#center">FARMER'S MARKET</a></li>
                     <li><a href="articles.jsp">NEWS AND ARTICLES</a></li>
-                    <li><a href="">MY ACCOUNT</a></li>
                     <li><a href="">CONTACT</a></li>
                 </ul>
             </div>
@@ -414,11 +424,11 @@ a:hover {
                 <p class="data">Customers</p>
             </div>
             <div class="item">
-                <p class="number">1</p>
+                <p class="number"><%=pl.size() %></p>
                 <p class="data">Total Products</p>
             </div>
             <div class="item">
-                <p class="number">1</p>
+                <p class="number"><%=al.size() %></p>
                 <p class="data">Articles Published</p>
             </div>
         </div>

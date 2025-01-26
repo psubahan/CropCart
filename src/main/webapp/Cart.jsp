@@ -221,7 +221,7 @@
             
             <div class="item-info">
                     <h2>Total Cost</h2>
-                    <span><%=itemTotalCost%></span>
+                    <span>₹<%=itemTotalCost%></span>
                 </div>
             <!--<span class="price"><%=itemTotalCost%></span>-->
          
@@ -239,7 +239,7 @@
         <div class="subtotal">
             <a href="ViewProductDetails.jsp" class="back-link">Back to Shop</a>
             <a href="RequestingProducts.jsp" class="back-link">Proceed to Request</a>
-            <span>Subtotal: <%=tcost%></span>
+            <span>Subtotal: ₹<%=tcost%></span>
         </div>
         <% } else { %>
             <h2>Please log in to view your cart.</h2>

@@ -188,9 +188,16 @@
 					            
 					            <div class="item-info">
 					                    <h2 style="color : black;">Cost</h2>
-					                    <span><%= itemTotalCost %></span>
+					                    <span>₹<%= itemTotalCost %></span>
 					           </div>
-			               </div> 
+					           <input type="hidden" value="<%=cartItem.getCart_Id()%>">
+			               </div>
+			               <input type="hidden" name="farmerid" value="<%= cartItem.getFarmer_Id() %>">
+                        <input type="hidden" name="customerid" value="<%= c.getCustomer_id() %>">
+                        <input type="hidden" name="customerName" value="<%= c.getName() %>">
+                        <input type="hidden" name="cartId" value="<%= cartItem.getCart_Id() %>">
+                        <input type="hidden" name="productImage" value="<%= cartItem.getProduct_Image() %>">
+                        <input type="hidden" name="ProductName" value="<%= cartItem.getProduct_Title() %>"> 
 			            <%} %>
 			     </div>         
        
@@ -230,7 +237,9 @@
 
             </form>
         <% } else { %>
-            <h2>Please log in to request your products.</h2>
+            <%RequestDispatcher rd=request.getRequestDispatcher("homePage.jsp");
+            	rd.forward(request, response);
+            %>
         <% } %>
     </div>
     <%@include file="footer.jsp" %>

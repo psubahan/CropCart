@@ -15,10 +15,19 @@ public class Logout extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String logs=req.getParameter("logout");
 		HttpSession session=req.getSession(false);
-		while(logs.equals("Logout"))
+		if(session!=null)
 		{
-			session.invalidate();
-			req.setAttribute("success", "logged out sucessfully");
+			while(logs.equals("LOGOUT"))
+			{
+				session.invalidate();
+				req.setAttribute("success", "logged out sucessfully");
+				RequestDispatcher rd=req.getRequestDispatcher("homePage.jsp");
+				rd.forward(req, resp);
+			}
+
+		}
+		else
+		{
 			RequestDispatcher rd=req.getRequestDispatcher("homePage.jsp");
 			rd.forward(req, resp);
 		}

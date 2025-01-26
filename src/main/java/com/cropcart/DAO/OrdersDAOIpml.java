@@ -25,6 +25,7 @@ public class OrdersDAOIpml implements OrderDAO
 	    String query = "INSERT INTO ORDERS ("
 	            + "    CART_ID,"
 	            + "    CART_COST,"
+	            + "    Quantity,"
 	            + "    ORDER_ADDRESS,"
 	            + "    ORDER_STATE,"
 	            + "    ORDER_CITY,"
@@ -40,6 +41,7 @@ public class OrdersDAOIpml implements OrderDAO
 	            + "SELECT "
 	            + "    CART_ID,"
 	            + "    (PRODUCT_COST * QUANTITY) AS CART_COST,"
+	            + "    Quantity,"
 	            + "    ? AS ORDER_ADDRESS,"
 	            + "    ? AS ORDER_STATE,"
 	            + "    ? AS ORDER_CITY,"
@@ -118,13 +120,14 @@ public class OrdersDAOIpml implements OrderDAO
 	            o.setCustomer_Id(rs.getInt("Customer_id"));
 	            o.setCustomer_Name(rs.getString("Customer_name"));
 	            o.setFarmer_id(rs.getString("Farmer_id"));
-	            o.setOrder_date(rs.getDate("Order_date"));
+	            o.setOrder_date(rs.getString("Order_date"));
 	            o.setStatus(rs.getString("Status"));
 	            o.setPaymet_mode(rs.getString("payment"));
 	            o.setProduct_Image(rs.getString("product_image"));
 	            o.setProduct_Name(rs.getString("product_name"));
-	            o.setDelivary_Date(rs.getDate("Delivery_date"));
+	            o.setDelivary_Date(rs.getString("Delivery_date"));
 	            o.setDecline_reason(rs.getString("Decline_Reason"));
+	            o.setQuantity(rs.getString("Quantity"));
 	            orderList.add(o);
 	        }
 	    } catch (SQLException e) {
@@ -138,7 +141,7 @@ public class OrdersDAOIpml implements OrderDAO
 		 ArrayList<Orders> orderList = new ArrayList<>();
 		    PreparedStatement ps = null;
 		    ResultSet rs = null;
-		    String query = "SELECT * FROM ORDERS WHERE FARMER_ID=?";
+		    String query = "SELECT * FROM ORDERS WHERE FARMER_ID=? && STATUS='Pending'";
 		    
 		    try {
 		        ps = con.prepareStatement(query);
@@ -156,13 +159,14 @@ public class OrdersDAOIpml implements OrderDAO
 		            o.setCustomer_Id(rs.getInt("Customer_id"));
 		            o.setCustomer_Name(rs.getString("Customer_name"));
 		            o.setFarmer_id(rs.getString("Farmer_id"));
-		            o.setOrder_date(rs.getDate("Order_date"));
+		            o.setOrder_date(rs.getString("Order_date"));
 		            o.setStatus(rs.getString("Status"));
 		            o.setPaymet_mode(rs.getString("payment"));
 		            o.setProduct_Image(rs.getString("product_image"));
 		            o.setProduct_Name(rs.getString("product_name"));
-		            o.setDelivary_Date(rs.getDate("Delivery_date"));
+		            o.setDelivary_Date(rs.getString("Delivery_date"));
 		            o.setDecline_reason(rs.getString("Decline_Reason"));
+		            o.setQuantity(rs.getString("Quantity"));
 		            orderList.add(o);
 		        }
 		    } catch (SQLException e) {
@@ -194,13 +198,14 @@ public class OrdersDAOIpml implements OrderDAO
 		            o.setCustomer_Id(rs.getInt("Customer_id"));
 		            o.setCustomer_Name(rs.getString("Customer_name"));
 		            o.setFarmer_id(rs.getString("Farmer_id"));
-		            o.setOrder_date(rs.getDate("Order_date"));
+		            o.setOrder_date(rs.getString("Order_date"));
 		            o.setStatus(rs.getString("Status"));
 		            o.setPaymet_mode(rs.getString("payment"));
 		            o.setProduct_Image(rs.getString("product_image"));
 		            o.setProduct_Name(rs.getString("product_name"));
-		            o.setDelivary_Date(rs.getDate("Delivery_date"));
+		            o.setDelivary_Date(rs.getString("Delivery_date"));
 		            o.setDecline_reason(rs.getString("Decline_Reason"));
+		            o.setQuantity(rs.getString("Quantity"));
 		            orderList.add(o);
 		        }
 		    } catch (SQLException e) {
@@ -208,5 +213,60 @@ public class OrdersDAOIpml implements OrderDAO
 		    }
 		    return orderList;
 	}
+	@Override
+	public String updateOrderForAccept(int orderid) {
+	    PreparedStatement ps = null;
+	    String success = "";
+	    int res = 0;
+	    String query = "UPDATE orders SET Status = ?,  Delivery_date = DATE_ADD(Order_date, INTERVAL 30 MINUTE) WHERE ORDER_ID =?";
+
+	    try {
+	        ps = con.prepareStatement(query);
+	        ps.setString(1, "In Progress");
+	        ps.setInt(2, orderid);
+
+	        res = ps.executeUpdate();
+
+	        if (res > 0) {
+	            success = "success";
+	        } else {
+	            success = "failure";
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        System.err.println("SQL Query Error: " + e.getMessage());
+	        success = "error";
+	    }
+	    return success;
+	}
+	@Override
+	public String updateOrderForDecline(int orderid) {
+
+	    PreparedStatement ps = null;
+	    String success = "";
+	    int res = 0;
+	    String query = "UPDATE orders SET Status = ?WHERE ORDER_ID =?";
+
+	    try {
+	        ps = con.prepareStatement(query);
+	        ps.setString(1, "declined");
+	        ps.setInt(2, orderid);
+
+	        res = ps.executeUpdate();
+
+	        if (res > 0) {
+	            success = "success";
+	        } else {
+	            success = "failure";
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        System.err.println("SQL Query Error: " + e.getMessage());
+	        success = "error";
+	    }
+	    return success;
+	
+	}
+
 	
 }
