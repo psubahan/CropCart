@@ -8,18 +8,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <title>Product Details</title>
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #fdf6e3;
+            background-color: #F4F6F9;
+         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
         }
         .container {
             padding: 20px;
-            text-align: center;
+            text-align: center; 
         }
+        
+     
         .error-message {
             color: red;
             font-size: 1.2em;
@@ -32,7 +36,7 @@
         }
         .product-card {
             background-color: #ffffff;
-            border: 2px solid #008000;
+            border: 0.5px solid #008000;
             border-radius: 15px;
             margin: 20px;
             padding: 20px;
@@ -41,7 +45,7 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
         }
         .product-card:hover {
-            transform: scale(1.05);
+            transform: scale(1.02);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
         .product-image img {
@@ -54,6 +58,7 @@
             font-size: 1.5em;
             font-weight: bold;
             margin: 15px 0;
+            text-transform : uppercase;
         }
         .price {
             color: #008000;
@@ -62,7 +67,7 @@
         }
         .product-description {
             font-size: 0.9em;
-            color: #555;
+            color: black;
             margin: 10px 0;
         }
         .button-container {
@@ -78,22 +83,26 @@
         .add-to-cart {
             background-color: #008000;
             color: white;
-            padding: 10px 15px;
+            padding: 8px 15px;
             border: none;
             border-radius: 5px;
-            font-size: 1em;
+            font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
         }
         .add-to-cart:hover {
-            background-color: #66cc66;
+            
             transform: scale(1.05);
+        }
+        
+        i{
+           
         }
     </style>
 </head>
 <body>
 <%@ include file="header.jsp" %>
-<div class="container">
+<div class="container" >
     <% 
         // Display error message if available
         String errorMessage = (String) request.getAttribute("error");
@@ -121,7 +130,7 @@
                             <input type="hidden" name="farmer_id" value="<%= product.getFarmer_id() %>">
                             <div class="button-container">
                                 <input type="number" name="quantity" class="quantity-input" placeholder="Qty" min="1" required>
-                                <button type="submit" name="addToCart" class="add-to-cart">Add to Cart</button>  
+                                <button type="submit" name="addToCart" class="add-to-cart"><i class="fa-solid fa-cart-shopping"></i></button>  
                             </div>
                         </form>
                     </div>

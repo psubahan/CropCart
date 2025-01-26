@@ -113,6 +113,38 @@ public class ProductDAOImp implements ProductDAO
 
 	        return isProductAdded;
 	    }
+  
+  @Override
+	public ArrayList<ProductDetails> getProducts(int farmer_id) {
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+	    String query = "SELECT * FROM product_details WHERE farmer_id=?";
+	    ArrayList<ProductDetails> al = new ArrayList<>();
+	    ProductDetails pd = null;
+
+	    try {
+	        ps = con.prepareStatement(query);
+	        ps.setInt(1, farmer_id);
+	        rs = ps.executeQuery();
+
+	        if (rs.next()) {
+	            pd = new ProductDetails();
+	            pd.setProduct_id(rs.getInt("product_id")); 
+	            pd.setCategoty(rs.getString("categoty"));
+	            pd.setTitle(rs.getString("title"));
+	            pd.setImage(rs.getString("image"));
+	            pd.setQuantity(rs.getInt("quantity"));
+	            pd.setDescription(rs.getString("description"));
+	            pd.setQuantity_type(rs.getString("quantity_type"));
+	            pd.setPrice(rs.getString("price"));
+	            pd.setStatus(rs.getString("status"));
+	            pd.setFarmer_id(rs.getInt("farmer_id"));
+	            al.add(pd);	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } 
+	    return al; 
+	}
 	}
 
 	
