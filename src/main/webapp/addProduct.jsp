@@ -16,12 +16,13 @@
         }
 
         .container {
-            width: 70%;
+            width: 77%;
             margin: 20px auto;
             background: white;
             padding: 20px;
-            border-radius: 8px;
+            border-radius: 0px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 0.5px solid #008000;
         }
 
         h2 {
@@ -35,6 +36,26 @@
         .form-group {
             margin-bottom: 15px;
         }
+        
+        .form-group input:focus {
+            border-color: #008000;
+            box-shadow: 0 0 15px rgba(0, 128, 0, 0.4);
+            outline: none;
+        }
+        
+        .form-group select:focus {
+            border-color: #008000;
+            box-shadow: 0 0 15px rgba(0, 128, 0, 0.4);
+            outline: none;
+        }
+        
+        .form-group textarea:focus {
+            border-color: #008000;
+            box-shadow: 0 0 15px rgba(0, 128, 0, 0.4);
+            outline: none;
+        }
+        
+        
 
         label {
             display: block;
@@ -62,12 +83,10 @@
             display: block;
             margin: 20px auto;
             width: 100%;
-            transition: all 0.3s ease-in-out;
+            
         }
 
-        .button:hover {
-            transform: scale(1.02);
-        }
+        
     </style>
 </head>
 <body>
@@ -75,7 +94,7 @@
     <%Farmer f = (Farmer)session.getAttribute("farmer");%>
     
     <div class="container" style="margin-top : 50px;">
-        <h2>Add New Product</h2>
+        <h2>ADD NEW PRODUCT</h2>
         <%if(request.getAttribute("message")!=null){ %>
          <h2 style= " margin:10px; color : blue; text-align : center;"><%=request.getAttribute("message")%></h2>
          <%} %>

@@ -1,128 +1,196 @@
+
 <%@page import="java.util.Iterator"%>
+<%@page import="com.cropcart.dto.Cart"%>
 <%@page import="java.util.List"%>
 <%@page import="com.cropcart.DAO.CartDAOImpl"%>
 <%@page import="com.cropcart.DAO.CartDAO"%>
-<%@page import="com.cropcart.dto.Cart"%>
-<%@page import="java.util.ArrayList"%>
 <%@page import="com.cropcart.dto.Customer"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>User Cart</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        color: #2e7d32; /* Darker green text */
-        margin: 0;
-        padding: 0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f9f6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
 
-    .container {
-        padding: 20px;
-        margin: auto;
-        max-width: 1000px;
-        background-color: #ffffff; /* White background for the container */
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+        .container {
+            width: 77%;
+            margin: 50px auto;
+            border : 1px solid white;
+            border-radius: 2px;
+            padding: 20px;
+            
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+           
+        }
 
-    h2 {
-        color: #008000; /* Grass green heading color */
-        text-align: center;
-    }
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+            color : #008000;
+            border: 1px solid #e0e0e0;
+            background-color : white;
+            padding : 20px;
+        }
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 15px;
+            border: 1px solid #e0e0e0;
+            margin-top : 10px;
+            background-color : white;
+            
+        }
 
-    table th, table td {
-        border: 2px solid #4caf50; /* Increased border thickness to 2px */
-        padding: 12px;  /* Increased padding for better readability */
-        text-align: center;
-    }
+        .cart-item:last-child {
+            border-bottom: none;
+        }
 
-    table th {
-        background-color: #008000; /* Light green for headers */
-        color: white;
-    }
+        .item-details {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
-    table tr:nth-child(even) {
-        background-color: #f1f8e9; /* Very light green for even rows */
-    }
+        .item-details img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
 
-    .btn {
-        display: inline-block;
-        text-decoration: none;
-        background-color: #008000; /* Grass green button background */
-        color: white;
-        padding: 12px 24px; /* Increased padding for buttons */
-        border-radius: 5px;
-        border: none;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background-color 0.3s ease; /* Smooth transition effect */
-    }
+        .item-info h2 {
+            font-size: 16px;
+            margin: 0;
+        }
 
-    .btn:hover {
-        background-color: #388e3c; /* Darker green on hover */
-    }
+        .item-info p {
+            font-size: 14px;
+            margin: 5px 0 0;
+            color: #666;
+        }
 
-    .btn i {
-        margin-right: 5px; /* Add some space between the icon and text */
-    }
+        .quantity {
+    display: inline-flex;
+    flex-direction: row; /* Change from column to row */
+    align-items: center; /* Align items horizontally */
+    background-color: #008000;
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 2px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
 
-    .total-cost {
-        margin-top: 20px;
-        font-size: 20px;  /* Larger font size for better visibility */
-        font-weight: bold;
-        text-align: right;
-        color: #2e7d32;
-    }
+.quantity button {
+    width: 30px; 
+    height: 30px; 
+    font-size: 18px;
+    background-color: #008000;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
 
-    .checkout-button {
-        text-align: center;
-        margin-top: 20px;
-    }
+.quantity input {
+    width: 40px; 
+    height: 30px; 
+    text-align: center;
+    font-size: 14px;
+    border: none;
+    background-color: white;
+    color: black;
+    outline: none;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 0 5px; 
+    transition: all 0.2s ease;
+}
 
-    .checkout-button a {
-        margin: 0 10px;
-    }
-</style>
+.quantity input:focus {
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.quantity button:active {
+    transform: scale(0.95);
+}
+
+
+        .price {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .remove {
+            color: #ff4d4d;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .remove:hover {
+            text-decoration: underline;
+        }
+
+        .subtotal {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            border: 1px solid #e0e0e0;
+            background-color : white;
+            padding : 20px;
+        }
+
+        .back-link {
+            color: #008000;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .btn{
+           background : none;
+           border : none;
+        }
+    </style>
 </head>
 <body>
-    <%@include file="header.jsp" %>
+
+  <%@include file="header.jsp" %>
     <% 
     String message = (String) session.getAttribute("message");
     if (message != null) { 
-%>
+    %>
     <div style="color: green; text-align: center; margin-bottom: 10px;"><%= message %></div>
-<%
+    <%
         session.removeAttribute("message");
     } 
-%>
+    %>
     
     <div class="container">
-        <% Customer c = (Customer) session.getAttribute("customer"); %>
-        <% if (c != null) { %>
-            <h2>Your Crop Cart</h2>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Image</th>
-                        <th>Product Name</th>
-                        <th>Cost (&#8377;)</th>
-                        <th>Quantity</th>
-                        <th>Total (&#8377;)</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% 
+    <% Customer c = (Customer) session.getAttribute("customer"); %>
+        <%if (c != null) { %>
+        <h1>YOUR CROP CART</h1>
+        <% 
                         int tcost = 0;
                         CartDAO cdao = new CartDAOImpl();
                         List<Cart> ar = cdao.getCartInfo(c.getCustomer_id());
@@ -132,29 +200,47 @@
                             int itemTotalCost = Integer.parseInt(s.getProduct_Cost()) * Integer.parseInt(s.getQuantity());
                             tcost += itemTotalCost;  
                     %>
-                    <tr>
-                        <td><img src="<%=s.getProduct_Image()%>" alt="<%=s.getProduct_Title()%>" style="height: 80px; width: auto; border-radius: 10px;"></td>
-                        <td><%=s.getProduct_Title()%></td>
-                        <td>&#8377;<%=s.getProduct_Cost()%></td>
-                        <td><%=s.getQuantity() %></td>
-                        <td>&#8377;<%=itemTotalCost%></td>
-                        <td>
-                            <form action="addToCart" method="post" style="display:inline;">
-                                <input type="hidden" name="cart_id" value="<%=s.getCart_Id()%>"/>
-                                <button type="submit" name="delete" class="btn">
-                                    <i class="fas fa-trash-alt"></i> <!-- Font Awesome Trash Icon -->
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                    <% } %>
-                </tbody>
-            </table>
-            <div class="total-cost">Total: &#8377;<%=tcost%></div>
-            <div class="checkout-button">
-                <a href="RequestingProducts.jsp" class="btn">Proceed to Request</a>
-                <a href="ViewProductDetails.jsp" class="btn">Back</a>
+        <div class="cart-item">
+            <div class="item-details">
+                <img src="<%=s.getProduct_Image()%>" alt="Product Image">
+                <div class="item-info">
+                    <h2><%=s.getProduct_Title()%></h2>
+                    <p><%=s.getProduct_Category() %></p>
+                </div>
             </div>
+            <!--<div class="quantity">
+                <button>-</button>
+                <input type="text" value="1">
+                <button>+</button>
+            </div> -->
+			
+			<div class="item-info">
+                    <h2>Quantity</h2>
+                    <span><%=s.getQuantity()%></span>
+            </div>
+            
+            <div class="item-info">
+                    <h2>Total Cost</h2>
+                    <span>₹<%=itemTotalCost%></span>
+                </div>
+            <!--<span class="price"><%=itemTotalCost%></span>-->
+         
+            <form action="addToCart" method="post" style="display:inline;">
+                <input type="hidden" name="cart_id" value="<%=s.getCart_Id()%>"/>
+            	<button type="submit" name="delete" class="btn">
+                   <span class="remove">×</span>   
+                </button>
+            </form>
+            
+        </div>
+        
+        
+         <% } %>
+        <div class="subtotal">
+            <a href="ViewProductDetails.jsp" class="back-link">Back to Shop</a>
+            <a href="RequestingProducts.jsp" class="back-link">Proceed to Request</a>
+            <span>Subtotal: ₹<%=tcost%></span>
+        </div>
         <% } else { %>
             <h2>Please log in to view your cart.</h2>
         <% } %>

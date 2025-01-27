@@ -95,6 +95,29 @@ a {
 ul li:hover .dropdown {
     display: block; 
 }
+
+ul li a:hover{
+    color : #008000;
+    cursor: pointer; 
+}
+
+#lgbtn {
+    background: none; 
+    border: none; 
+    color: red; 
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none; 
+    padding: 0; 
+    cursor: pointer; 
+    transition: color 0.3s;
+    margin : 0px 10px;
+}
+
+#lgbtn:focus {
+    outline: none; 
+}
+
     </style>
 </head>
 <body>
@@ -110,31 +133,40 @@ ul li:hover .dropdown {
                     <li>
                         <a href="articlesList.jsp">NEWS AND ARTICLES</a>
                         <div class="dropdown">
-                            <a href="AddArticles.jsp">Add Articles</a>
-                            <a href="editArticles.jsp">Edit Articles</a>
+                            <a href="AddArticles.jsp">ADD ARTICLES</a>
+                            <a href="editArticles.jsp">EDIT ARTICLES</a>
                         </div>
                     </li>
                     <li><a href="changePassword.jsp">CHANGE PASSWORD</a></li>
                     <li><a href="">	QUERIES</a></li>
-                    <li><a href="">LOGOUT</a></li>
+                    <form action="logout" method="post">
+                       <input type="submit" name="logout" value="LOGOUT" class="logout" id="lgbtn">
+                    </form> 
                 </ul>
-                <%}else if(request.getParameter("farmer")!=null){ %>
+                <%}else if(session.getAttribute("farmer")!=null){ %>
                 <ul>
-                    <li><a href="homePage.jsp">HOME</a></li>
+                    <li><a href="farmerDashboard.jsp">HOME</a></li>
                     <li><a href="addProduct.jsp">ADD PRODUCT</a></li>
-                    <li><a href="articles.jsp">NEWS AND ARTICLES</a></li>
+                    <li><a href="reuqestedOrders.jsp">ORDERS</a></li>
+                    <li><a href="articles.jsp">NEWS & ARTICLES</a></li>
                     <li><a href="editProfile.jsp">EDIT PROFILE</a></li>
                     <li><a href="">CONTACT</a></li>
-                    <li><a href="">	LOGOUT</a></li>
+                    <form action="logout" method="post">
+                       <input type="submit" name="logout" value="LOGOUT" class="logout" id="lgbtn">
+                    </form>   
                 </ul>
-                <%}else if(request.getParameter("customer")!=null){ %>
+                <%}else if(session.getAttribute("customer")!=null){ %>
                 <ul>
-                    <li><a href="homePage.jsp">HOME</a></li>
+                    <li><a href="customerDashboard.jsp">HOME</a></li>
                     <li><a href="ViewProductDetails.jsp">VIEW PRODUCTS</a></li>
-                    <li><a href="articles.jsp">NEWS AND ARTICLES</a></li>
+                    <li><a href="RequestedProducts.jsp">VIEW ORDERS</a></li>
+                    <li><a href="Cart.jsp">CART</a></li>
+                    <li><a href="articles.jsp">NEWS & ARTICLES</a></li>
                     <li><a href="editProfile.jsp">EDIT PROFILE</a></li>
                     <li><a href="">CONTACT</a></li>
-                    <li><a href="">LOGOUT</a></li>
+                    <form action="logout" method="post">
+                       <input type="submit" name="logout" value="LOGOUT" class="logout" id="lgbtn">
+                    </form> 
                 </ul>
                 <%}else{ %>
                 <ul>

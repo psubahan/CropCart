@@ -28,7 +28,7 @@
             width: 1000px;
             animation: fadeIn 1s ease-in-out;
             margin: 50px auto;
-            border: 2px solid #008000;
+            border: 0.5px solid #008000;
             position: relative; /* This makes it a positioning reference */
         }
 

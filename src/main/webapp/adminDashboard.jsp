@@ -1,3 +1,35 @@
+<%@page import="com.cropcart.dto.Orders"%>
+<%@page import="com.cropcart.DAO.OrdersDAOIpml"%>
+<%@page import="com.cropcart.DAO.OrderDAO"%>
+<%@page import="com.cropcart.DAO.ProductCatDAOImp"%>
+<%@page import="com.cropcart.DAO.ProductCatDAO"%>
+<%@page import="com.cropcart.dto.ProductCategory"%>
+<%@page import="com.cropcart.DAO.ArticlesDAOImp"%>
+<%@page import="com.cropcart.DAO.AdminDAOImp"%>
+<%@page import="com.cropcart.DAO.ArticlesDAO"%>
+<%@page import="com.cropcart.dto.Articles"%>
+<%@page import="com.cropcart.dto.ProductDetails"%>
+<%@page import="com.cropcart.DAO.ProductDAOImp"%>
+<%@page import="com.cropcart.DAO.ProductDAO"%>
+<%@page import="com.cropcart.dto.Farmer"%>
+<%@page import="com.cropcart.DAO.FarmerDAOImp"%>
+<%@page import="com.cropcart.DAO.FarmerDAO"%>
+<%@page import="java.util.List"%>
+<%@page import="com.cropcart.DAO.CustomerDAOImp"%>
+<%@page import="com.cropcart.DAO.CustomerDAO"%>
+<%@page import="com.cropcart.dto.Customer"%>
+<%
+	CustomerDAO cdao= new CustomerDAOImp();
+	List<Customer> cl=cdao.getAllCoustomers();
+	FarmerDAO fdao=new FarmerDAOImp();
+	List<Farmer>fl=fdao.getAllFarmer();
+	ProductCatDAO pdao=new ProductCatDAOImp();
+	List<ProductCategory>pl=pdao.getProductCategory();
+	ArticlesDAO adao=new ArticlesDAOImp();
+	List<Articles>al=adao.getArticles();
+	OrderDAO odao=new OrdersDAOIpml();
+	List<Orders>ol=odao.getAllorders();
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,20 +126,16 @@
         <h1>Admin Dashboard</h1>
         <div class="table-container">
             <div class="record-row">
-
-                <div class="record-type"><a href="FarmerRecords.jsp">Number of Farmer records</a></div>
-
                 <a href="ViewFarmerDetails.jsp"><div class="record-type">Number of Farmer records</div></a>
-
-                <div class="record-count">1</div>
+                <div class="record-count"><%=fl.size() %></div>
             </div>
             <div class="record-row">
                 <div class="record-type"><a href="ViewCustomerDetails.jsp">Number of  Customer records</a></div>
-                <div class="record-count">20</div>
+                <div class="record-count"><%=cl.size() %></div>
             </div>
             <div class="record-row">
                 <a href="Productcat.jsp"><div class="record-type">Number of Product Category records</div></a>
-                <div class="record-count">5</div>
+                <div class="record-count"><%=pl.size() %></div>
             </div>
             <div class="record-row">
                 <a href=""><div class="record-type">Number of Produce records</div></a>
@@ -115,7 +143,7 @@
             </div>
             <div class="record-row">
                 <a href=""><div class="record-type">Number of Purchase Order records</div></a>
-                <div class="record-count">18</div>
+                <div class="record-count"><%=ol.size() %></div>
             </div>
         </div>
     </div>

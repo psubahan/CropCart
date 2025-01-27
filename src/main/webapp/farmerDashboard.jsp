@@ -26,8 +26,9 @@
         }
 
         .card {
-            border-radius: 10px;
+            border-radius: 0px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border : 2px solid #008000;
         }
 
         .card-body {
@@ -119,7 +120,7 @@
         <div class="card mb-4">
             <div class="card-header" style="display : flex; justify-content : space-between;">
                 <h4>Your Details</h4>
-                <a href="updateDetails.jsp" class="update-link">Update Your Details</a>
+                
             </div>
             <div class="card-body">
                 <% Farmer f = (Farmer)session.getAttribute("farmer");
@@ -159,7 +160,8 @@
                         <% 
                             ProductDetails p = new ProductDetails();
                             ProductDAO pdao = new ProductDAOImp();
-                            List<ProductDetails> products = pdao.getAllproducts(); 
+                            ArrayList<ProductDetails> products = pdao.getProducts(f.getFarmer_id()); 
+                            
                         %>
                         <!-- Table displaying Product ID, Category, and Status -->
                         <table class="table">
@@ -173,10 +175,10 @@
                             <tbody>
                                 <% 
                                     // Loop through the products and display their details
-                                    for (ProductDetails product : products) {
+                                    for(ProductDetails product : products) {
                                 %>
                                 <tr>
-                                    <td><%= product.getTitle() %></td>
+                                    <td><%= product.getProduct_id() %></td>
                                     <td><%= product.getCategoty() %></td>
                                     <td><%= product.getStatus() %></td>
                                 </tr>

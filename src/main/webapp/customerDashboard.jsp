@@ -21,8 +21,9 @@
      }
 
      .card {
-         border-radius: 10px;
+         border-radius: 0px;
          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+         border : 0.5px solid #008000;
      }
 
      .card-body {
@@ -105,7 +106,7 @@
      <div class="card mb-4">
          <div class="card-header" style="display : flex; justify-content : space-between;">
                 <h4>Your Details</h4>
-                <a href="updateDetails.jsp" class="update-link">Update Your Details</a>
+            
             </div>
          <div class="card-body">
              <% Customer c = (Customer) session.getAttribute("customer"); %>
