@@ -115,7 +115,7 @@ public class ProductDAOImp implements ProductDAO
 	    }
   
   @Override
-	public ArrayList<ProductDetails> getProducts(int farmer_id) {
+	public List<ProductDetails> getProducts(int farmer_id) {
 	    PreparedStatement ps = null;
 	    ResultSet rs = null;
 	    String query = "SELECT * FROM product_details WHERE farmer_id=?";
@@ -127,7 +127,7 @@ public class ProductDAOImp implements ProductDAO
 	        ps.setInt(1, farmer_id);
 	        rs = ps.executeQuery();
 
-	        if (rs.next()) {
+	        while (rs.next()) {
 	            pd = new ProductDetails();
 	            pd.setProduct_id(rs.getInt("product_id")); 
 	            pd.setCategoty(rs.getString("categoty"));
@@ -145,9 +145,32 @@ public class ProductDAOImp implements ProductDAO
 	    } 
 	    return al; 
 	}
-	}
 
-	
-	
-	
+  @Override
+  public boolean updateProduct(ProductDetails product) {
+      PreparedStatement ps = null;
+      String query = "UPDATE product_details SET  quantity = ?, description = ? ,price = ?, status = ? WHERE product_id = ?";
+      boolean isUpdated = false;
 
+      try {
+          ps = con.prepareStatement(query);
+         
+          ps.setInt(1, product.getQuantity());
+          ps.setString(2, product.getDescription());
+          ps.setString(3, product.getPrice());
+          ps.setString(4, product.getStatus());
+          ps.setInt(5, product.getProduct_id());  // The product ID to identify which product to update
+
+          int rowsAffected = ps.executeUpdate();
+
+          if (rowsAffected > 0) {
+              isUpdated = true;  // If at least one row was updated, return true
+          }
+      } catch (SQLException e) {
+          e.printStackTrace();
+      }
+
+      return isUpdated;  // Return whether the product was successfully updated
+  }
+
+}

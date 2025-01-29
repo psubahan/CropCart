@@ -104,8 +104,7 @@
                 <th>City</th>
                 <th>Date</th>
                 <th>Payment</th>
-                <th>Accept</th>
-                <th>Decline</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -126,15 +125,14 @@
                 <td><%= o.getPaymet_mode() %></td>
                 <td>
                     <form action="farmeraction" method="post">
-                        <input type="hidden" name="orderid" value="<%= o.getCart_Id() %>">
+                        <input type="hidden" name="orderid" value="<%=o.getOrder_Id()%>">
                         <input class="button" type="submit" name="accept" value="Accept">
                     </form>
-                </td>
-                <td>
-                   <form action="farmeraction" method="post">
-                        <input type="hidden" name="orderid" value="<%= o.getCart_Id() %>">
-                        <input class="button" type="submit" name="decline" value="Decline">
-                    </form>
+                    <form id="declineForm_<%= o.getOrder_Id() %>" action="farmeraction" method="post">
+					    <input type="hidden" name="orderid" value="<%= o.getOrder_Id() %>">
+					    <input type="hidden" id="declineReason_<%= o.getOrder_Id() %>" name="declineReason">
+					    <input class="button" type="button" onclick="showDeclinePopup('<%= o.getOrder_Id() %>')"name="decline" value="Decline">
+					</form>
                 </td>
             </tr>
         <% } %>
@@ -142,6 +140,58 @@
     </table>
 </div>
 
+
+<script>
+// JavaScript to handle decline pop-up functionality
+
+let requestedOrderId;
+function showDeclinePopup(orderId) {
+	requestedOrderId = orderId;
+    const modal = document.createElement('div');
+    modal.id = 'declineModal';
+    modal.style.position = 'fixed';
+    modal.style.left = '0';
+    modal.style.top = '0';
+    modal.style.width = '100%';
+    modal.style.height = '100%';
+    modal.style.backgroundColor = 'rgba(0,0,0,0.5)';
+    modal.style.display = 'flex';
+    modal.style.justifyContent = 'center';
+    modal.style.alignItems = 'center';
+    modal.style.zIndex = '1000';
+
+    modal.innerHTML = `
+        <div style="background: white; padding: 20px; border-radius: 10px; width: 400px; text-align: center;">
+            <h3>Reason for Decline</h3>
+            <textarea id="reasonInput" style="width: 100%; height: 100px; margin-bottom: 20px;" name="declineReason" placeholder="Enter your reason..."></textarea>
+            <br>
+            <button onclick="submitDecline('')" name="decline" value="Decline"style="padding: 10px 20px; background-color: #f44336; color: white; border: none; border-radius: 5px; cursor: pointer;">Submit</button>
+            <button onclick="closeModal()" style="padding: 10px 20px; margin-left: 10px; background-color: #ddd; border: none; border-radius: 5px; cursor: pointer;">Cancel</button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+function closeModal() {
+    const modal = document.getElementById('declineModal');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+function submitDecline() {
+    const reason = document.getElementById('reasonInput').value;
+    if (!reason) {
+        alert('Please provide a reason for declining the order.');
+        return;
+    }
+     if (reasonInput) {
+        reasonInput.value = reason; // Set the decline reason
+        document.getElementById("declineForm_"+requestedOrderId).submit(); // Submit the form
+    }
+     closeModal();
+} 
+</script>
 <%@ include file="footer.jsp"%>
 </body>
 </html>

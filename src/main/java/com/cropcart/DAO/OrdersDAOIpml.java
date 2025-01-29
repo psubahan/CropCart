@@ -222,7 +222,7 @@ public class OrdersDAOIpml implements OrderDAO
 
 	    try {
 	        ps = con.prepareStatement(query);
-	        ps.setString(1, "In Progress");
+	        ps.setString(1, "Deliverd");
 	        ps.setInt(2, orderid);
 
 	        res = ps.executeUpdate();
@@ -240,33 +240,32 @@ public class OrdersDAOIpml implements OrderDAO
 	    return success;
 	}
 	@Override
-	public String updateOrderForDecline(int orderid) {
-
-	    PreparedStatement ps = null;
-	    String success = "";
-	    int res = 0;
-	    String query = "UPDATE orders SET Status = ?WHERE ORDER_ID =?";
-
-	    try {
-	        ps = con.prepareStatement(query);
+	public String updateOrderForDecline(int orderId, String declineReason) {
+	    String query = "UPDATE orders SET Status = ?, DeclineReason = ? WHERE ORDER_ID = ?";
+	    int res=0;
+	    String status="";
+	    try (
+	        PreparedStatement ps = con.prepareStatement(query)) {
 	        ps.setString(1, "declined");
-	        ps.setInt(2, orderid);
-
-	        res = ps.executeUpdate();
-
-	        if (res > 0) {
-	            success = "success";
-	        } else {
-	            success = "failure";
-	        }
+	        ps.setString(2, declineReason);
+	        ps.setInt(3, orderId);
+	       res= ps.executeUpdate();
+	       if(res>0)
+	       {
+	    	   status="success";
+	       }
+	       else
+	       {
+	    	   status="failure";
+	       }
 	    } catch (SQLException e) {
+	        // Log the exception
 	        e.printStackTrace();
-	        System.err.println("SQL Query Error: " + e.getMessage());
-	        success = "error";
 	    }
-	    return success;
-	
+	    return status; // Return false if an exception occurs
 	}
+
+
 
 	
 }

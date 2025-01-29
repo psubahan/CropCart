@@ -13,6 +13,8 @@
     align-items: center;
     padding: 20px;
     margin-top: 70px;
+    margin-left:0;
+    margin-right:0;
     background-color: #f9f9f9;
     border-top: 1px solid #ddd;
     flex-wrap: wrap; /* Ensures wrapping on smaller screens */

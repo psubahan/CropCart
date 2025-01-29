@@ -30,7 +30,7 @@ public class ProductCatDAOImp implements ProductCatDAO {
 			rs=ps.executeQuery();
 			while(rs.next()) {
 				ProductCategory pc=new ProductCategory();
-				pc.setProductCategory_id(1);
+				pc.setProductCategory_id(rs.getInt(1));
 				pc.setCategory(rs.getString(2));
 				pc.setImg(rs.getString(3));
 				pc.setDescription(rs.getString(4));
