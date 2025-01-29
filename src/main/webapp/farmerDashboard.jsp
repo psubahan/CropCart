@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<%@page import="com.cropcart.dto.Orders"%>
+<%@page import="com.cropcart.DAO.OrdersDAOIpml"%>
+<%@page import="com.cropcart.DAO.OrderDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.cropcart.dto.ProductDetails"%>
@@ -8,7 +11,6 @@
 <%@page import="com.cropcart.DAO.ProductDAOImp"%>
 <%@page import="com.cropcart.DAO.ProductDAO"%>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,6 +25,7 @@
         body {
             background-color: #F4F6F9;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+           
         }
 
         .card {
@@ -115,7 +118,16 @@
 
 <body>
     <%@ include file="header.jsp"%>
-    <div class="container">
+	<%
+	Farmer f = (Farmer) session.getAttribute("farmer");
+	FarmerDAO fdao = new FarmerDAOImp();
+	f = fdao.getFarmer(f.getFarmer_id());
+	ProductDAO pdao1=new ProductDAOImp();
+	List<ProductDetails>p4=pdao1.getProducts(f.getFarmer_id());
+	OrderDAO odao=new OrdersDAOIpml();
+	List<Orders>ol=odao.getAllorders(f.getFarmer_id());
+	%>
+	<div class="container">
         <!-- Farmer Details Card -->
         <div class="card mb-4">
             <div class="card-header" style="display : flex; justify-content : space-between;">
@@ -123,10 +135,7 @@
                 
             </div>
             <div class="card-body">
-                <% Farmer f = (Farmer)session.getAttribute("farmer");
-                   FarmerDAO fdao = new FarmerDAOImp();
-                   f = fdao.getFarmer(f.getFarmer_id());
-                %>
+                
                 <!-- Farmer Profile Information -->
                 <div class="row farmer-details">
                     <div class="col-md-6">
@@ -154,13 +163,13 @@
                 <div class="card product-list">
                     <div class="card-header" style="display : flex; justify-content : space-between;">
                         <h4>Products Added</h4>
-                        <a href="" class="update-link">View All</a>
+                        <a href="ViewProductsByFID.jsp" class="update-link">View All</a>
                     </div>
                     <div class="card-body">
                         <% 
                             ProductDetails p = new ProductDetails();
                             ProductDAO pdao = new ProductDAOImp();
-                            ArrayList<ProductDetails> products = pdao.getProducts(f.getFarmer_id()); 
+                            List<ProductDetails> products = pdao.getProducts(f.getFarmer_id()); 
                             
                         %>
                         <!-- Table displaying Product ID, Category, and Status -->
@@ -178,7 +187,7 @@
                                     for(ProductDetails product : products) {
                                 %>
                                 <tr>
-                                    <td><%= product.getProduct_id() %></td>
+                                    <td><%= product.getProduct_id()%></td>
                                     <td><%= product.getCategoty() %></td>
                                     <td><%= product.getStatus() %></td>
                                 </tr>

@@ -9,5 +9,6 @@ public interface ProductDAO {
 	public ProductDetails getProduct(int product_id);
 	public List<ProductDetails> getAllproducts();
 	boolean addProduct(ProductDetails product);
-	public ArrayList<ProductDetails> getProducts(int farmer_id);
+	public List<ProductDetails> getProducts(int farmer_id);
+	public boolean updateProduct(ProductDetails p);
 }

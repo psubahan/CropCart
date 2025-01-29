@@ -20,7 +20,7 @@ public class FarmerAction extends HttpServlet {
         String Aaction = req.getParameter("accept");
         String Daction = req.getParameter("decline");
         String orderIdParam = req.getParameter("orderid");
-        
+        System.out.println(Daction);
         if (Aaction != null && Aaction.equals("Accept") && orderIdParam != null) {
             try {
                 int orderId = Integer.parseInt(orderIdParam);
@@ -41,20 +41,24 @@ public class FarmerAction extends HttpServlet {
         else if (Daction != null && Daction.equals("Decline") && orderIdParam != null) {
             try {
                 int orderId = Integer.parseInt(orderIdParam);
+                String declineReason = req.getParameter("declineReason"); // Get decline reason
                 OrderDAO odao = new OrdersDAOIpml();
-                String result = odao.updateOrderForDecline(orderId);
-                
-                if (result.equals("success")) {
-                    req.setAttribute("success", "Order updated successfully.");
+                System.out.println(declineReason);
+                // Assuming you update the order status with a reason
+                String isDeclined = odao.updateOrderForDecline(orderId, declineReason);
+
+                if (isDeclined.equals("success")) {
+                    req.setAttribute("success", "Order declined successfully.");
                 } else {
-                    req.setAttribute("error", "Failed to update order.");
+                    req.setAttribute("error", "Failed to decline the order. Please try again.");
                 }
-            } catch (NumberFormatException e) {
-                req.setAttribute("error", "Invalid order ID.");
             } catch (Exception e) {
-                req.setAttribute("error", "An unexpected error occurred.");
+                req.setAttribute("error", "Invalid order ID or server issue.");
+                e.printStackTrace();
             }
-        }  
+            req.getRequestDispatcher("requestedOrders.jsp").forward(req, resp);
+        }
+
         else {
             req.setAttribute("error", "Invalid action or missing parameters.");
         }
