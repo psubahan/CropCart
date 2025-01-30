@@ -94,6 +94,7 @@
     <table>
         <thead>
             <tr>
+            	<th>OrderId</th>
                 <th>Product Name</th>
                 <th>Image</th>
                 <th>₹ Cost</th>
@@ -113,6 +114,7 @@
            while (itr.hasNext()) {
                o = itr.next(); %>
             <tr>
+            	<td><%= o.getOrder_Id() %></td>
                 <td><%= o.getProduct_Name() %></td>
                 <td><img src="<%= o.getProduct_Image() %>" height="150px" width="150px"></td>
                 <td>₹<%= o.getCart_Cost() %></td>
@@ -131,7 +133,8 @@
                     <form id="declineForm_<%= o.getOrder_Id() %>" action="farmeraction" method="post">
 					    <input type="hidden" name="orderid" value="<%= o.getOrder_Id() %>">
 					    <input type="hidden" id="declineReason_<%= o.getOrder_Id() %>" name="declineReason">
-					    <input class="button" type="button" onclick="showDeclinePopup('<%= o.getOrder_Id() %>')"name="decline" value="Decline">
+					    <input type="hidden" name="decline" value="Decline">
+					    <input class="button" type="button" onclick="showDeclinePopup('<%= o.getOrder_Id() %>')"name="declineb" value="Decline">
 					</form>
                 </td>
             </tr>
@@ -185,11 +188,15 @@ function submitDecline() {
         alert('Please provide a reason for declining the order.');
         return;
     }
-     if (reasonInput) {
+    
+    // Retrieve the hidden input field for the decline reason
+    const reasonInput = document.getElementById("declineReason_" + requestedOrderId);
+    if (reasonInput) {
         reasonInput.value = reason; // Set the decline reason
-        document.getElementById("declineForm_"+requestedOrderId).submit(); // Submit the form
+        document.getElementById("declineForm_" + requestedOrderId).submit(); // Submit the form
     }
-     closeModal();
+    
+    closeModal();
 } 
 </script>
 <%@ include file="footer.jsp"%>
