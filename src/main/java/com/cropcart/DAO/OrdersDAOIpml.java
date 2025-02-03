@@ -241,7 +241,7 @@ public class OrdersDAOIpml implements OrderDAO
 	}
 	@Override
 	public String updateOrderForDecline(int orderId, String declineReason) {
-	    String query = "UPDATE orders SET Status = ?, DeclineReason = ? WHERE ORDER_ID = ?";
+	    String query = "UPDATE orders SET Status = ?, Decline_Reason = ? WHERE ORDER_ID = ?";
 	    int res=0;
 	    String status="";
 	    try (

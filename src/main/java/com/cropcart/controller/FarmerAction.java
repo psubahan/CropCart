@@ -20,7 +20,9 @@ public class FarmerAction extends HttpServlet {
         String Aaction = req.getParameter("accept");
         String Daction = req.getParameter("decline");
         String orderIdParam = req.getParameter("orderid");
+        String declineReason = req.getParameter("declineReason");
         System.out.println(Daction);
+        System.out.println(declineReason);
         if (Aaction != null && Aaction.equals("Accept") && orderIdParam != null) {
             try {
                 int orderId = Integer.parseInt(orderIdParam);
@@ -41,9 +43,9 @@ public class FarmerAction extends HttpServlet {
         else if (Daction != null && Daction.equals("Decline") && orderIdParam != null) {
             try {
                 int orderId = Integer.parseInt(orderIdParam);
-                String declineReason = req.getParameter("declineReason"); // Get decline reason
+                 // Get decline reason
                 OrderDAO odao = new OrdersDAOIpml();
-                System.out.println(declineReason);
+               
                 // Assuming you update the order status with a reason
                 String isDeclined = odao.updateOrderForDecline(orderId, declineReason);
 
@@ -56,15 +58,14 @@ public class FarmerAction extends HttpServlet {
                 req.setAttribute("error", "Invalid order ID or server issue.");
                 e.printStackTrace();
             }
-            req.getRequestDispatcher("requestedOrders.jsp").forward(req, resp);
+            req.getRequestDispatcher("reuqestedOrders.jsp").forward(req, resp);
         }
 
         else {
             req.setAttribute("error", "Invalid action or missing parameters.");
         }
 
-        // Forward back to the requestedOrders.jsp page
-        RequestDispatcher rd = req.getRequestDispatcher("reuqestedOrders.jsp");
-        rd.forward(req, resp);
-    }
-}
+         //Forward back to the requestedOrders.jsp page
+      RequestDispatcher rd = req.getRequestDispatcher("reuqestedOrders.jsp");
+      rd.forward(req, resp);
+}}
