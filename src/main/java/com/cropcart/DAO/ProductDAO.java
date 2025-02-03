@@ -11,4 +11,5 @@ public interface ProductDAO {
 	boolean addProduct(ProductDetails product);
 	public List<ProductDetails> getProducts(int farmer_id);
 	public boolean updateProduct(ProductDetails p);
+	public List<ProductDetails> getPurchasedProducts(int customerId);
 }

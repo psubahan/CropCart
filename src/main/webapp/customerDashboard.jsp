@@ -132,39 +132,64 @@
          <!-- Product List Column -->
          <div class="col-md-6">
              <div class="card mb-4">
-                 <div class="card-header" style="display : flex; justify-content : space-between;">
-                        <h4>Products Bought</h4>
-                        <a href="" class="update-link">View All</a>
-                    </div>
-                 <div class="card-body">
-                     <% 
-                         ProductDAO pdao = new ProductDAOImp();
-                     
-                     List<ProductDetails> products = pdao.getAllproducts(); 
-                     %>
-                     <!-- Table displaying Product ID, Category, and Status -->
-                     <table class="table table-hover">
-                         <thead>
-                             <tr>
-                                 <th>Product ID</th>
-                                 <th>Category</th>
-                                 <th>Status</th>
-                             </tr>
-                         </thead>
-                         <tbody>
-                             <% 
-                                 for (ProductDetails product : products) {
-                             %>
-                             <tr>
-                                 <td></td>
-                                 <td><%= product.getCategoty() %></td>
-                                 <td><%= product.getStatus() %></td>
-                             </tr>
-                             <% } %>
-                         </tbody>
-                     </table>
-                 </div>
-             </div>
+    <div class="card-header" style="display: flex; justify-content: space-between;">
+        <h4>Products Bought</h4>
+        <a href="CustomerProductsBought.jsp" class="update-link">View All</a>
+    </div>
+    <div class="card-body">
+        <%
+            Customer customer = (Customer) session.getAttribute("customer");
+            if (customer != null) {
+                int customerId = customer.getCustomer_id(); // Use correct getter method
+
+                ProductDAO pdao = new ProductDAOImp();
+                List<ProductDetails> purchasedProducts = pdao.getPurchasedProducts(customerId);
+        %>
+        <!-- Table displaying purchased products -->
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%
+                    if (purchasedProducts != null && !purchasedProducts.isEmpty()) {
+                        for (ProductDetails product : purchasedProducts) {
+                %>
+                <tr>
+                    <td><%= product.getProduct_id() %></td>
+                    <td><%= product.getTitle() %></td>
+                    <td><%= product.getCategoty() %></td>
+                    <td><%= product.getQuantity() %> <%= product.getQuantity_type() %></td>
+                    <td>₹<%= product.getPrice() %></td>
+                </tr>
+                <%
+                        }
+                    } else {
+                %>
+                <tr>
+                    <td colspan="5">No products purchased yet.</td>
+                </tr>
+                <%
+                    }
+                %>
+            </tbody>
+        </table>
+        <%
+            } else {
+        %>
+        <p>Please log in to view purchased products.</p>
+        <%
+            }
+        %>
+    </div>
+</div>
+             
          </div>
 
          <!-- Graph Column -->

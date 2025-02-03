@@ -173,4 +173,40 @@ public class ProductDAOImp implements ProductDAO
       return isUpdated;  // Return whether the product was successfully updated
   }
 
+
+@Override
+	 public List<ProductDetails> getPurchasedProducts(int customerId) {
+	        List<ProductDetails> productList = new ArrayList<>();
+	        
+	        String query = "SELECT p.id, p.title, p.image, p.category, p.quantity, p.quantity_type, p.price " +
+	                       "FROM purchases pu " +
+	                       "JOIN products p ON pu.product_id = p.id " +
+	                       "WHERE pu.customer_id = ?";
+	        
+	        try {
+	             PreparedStatement ps = con.prepareStatement(query);
+	            ps.setInt(1, customerId);
+	            ResultSet rs = ps.executeQuery();
+	            
+	            while (rs.next()) {
+	                ProductDetails product = new ProductDetails();
+	                product.setProduct_id(rs.getInt("product_id"));
+	                product.setTitle(rs.getString("title"));
+	                product.setImage(rs.getString("image"));
+	                product.setCategoty(rs.getString("category"));
+	                product.setQuantity(rs.getInt("quantity"));
+	                product.setQuantity_type(rs.getString("quantity_type"));
+	                product.setPrice(rs.getString("price"));
+	                
+	                productList.add(product);
+	            }
+	        
+	        } 
+	        catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        
+	        return productList;
 }
+}
+

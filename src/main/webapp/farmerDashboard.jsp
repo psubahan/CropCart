@@ -209,6 +209,7 @@
 
     <script>
         // Chart.js code for the graph
+        
         const ctx = document.getElementById('productGraph').getContext('2d');
         const productGraph = new Chart(ctx, {
             type: 'bar',
