@@ -90,25 +90,72 @@
             border: 1px solid #f5c6cb;
         }
     </style>
+    <script>
+        function sendOTP() {
+            var email = document.getElementById("email").value;
+            if(email === "") {
+                alert("Please enter an email address");
+                return;
+            }
+            fetch("sendOTP", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: "email=" + encodeURIComponent(email) + "&name=" + encodeURIComponent(name)
+            }).then(response => response.text())
+              .then(data => alert(data));
+        }
+        function verifyOTP() {
+            var email = document.getElementById("email").value;
+            var otp = document.getElementById("otp").value;
+            if (otp === "") {
+                alert("Please enter the OTP");
+                return;
+            }
+            fetch("verifyOTP", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: "email=" + encodeURIComponent(email) + "&otp=" + encodeURIComponent(otp)
+            }).then(response => response.text())
+              .then(data => {
+                  if (data.includes("success")) {
+                      alert("OTP verified successfully!");
+                      document.getElementById("register-btn").disabled = false;
+                  } else {
+                      alert("Invalid OTP. Please try again.");
+                      document.getElementById("register-btn").disabled = true;
+                  }
+              });
+        }
+    </script>
 </head>
 <body>
     <%@ include file="header.jsp"%>
-    <%
-    String userRegister = request.getParameter("userRegister");
+  <%
+  String userRegister = request.getParameter("userRegister");
     String message = (String) request.getAttribute("message");
-  %>
+    Boolean success = (Boolean) request.getAttribute("success");
+
+    if (message != null) {
+        if (success != null && success) {
+%>
+            <div class="container">
+                <div class="message success">
+                    <%= message %>
+                </div>
+            </div>
+<%
+        } else {
+%>
+            <div class="container">
+                <div class="message error">
+                    <%= message %>
+                </div>
+            </div>
+<%
+        }
+    }
+%>
   
-  <%
-      if (message != null) {
-  %>
-  <div class="container">
-      <div class="message <%= message.contains("successful") ? "success" : "error" %>">
-          <%= message %>
-      </div>
-  </div>
-  <%
-      }
-  %> 
     <%if ("Farmer".equalsIgnoreCase(userRegister)) { %>
     <div class="container" style="margin-top : 50px;">
         <div class="image-section">
@@ -120,9 +167,15 @@
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" required>
             </div>
-            <div class="form-group">
+           <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
+                <button type="button" class="button" onclick="sendOTP()">Send OTP</button>
+            </div>
+            <div class="form-group">
+                <label for="otp">Enter OTP</label>
+                <input type="text" id="otp" name="otp" required>
+                <button type="button" class="button" onclick="verifyOTP()">Verify OTP</button>
             </div>
             <div class="form-group">
                 <label for="address">Address</label> 
@@ -183,9 +236,15 @@
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" required>
             </div>
-            <div class="form-group">
+           <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
+                <button type="button" class="button" onclick="sendOTP()">Send OTP</button>
+            </div>
+            <div class="form-group">
+                <label for="otp">Enter OTP</label>
+                <input type="text" id="otp" name="otp" required>
+                <button type="button" class="button" onclick="verifyOTP()">Verify OTP</button>
             </div>
             <div class="form-group">
                 <label for="contactNumber">Contact Number</label>

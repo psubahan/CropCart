@@ -122,7 +122,7 @@ public class RegisterServlet extends HttpServlet {
         customer.setCity(city);
         customer.setPincode(pincode);
         customer.setCustomer_type(customerType);
-
+        
         // Save to database
         CustomerDAO customerDAO = new CustomerDAOImp();
         return customerDAO.addCustomer(customer);
