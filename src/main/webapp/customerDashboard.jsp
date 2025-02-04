@@ -19,11 +19,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
          <style>
-        body {
-            background-color: #F4F6F9;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
+        
         .card {
             border-radius: 0px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

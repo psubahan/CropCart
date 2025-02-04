@@ -129,7 +129,7 @@ ul li a:hover{
                 <%if(session.getAttribute("Admin")!=null){ %>
                 <ul>
                     <li><a href="adminDashboard.jsp">HOME</a></li>
-                    <li><a href="">FARMER'S MARKET</a></li>
+                    <!-- <li><a href="">FARMER'S MARKET</a></li> -->
                     <li>
                         <a href="articlesList.jsp">NEWS AND ARTICLES</a>
                         <div class="dropdown">
@@ -161,7 +161,6 @@ ul li a:hover{
                     <li><a href="ViewProductDetails.jsp">VIEW PRODUCTS</a></li>
                     <li><a href="RequestedProducts.jsp">VIEW ORDERS</a></li>
                     <li><a href="Cart.jsp">CART</a></li>
-                    <li><a href="articles.jsp">NEWS & ARTICLES</a></li>
                     <li><a href="editProfile.jsp">EDIT PROFILE</a></li>
                     <li><a href="">CONTACT</a></li>
                     <form action="logout" method="post">
@@ -171,7 +170,7 @@ ul li a:hover{
                 <%}else{ %>
                 <ul>
                     <li><a href="homePage.jsp">HOME</a></li>
-                    <li><a href="">FARMER'S MARKET</a></li>
+                    <!-- <li><a href="">FARMER'S MARKET</a></li> -->
                     <li><a href="articles.jsp">NEWS AND ARTICLES</a></li>
                     <li><a href="">CONTACT</a></li>
                 </ul>

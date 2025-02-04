@@ -19,4 +19,5 @@ public class Customer
 	private String city;
 	private int pincode;
 	private String customer_type;
+	private String account_number;
 }

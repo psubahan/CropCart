@@ -24,6 +24,7 @@ public class AddArticles extends HttpServlet {
         String publishDate = request.getParameter("publishDate");
         String titleDescription = request.getParameter("titleDescription");
         String articleImage = request.getParameter("articleImage");
+        
         HttpSession session = request.getSession(false);
         System.out.println(articleType1);
 

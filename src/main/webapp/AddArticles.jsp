@@ -67,12 +67,45 @@
         .button:hover {
             transform: scale(1.02); /* Slightly enlarges the button */
         }
+        
+        .success-message {
+            color: #008000;
+            text-align : center;
+        }
+
+        .error-message {
+            color: red;
+            text-align : center;
+        }
     </style>
 </head>
 <body>
     <jsp:include page="header.jsp" />
     <div class="container" style="margin-top : 50px;">
         <h2>Add New Article</h2>
+        
+        <!-- Display success or error message -->
+        <%
+            String successMessage = (String) request.getAttribute("successMessage");
+            String errorMessage = (String) request.getAttribute("errorMessage");
+            
+            if (successMessage != null) {
+        %>
+            <div class="message success-message">
+                <%= successMessage %>
+            </div>
+        <%
+            }
+            
+            if (errorMessage != null) {
+        %>
+            <div class="message error-message">
+                <%= errorMessage %>
+            </div>
+        <%
+            }
+        %>
+        
         <form action="AddArticles" method="post">
             <div class="form-group">
                 <label for="articleType">Article Type</label>
