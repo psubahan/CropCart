@@ -10,20 +10,20 @@ public class dbConnection
 	
 	static String username = "root";
 	static String password = "tiger";
-	static Connection conn = null;
+	static Connection con = null;
 
 	public static Connection getConnection() {
 
-		if (conn == null) 
+		if (con == null) 
 		{
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
-				conn = DriverManager.getConnection(url, username, password);
+				con = DriverManager.getConnection(url, username, password);
 			} catch (ClassNotFoundException | SQLException e) 
 			{
 				e.printStackTrace();
 			}
 		}
-		return conn;
+		return con;
 	}
 }

@@ -138,11 +138,11 @@
                 <div class="record-count"><%=pl.size() %></div>
             </div>
             <div class="record-row">
-                <a href=""><div class="record-type">Number of Produce records</div></a>
+                <a href="FarmerRevenue.jsp"><div class="record-type">Total revenue from farmer</div></a>
                 <div class="record-count">1</div>
             </div>
             <div class="record-row">
-                <a href=""><div class="record-type">Number of Purchase Order records</div></a>
+                <a href="ViewOrders.jsp"><div class="record-type">Number of customer orders</div></a>
                 <div class="record-count"><%=ol.size() %></div>
             </div>
         </div>

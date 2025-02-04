@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.cropcart.db.dbConnection;
 import com.cropcart.dto.Orders;
@@ -264,8 +265,62 @@ public class OrdersDAOIpml implements OrderDAO
 	    }
 	    return status; // Return false if an exception occurs
 	}
+	@Override
+	public double getTotalRevenueByFarmer(int farmerId) {
+		double totalRevenue = 0;
+        String query = "SELECT SUM(cart_Cost) FROM Orders WHERE farmer_id = ?";
+        
+        try 
+        {
+             PreparedStatement ps = con.prepareStatement(query);
+{
 
+            ps.setInt(1, farmerId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                totalRevenue = rs.getDouble(1);
+            }
+             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return totalRevenue;
+    }
+	@Override
+	public List<Orders> getDeliveredOrders() 
+	{
+		List<Orders> deliveredOrders = new ArrayList<>();
+        String query = "SELECT * FROM orders WHERE status = 'Deliverd'";
+
+        try
+        {
+             PreparedStatement pstmt = con.prepareStatement(query);
+             ResultSet rs = pstmt.executeQuery();
+            		 {
+
+            while (rs.next()) {
+                Orders order = new Orders();
+                order.setOrder_Id(rs.getInt("order_Id"));
+                order.setCart_Cost(rs.getInt("cart_Cost"));
+                order.setProduct_Image(rs.getString("product_Image"));
+                order.setProduct_Name(rs.getString("product_Name"));
+                order.setOrder_Address(rs.getString("order_Address"));
+                order.setCustomer_Id(rs.getInt("customer_Id"));
+                order.setCustomer_Name(rs.getString("customer_Name"));
+                order.setFarmer_id(rs.getString("farmer_id"));
+
+                deliveredOrders.add(order);
+            }
+
+        } 
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return deliveredOrders;
+    }
+}
+	
 
 
 	
-}
