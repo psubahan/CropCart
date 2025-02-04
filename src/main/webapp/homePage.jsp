@@ -59,7 +59,6 @@ body {
     width: 100%;
 }
 
-/* TOP */
 .top {
     background-image: url("images/homepageImg.jpg");
     height: 580px;
@@ -72,27 +71,23 @@ body {
     
 }
 
-
-
 .nav {
-    width: 80%; /* Center the nav block horizontally */
+    width: 80%; 
     margin: 50px auto; 
-    /* padding: 10px 20px;  */
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Distribute items (h3 and ul) */
-    background: rgba(255, 255, 255, 0.8); /* Semi-transparent background for contrast */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
+    justify-content: space-between; 
+    background: rgba(255, 255, 255, 0.8); 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
 .nav h3 {
     margin: 0;
-    padding: 10px 20px; /* Add padding around the text */
-    background-color: #007BFF; /* Set the background color */
-    color: white; /* Text color for contrast */
+    padding: 10px 20px; 
+    background-color: #007BFF; 
+    color: white; 
     font-size: 24px;
 }
-
 
 ul {
     display: flex;
@@ -113,7 +108,6 @@ a {
     transition: color 0.3s;
 }
 
-
 a:hover {
     color: #008000; 
 }
@@ -127,7 +121,7 @@ a:hover {
     align-items: center;
     margin-top: 70px;
     color: black;
-    opacity: 0; /* Initially hidden */
+    opacity: 0; 
     transform: translateY(30px) scale(0.95); 
     animation: enhancedFadeIn 1s ease-out 1s forwards;
 }
@@ -147,30 +141,28 @@ a:hover {
     }
 }
 
-
-/* ============CENTER====================== */
 .center {
     display: flex;
     justify-content: space-between; 
-    align-items: stretch; /* Ensures both image and content have equal height */
-    height: 450px; /* Set the height of the center div */
-    gap: 20px; /* Add spacing between the image and content */
+    align-items: stretch; 
+    height: 450px; 
+    gap: 20px; 
     padding: 20px;
     margin-top: 40px;
     
 }
 
 .image-container {
-    flex: 1; /* Ensures equal width for the image and content */
-    overflow: hidden; /* Ensures any cropped parts of the image are hidden */
+    flex: 1; 
+    overflow: hidden; 
     
 }
         
 .image-container img {
-    width: 100%; /* Fills the container's width */
-    height: 100%; /* Fills the container's height */
-    object-fit: cover; /* Ensures the image fills the space while maintaining proportions */
-    object-position: top; /* Crops the image from the top */
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    object-position: top; 
     animation: fadeIn 4s ease-in-out;
 }
 
@@ -184,22 +176,22 @@ a:hover {
         }
 
 .center-content {
-    flex: 1; /* Equal width for content */
+    flex: 1; 
     display: flex;
-    flex-direction: column; /* Align items vertically */
-    justify-content: flex-start; /* Align items at the top */
-    align-items: flex-start; /* Align content to the left */
+    flex-direction: column; 
+    justify-content: flex-start; 
+    align-items: flex-start; 
     padding: 20px;
-    text-align: justify; /* Aligns the text neatly */
-    overflow: hidden; /* Prevents scrolling and hides overflow */
-    word-break: break-word; /* Ensures long words break to fit within the container */
+    text-align: justify; 
+    overflow: hidden; 
+    word-break: break-word; 
+
 }
 
-
 .center-content h3 {
-    margin: 0 0 10px 0; /* Add spacing below the heading */
-    font-size: 1.5rem; /* Adjust size of the heading */
-    font-weight: bold; /* Make the heading bold */
+    margin: 0 0 10px 0; 
+    font-size: 1.5rem; 
+    font-weight: bold; 
 }
 
 .center-content p {
@@ -207,13 +199,12 @@ a:hover {
     line-height: 1.6;
 }
 
-/* =============DETAILS=============== */
 .details {
     display: flex;
     justify-content: space-around;
-    gap: 20px; /* Space between items */
-    width: 100%; /* Full width container */
-    margin: 40px auto; /* Center the container */
+    gap: 20px; 
+    width: 100%; 
+    margin: 40px auto; 
     height: 160px;
     background-color: #008000;
     color: white;
@@ -222,10 +213,10 @@ a:hover {
 
 .item {
     display: flex;
-    flex-direction: column; /* Stack the number and data vertically */
+    flex-direction: column; 
     align-items: center;
-    width: 100%; /* Ensures each item occupies full width */
-    max-width: 150px; /* Limit the width of each item */
+    width: 100%; 
+    max-width: 150px; 
 }
 
 .number {
@@ -236,51 +227,50 @@ a:hover {
 .data {
     font-size: 1rem;
     text-align: center;
-    margin-top: 10px; /* Space between number and data */
+    margin-top: 10px; 
 }
 
-/* =======LOGIN============ */
 .login {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    gap: 40px; /* Space between the boxes */
+    gap: 40px; 
     margin: 70px auto;
     width: 80%;
 }
 
 .box {
-    background-color: #ffffff; /* Clean white background */
-    padding: 30px; /* Added padding for better spacing */
-    height: 300px; /* Slightly increased height */
-    border-radius: 15px; /* Rounded corners */
-    width: 30%; /* Keep at 30% width for desktop view */
+    background-color: #ffffff; 
+    padding: 30px; 
+    height: 300px; 
+    border-radius: 15px; 
+    width: 30%; 
     text-align: center;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1); /* Larger shadow for more depth */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1); 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    transition: all 0.3s ease-in-out; /* Smooth transition for the hover effect */
-    margin-bottom: 20px; /* Space between boxes */
+    transition: all 0.3s ease-in-out; 
+    margin-bottom: 20px; 
 }
 
 .box:hover {
-        transform: scale(1.05); /* Slightly enlarge the button */
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+        transform: scale(1.05); 
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2); 
 }
 
 .box h4 {
-    font-size: 1.2rem; /* Slightly larger font for the title */
-    font-weight: 600; /* Bold heading */
-    color: #333; /* Darker color for better readability */
+    font-size: 1.2rem; 
+    font-weight: 600; 
+    color: #333; 
     margin-bottom: 20px;
 }
 
 .box i {
     margin: 20px;
-    font-size: 2rem; /* Bigger icon size for emphasis */
-    color: #008000; /* Green icon to match the theme */
+    font-size: 2rem; 
+    color: #008000; 
 }
 
 .box a {
@@ -288,35 +278,33 @@ a:hover {
     color: white;
     font-weight: bold;
     border-radius: 8px;
-    padding: 15px 25px; /* Larger padding for the button */
+    padding: 15px 25px; 
     background-color: #008000;
     margin-top: 15px;
     display: inline-block;
-    transition: all 0.3s ease; /* Smooth transition */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Button shadow */
+    transition: all 0.3s ease; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
 .box a:hover {
-    background-color: #006400; /* Darker green for the hover effect */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Shadow effect on hover */
+    background-color: #006400; 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); 
 }
 
 @media (max-width: 768px) {
     .box {
-        width: 100%; /* Full width for smaller screens */
-        margin-bottom: 20px; /* Space between boxes */
+        width: 100%; 
+        margin-bottom: 20px; 
     }
 }
 
 @media (max-width: 480px) {
     .box {
-        width: 100%; /* Full width for very small screens */
-        padding: 20px; /* Adjust padding for mobile devices */
+        width: 100%; 
+        padding: 20px; 
     }
 }
 
-
-/*=========== BOTTOM ===============*/
 .bottom {
     display: flex;
     justify-content: space-between;
@@ -325,11 +313,11 @@ a:hover {
     margin-top: 120px;
     background-color: #f9f9f9;
     border-top: 1px solid #ddd;
-    flex-wrap: wrap; /* Ensures wrapping on smaller screens */
+    flex-wrap: wrap; 
 }
 
 .info, .services, .social-media {
-    flex: 1; /* Distribute space equally */
+    flex: 1; 
     margin-right: 20px;
 }
 
@@ -370,7 +358,7 @@ a:hover {
 .footer-bottom {
     text-align: center;
     padding: 10px 0;
-    background-color: #f1f1f1; /* Slightly darker background */
+    background-color: #f1f1f1; 
     font-size: 0.9rem;
     color: #666;
 }
@@ -479,8 +467,6 @@ a:hover {
         <div class="footer-bottom">
             <p>&copy; 2025 CropCart. All rights reserved.</p>
         </div>
-        
-
     </div>
 </body>
 </html>

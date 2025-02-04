@@ -29,6 +29,7 @@ public class RequestProductServlet extends HttpServlet {
         String customerName = req.getParameter("customerName");
         String productName=req.getParameter("ProductName");
         String productImage=req.getParameter("productImage");
+        
         // Create an Orders object to store the order details
         Orders order = new Orders();
         order.setPaymet_mode(paymentMode);
