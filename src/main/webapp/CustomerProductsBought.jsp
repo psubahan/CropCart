@@ -1,7 +1,8 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.cropcart.dto.ProductDetails" %>
-<%@ page import="com.cropcart.DAO.ProductDAOImp" %>
-<%@ page import="com.cropcart.DAO.ProductDAO" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.cropcart.dto.Orders" %>
+<%@ page import="com.cropcart.DAO.OrdersDAOIpml" %>
+<%@ page import="com.cropcart.DAO.OrderDAO" %>
 <%@ page import="com.cropcart.dto.Customer" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -75,29 +76,31 @@
         Customer c = (Customer) session.getAttribute("customer");
         if (c != null) {
             int customerId = c.getCustomer_id();
-            ProductDAO pdao = new ProductDAOImp();
-            List<ProductDetails> productList = pdao.getPurchasedProducts(customerId);
+            OrderDAO orderDAO = new OrdersDAOIpml();
+            List<Orders> orderList = orderDAO.getOrders(customerId);
     %>
         <h4>Customer Name: <%= c.getName() %></h4>
         <div class="card-container">
             <%
-                if (productList != null && !productList.isEmpty()) {
-                    for (ProductDetails pd : productList) {
+                if (orderList != null && !orderList.isEmpty()) {
+                    for (Orders order : orderList) {
             %>
                 <div class="card">
-                    <img alt="Image of <%= pd.getTitle() %>" src="<%= pd.getImage() %>" />
+                    <img alt="Image of <%= order.getProduct_Name() %>" src="<%= order.getProduct_Image() %>" />
                     <div class="card-body">
-                        <div class="card-title"><%= pd.getTitle() %></div>
-                        <div class="card-details">Category: <%= pd.getCategoty() %></div>
-                        <div class="card-details">Quantity: <%= pd.getQuantity() %> <%= pd.getQuantity_type() %></div>
-                        <div class="card-price">₹<%= pd.getPrice() %></div>
+                        <div class="card-title"><%= order.getProduct_Name() %></div>
+                        <div class="card-details">Quantity: <%= order.getQuantity() %></div>
+                        <div class="card-details">Order Date: <%= order.getOrder_date() %></div>
+                        <div class="card-details">Delivery Date: <%= order.getDelivary_Date() %></div>
+                        <div class="card-details">Status: <%= order.getStatus() %></div>
+                        <div class="card-price">₹<%= order.getCart_Cost() %></div>
                     </div>
                 </div>
             <%
                     }
                 } else {
             %>
-                <h4 style="text-align: center; color: red;">No products purchased.</h4>
+                <h4 style="text-align: center; color: red;">No orders found.</h4>
             <%
                 }
             %>
