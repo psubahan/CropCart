@@ -4,6 +4,7 @@
 <head>
     <meta >
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="footer.css">
     <title></title>
     <style>
@@ -13,6 +14,8 @@
     align-items: center;
     padding: 20px;
     margin-top: 70px;
+    margin-left:0;
+    margin-right:0;
     background-color: #f9f9f9;
     border-top: 1px solid #ddd;
     flex-wrap: wrap; /* Ensures wrapping on smaller screens */
@@ -80,11 +83,11 @@ body{
             <p>Bangalore, Karnataka</p>
             <p>India</p>
             <p>Phone : +91 7023107456</p>
-            <p>Email : CropCart@gmail.com</p>
+            <p>Email : cropcart.agro@gmail.com</p>
         </div>
         <div class="services">
-            <a href="#homePage.jsp">Home</a>
-            <a href="#homePage.jsp">About Us</a>
+            <a href="homePage.jsp">Home</a>
+            <a href="homePage.jsp">About Us</a>
             <a href="">Articles</a>
             <a href="">Contact</a>
             <a href="">Terms & Conditions</a>

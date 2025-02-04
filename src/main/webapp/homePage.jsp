@@ -447,7 +447,7 @@ a:hover {
                 <p>Bangalore, Karnataka</p>
                 <p>India</p>
                 <p>Phone : +91 7023107456</p>
-                <p>Email : CropCart@gmail.com</p>
+                <p>Email : cropcart.agro@gmail.com</p>
             </div>
             <div class="services">
                 <a href="#top">Home</a>
