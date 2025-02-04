@@ -264,6 +264,12 @@
                     <option value="Retailer">Retailer</option>
                 </select>
             </div>
+            
+            <div class="form-group">
+                <label for="account-number">Account Number</label>
+                <input type="text" id="account-number" name="account-number">
+            </div>
+            
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>

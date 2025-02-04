@@ -24,11 +24,11 @@
             background-color: white;
             padding: 30px;
             border-radius: 5px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), 0 6px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0px 5px #008000;
             width: 1000px;
             animation: fadeIn 1s ease-in-out;
             margin: 50px auto;
-            border: 0.5px solid #008000;
+            
             position: relative; /* This makes it a positioning reference */
         }
 

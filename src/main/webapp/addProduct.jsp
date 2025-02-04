@@ -20,9 +20,9 @@
             margin: 20px auto;
             background: white;
             padding: 20px;
-            border-radius: 0px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border: 0.5px solid #008000;
+            border-radius: 3px;
+            box-shadow: 0 0 5px #008000;
+            
         }
 
         h2 {

@@ -46,7 +46,7 @@ public class CustomerDAOImp implements CustomerDAO
 	                status = "PasswordAlreadyExists";
 	            } else {
 	                // Insert new customer
-	                String queryInsert = "INSERT INTO CUSTOMER(NAME, PHONE, MAIL, PASSWORD, ADDRESS, STATE, CITY, PINCODE, CUSTOMER_TYPE) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	                String queryInsert = "INSERT INTO CUSTOMER(NAME, PHONE, MAIL, PASSWORD, ADDRESS, STATE, CITY, PINCODE, CUSTOMER_TYPE,ACCOUNT) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	                ps = con.prepareStatement(queryInsert);
 	                ps.setString(1, c.getName());
 	                ps.setLong(2, c.getPhone());
@@ -57,6 +57,7 @@ public class CustomerDAOImp implements CustomerDAO
 	                ps.setString(7, c.getCity());
 	                ps.setLong(8, c.getPincode());
 	                ps.setString(9, c.getCustomer_type());
+	                ps.setString(10, c.getAccount_number());
 	                
 	                res = ps.executeUpdate();
 	                if (res > 0) {
