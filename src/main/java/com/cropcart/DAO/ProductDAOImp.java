@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.cropcart.db.dbConnection;
 import com.cropcart.dto.ProductDetails;
@@ -172,5 +174,24 @@ public class ProductDAOImp implements ProductDAO
 
       return isUpdated;  // Return whether the product was successfully updated
   }
+            	    
+@Override
+public Map<String, Integer> getProductsBoughtByCategory(int customerId) {
+    Map<String, Integer> categoryCounts = new HashMap<>();
+    String sql = "SELECT category, COUNT(*) as quantity FROM Products WHERE customer_id = ? GROUP BY category";
+
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setInt(1, customerId);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            categoryCounts.put(rs.getString("category"), rs.getInt("quantity"));
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return categoryCounts; // Return a map with category as key and count as value
+}
 
 }
+

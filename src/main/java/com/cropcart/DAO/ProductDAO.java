@@ -2,6 +2,7 @@ package com.cropcart.DAO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.cropcart.dto.ProductDetails;
 
@@ -11,4 +12,5 @@ public interface ProductDAO {
 	boolean addProduct(ProductDetails product);
 	public List<ProductDetails> getProducts(int farmer_id);
 	public boolean updateProduct(ProductDetails p);
+    public Map<String, Integer> getProductsBoughtByCategory(int customerId);
 }

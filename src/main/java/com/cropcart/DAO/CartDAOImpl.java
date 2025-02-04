@@ -86,7 +86,7 @@ public class CartDAOImpl implements CartDAO{
 	    try {
 	        ps = con.prepareStatement(qry);
 	        ps.setInt(1, cart_id);
-	        status = ps.executeUpdate(); // Executes the query and returns the number of rows affected
+	        status = ps.executeUpdate(); 
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }

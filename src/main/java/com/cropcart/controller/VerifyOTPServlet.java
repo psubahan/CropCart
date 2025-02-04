@@ -8,6 +8,7 @@ import com.cropcart.DAO.OTPService;
 import com.cropcart.DAO.OTPServiceImpl;
 import com.cropcart.dto.OTPData;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -30,6 +31,9 @@ public class VerifyOTPServlet extends HttpServlet {
 
             if (storedOTP.equals(userOTP) && System.currentTimeMillis() < expiresAt.getTime()) {
                 response.getWriter().write("OTP verified successfully!");
+                request.setAttribute("mail", userEmail);
+                RequestDispatcher rd=request.getRequestDispatcher("registerForm.jsp");
+                rd.forward(request, response);
             } else {
                 response.getWriter().write("Invalid or expired OTP!");
             }

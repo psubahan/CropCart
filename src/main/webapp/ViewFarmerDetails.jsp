@@ -82,7 +82,7 @@
 <div class="container my-5">
     <%
         try {
-            // Create the DAO object and fetch the customer details
+            // Create the DAO object and fetch the farmer details
             FarmerDAO cdao = new FarmerDAOImp();
             List<Farmer> farmer = cdao.getAllFarmer();
 

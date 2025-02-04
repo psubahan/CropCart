@@ -53,7 +53,7 @@
             margin-top: 20px;
         }
         .btn {
-            background-color: #4caf50;
+            background-color: #008000;
             color: white;
             padding: 10px 20px;
             text-decoration: none;
@@ -62,6 +62,17 @@
         }
         .btn:hover {
             background-color: #45a049;
+        }
+        .psy-btn
+        {
+        	background-color: #008000;
+        	color: white;
+        	border: none;
+        	width: 80px;
+        	height: 25px;
+        	border-radius: 50px;
+        	cursor: pointer;
+        	margin: 5px;
         }
     </style>
 </head>
@@ -96,7 +107,10 @@
                 <p>Order_Declined: <%=order.getDecline_reason() %></p>
                 <%} %>
             </div>
+            <a href="doPayment.jsp"><button class="psy-btn">Pay</button></a>
+            <a href="delete"><button class="psy-btn">cancel</button></a>
         </div>
+        
         <% } %>
 
         <div class="back-button">

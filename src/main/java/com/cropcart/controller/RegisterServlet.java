@@ -102,6 +102,8 @@ public class RegisterServlet extends HttpServlet {
         String pincodeStr = request.getParameter("pincode");
         String mobileStr = request.getParameter("contactNumber");
         String customerType = request.getParameter("customerType");
+        String accountNumberStr = request.getParameter("account-number");
+        
 
         if (!password.equals(confirmPassword)) {
             return "Passwords do not match.";
@@ -122,6 +124,7 @@ public class RegisterServlet extends HttpServlet {
         customer.setCity(city);
         customer.setPincode(pincode);
         customer.setCustomer_type(customerType);
+        customer.setAccount_number(accountNumberStr);
         
         // Save to database
         CustomerDAO customerDAO = new CustomerDAOImp();

@@ -35,16 +35,16 @@
         .login-btn {
             background-color: #008000;
             color: #fff;
-            transition: all 0.3s ease-in-out; /* Smooth animation */
+            transition: all 0.3s ease-in-out; 
         }
         .login-btn:hover {
-            transform: scale(1.02); /* Slightly enlarges the button */
+            transform: scale(1.02); 
         }
         .login-icon {
-            max-width: 100%; /* Ensures the image doesn't exceed container width */
-            height: auto; /* Maintains aspect ratio */
-            display: block; /* Centers the image */
-            margin: 0 auto; /* Centers the image horizontally */
+            max-width: 100%; 
+            height: auto; 
+            display: block; 
+            margin: 0 auto; 
         }
         .navbar .nav-link {
             color: #007bff;
@@ -92,7 +92,7 @@
                                 <div class="text-center mt-3">
                                     <a href="register.jsp?userRegister=Farmer" class="text-decoration-none" style="color: #008000; font-weight: bold;">New User?</a>
                                     <br>
-                                    <a href="#" class="text-decoration-none" style="color: #008000; font-weight: bold;">Forgot Password?</a>
+                                    <a href="changePassword.jsp" class="text-decoration-none" style="color: #008000; font-weight: bold;">Forgot Password?</a>
                                 </div>
                             </form>
                         </div>
