@@ -76,7 +76,5 @@ public class EditArticle extends HttpServlet {
         		rd.forward(request, response);
         	}
         }
-	
-
 }
 }

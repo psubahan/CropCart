@@ -17,5 +17,8 @@ public interface FarmerDAO
 	public List<Farmer> getAllFarmer();
 	public Farmer getFarmer1(int farmer_id, String name);
 	String updatePassword(String email, String oldPassword, String newPassword);
+	//double getTotalRevenue(int farmerId );
+	}
 
-}
+
+

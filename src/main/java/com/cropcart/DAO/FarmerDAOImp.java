@@ -371,5 +371,33 @@ public class FarmerDAOImp implements FarmerDAO
 
 	    return status;
 	}
-
 }
+//	@Override
+//    public double getTotalRevenue(int farmerId) {
+//        String query = "SELECT SUM(cart_cost) AS total_revenue FROM orders WHERE farmer_id = ? and status='delivered'";
+//        double totalRevenue = 0;
+//
+//        PreparedStatement ps = null;
+//        ResultSet rs = null;
+//
+//        try {
+//            ps = con.prepareStatement(query);
+//            ps.setInt(1, farmerId);
+//            rs = ps.executeQuery();
+//
+//            if (rs.next()) {
+//                totalRevenue = rs.getDouble("total_revenue");
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace(); // Handle errors properly in real applications
+//        } finally {
+//            try {
+//                if (rs != null) rs.close();
+//                if (ps != null) ps.close();
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        return totalRevenue;
+//    }
+//}
