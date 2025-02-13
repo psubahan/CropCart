@@ -21,83 +21,67 @@ public class OrdersDAOIpml implements OrderDAO
 	public String addOrders(Orders o) {
 	    PreparedStatement ps = null;
 	    PreparedStatement psUpdate = null;
-	    int res = 0;
-	    String status = "";
-	    String query = "INSERT INTO ORDERS ("
-	            + "    CART_ID,"
-	            + "    CART_COST,"
-	            + "    Quantity,"
-	            + "    ORDER_ADDRESS,"
-	            + "    ORDER_STATE,"
-	            + "    ORDER_CITY,"
-	            + "    CUSTOMER_ID,"
-	            + "    CUSTOMER_NAME,"
-	            + "    FARMER_ID,"
-	            + "    ORDER_DATE,"
-	            + "    STATUS,"
-	            + "    PAYMENT,"
-	            + "    PRODUCT_IMAGE,"
-	            + "    PRODUCT_NAME"
+	    String status = "Failed";
+	    String insertQuery = "INSERT INTO ORDERS ("
+	            + "    CART_ID, CART_COST, Quantity, ORDER_ADDRESS, ORDER_STATE, ORDER_CITY, CUSTOMER_ID, CUSTOMER_NAME, "
+	            + "    FARMER_ID, ORDER_DATE, STATUS, PAYMENT, PRODUCT_IMAGE, PRODUCT_NAME, Product_Category"
 	            + ") "
-	            + "SELECT "
-	            + "    CART_ID,"
-	            + "    (PRODUCT_COST * QUANTITY) AS CART_COST,"
-	            + "    Quantity,"
-	            + "    ? AS ORDER_ADDRESS,"
-	            + "    ? AS ORDER_STATE,"
-	            + "    ? AS ORDER_CITY,"
-	            + "    CUSTOMER_ID,"
-	            + "    ? AS CUSTOMER_NAME,"
-	            + "    FARMER_ID,"
-	            + "    SYSDATE() AS ORDER_DATE,"
-	            + "    'Pending' AS STATUS,"
-	            + "    ? AS PAYMENT,"
-	            + "    PRODUCT_IMAGE,"
-	            + "    PRODUCT_TITLE AS PRODUCT_NAME "
-	            + "FROM CART "
-	            + "WHERE CUSTOMER_ID = ? "
-	            + "  AND STATUS = 'Pending';";
+	            + "SELECT CART_ID, (PRODUCT_COST * QUANTITY) AS CART_COST, Quantity, ?, ?, ?, CUSTOMER_ID, ?, FARMER_ID, "
+	            + "    NOW(), 'Pending', ?, PRODUCT_IMAGE, PRODUCT_TITLE, Product_Category "
+	            + "FROM CART WHERE CUSTOMER_ID = ? AND STATUS = 'Pending'";
 
-	    String updateQuery = "UPDATE CART "
-	            + "SET STATUS = 'Requested' "
-	            + "WHERE CUSTOMER_ID = ? "
-	            + "  AND STATUS = 'Pending';";
+	    String updateQuery = "UPDATE CART SET STATUS = 'Requested' WHERE CUSTOMER_ID = ? AND STATUS = 'Pending'";
 
 	    try {
+	        con.setAutoCommit(false); // Start transaction
+
 	        // Execute the insert query
-	        ps = con.prepareStatement(query);
-	        ps.setString(1, o.getOrder_Address()); // Order address
-	        ps.setString(2, o.getOrder_State());   // Order state
-	        ps.setString(3, o.getOrder_city());    // Order city
-	        ps.setString(4, o.getCustomer_Name()); // Customer name
-	        ps.setString(5, o.getPaymet_mode());   // Payment mode
-	        ps.setInt(6, o.getCustomer_Id());      // Customer ID
+	        ps = con.prepareStatement(insertQuery);
+	        ps.setString(1, o.getOrder_Address());
+	        ps.setString(2, o.getOrder_State());
+	        ps.setString(3, o.getOrder_city());
+	        ps.setString(4, o.getCustomer_Name());
+	        ps.setString(5, o.getPaymet_mode());
+	        ps.setInt(6, o.getCustomer_Id());
 
-	        res = ps.executeUpdate();
+	        int insertCount = ps.executeUpdate();
 
-	        // If insert is successful, update the CART table
-	        if (res > 0) {
+	        if (insertCount > 0) {
 	            // Update status in the CART table
 	            psUpdate = con.prepareStatement(updateQuery);
-	            psUpdate.setInt(1, o.getCustomer_Id()); // Customer ID
-	            int updateRes = psUpdate.executeUpdate();
+	            psUpdate.setInt(1, o.getCustomer_Id());
+	            int updateCount = psUpdate.executeUpdate();
 
-	            // Check if the update was successful
-	            if (updateRes > 0) {
+	            if (updateCount > 0) {
+	                con.commit(); // Commit transaction
 	                status = "success";
 	            } else {
+	                con.rollback(); // Rollback if update fails
 	                status = "Failed to update CART status.";
 	            }
 	        } else {
+	            con.rollback(); // Rollback if insert fails
 	            status = "Failed to insert into ORDERS table.";
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
+	        try {
+	            con.rollback(); // Rollback on error
+	        } catch (SQLException rollbackEx) {
+	            rollbackEx.printStackTrace();
+	        }
 	        status = "Error: " + e.getMessage();
+	    } finally {
+	        try {
+	            if (ps != null) ps.close();
+	            if (psUpdate != null) psUpdate.close();
+	            con.setAutoCommit(true); // Restore default behavior
+	        } catch (SQLException closeEx) {
+	            closeEx.printStackTrace();
+	        }
 	    }
 	    return status;
 	}
-
 
 	@Override
 	public ArrayList<Orders> getAllorders() {
@@ -129,6 +113,7 @@ public class OrdersDAOIpml implements OrderDAO
 	            o.setDelivary_Date(rs.getString("Delivery_date"));
 	            o.setDecline_reason(rs.getString("Decline_Reason"));
 	            o.setQuantity(rs.getString("Quantity"));
+	            o.setProductCategory(rs.getString("product_category"));;
 	            orderList.add(o);
 	        }
 	    } catch (SQLException e) {
@@ -168,6 +153,7 @@ public class OrdersDAOIpml implements OrderDAO
 		            o.setDelivary_Date(rs.getString("Delivery_date"));
 		            o.setDecline_reason(rs.getString("Decline_Reason"));
 		            o.setQuantity(rs.getString("Quantity"));
+		            o.setProductCategory(rs.getString("product_category"));
 		            orderList.add(o);
 		        }
 		    } catch (SQLException e) {
@@ -207,6 +193,7 @@ public class OrdersDAOIpml implements OrderDAO
 		            o.setDelivary_Date(rs.getString("Delivery_date"));
 		            o.setDecline_reason(rs.getString("Decline_Reason"));
 		            o.setQuantity(rs.getString("Quantity"));
+		            o.setProductCategory(rs.getString("product_category"));
 		            orderList.add(o);
 		        }
 		    } catch (SQLException e) {
