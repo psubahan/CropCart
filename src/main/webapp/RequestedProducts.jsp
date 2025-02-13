@@ -107,8 +107,8 @@
                 <p>Order_Declined: <%=order.getDecline_reason() %></p>
                 <%} %>
             </div>
-            <a href="doPayment.jsp"><button class="psy-btn">Pay</button></a>
-            <a href="delete"><button class="psy-btn">cancel</button></a>
+            <a href="doPayment.jsp?id=<%=order.getFarmer_id()%>&cid=<%=order.getCustomer_Id()%>&cost=<%=order.getCart_Cost()%>"><button class="psy-btn">Pay</button></a>
+            <a href="delete"><button class="psy-btn">Cancel</button></a>
         </div>
         
         <% } %>

@@ -349,6 +349,39 @@ public class CustomerDAOImp implements CustomerDAO
 
 	    return status;
 	}
+	
+	@Override
+	public Customer getCustomerByAccountNumber(int accountNumber) {
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+	    Customer c = null;
+	    String query = "SELECT * FROM CUSTOMER WHERE ACCOUNT = ?";
+	    
+	    try {
+	        ps = con.prepareStatement(query);
+	        ps.setInt(1, accountNumber);
+	        rs = ps.executeQuery();
+	        
+	        if (rs.next()) {
+	            c = new Customer();
+	            c.setCustomer_id(rs.getInt("customer_id"));
+	            c.setName(rs.getString("name"));
+	            c.setPhone(rs.getLong("phone"));
+	            c.setMail(rs.getString("mail"));
+	            c.setAddress(rs.getString("address"));
+	            c.setState(rs.getString("state"));
+	            c.setCity(rs.getString("city"));
+	            c.setPincode(rs.getInt("pincode"));
+	            c.setCustomer_type(rs.getString("customer_type"));
+	            c.setAccount_number(rs.getString("account"));
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return c;
+	}
+
 
 
 }
