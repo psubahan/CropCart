@@ -171,7 +171,7 @@ ul li a:hover{
                 <ul>
                     <li><a href="homePage.jsp">HOME</a></li>
                     <!-- <li><a href="">FARMER'S MARKET</a></li> -->
-                    <li><a href="articles.jsp">NEWS AND ARTICLES</a></li>
+                    <!-- <li><a href="articles.jsp">NEWS AND ARTICLES</a></li> -->
                     <li><a href="">CONTACT</a></li>
                 </ul>
                 <%} %>

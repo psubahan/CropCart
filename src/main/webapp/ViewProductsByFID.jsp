@@ -27,15 +27,15 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
-            margin: 20px auto;
-            max-width: 1200px;
+            margin: 50px auto;
+            max-width: 1300px;
         }
         .card {
             background-color: white;
             border: 1px solid #ddd;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            width: 310px;
             overflow: hidden;
             text-align: center;
             transition: transform 0.3s ease;
@@ -92,7 +92,7 @@
 
             if (productList != null && !productList.isEmpty()) {
     %>
-        <h4>Farmer Name: <%= f.getName() %></h4>
+        <!--<h4>Farmer Name: <%= f.getName() %></h4>-->
         <div class="card-container">
             <%
                 for (ProductDetails pd : productList) {

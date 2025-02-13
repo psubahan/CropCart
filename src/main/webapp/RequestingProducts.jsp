@@ -208,7 +208,7 @@
                     <label for="paymentMode">Payment Mode</label>
                     <select name="paymentMode" id="paymentMode" required>
                         <option value="">--Select Payment Mode--</option>
-                        <option value="Cash on Delivery">Cash on Delivery</option>
+                        <!--  <option value="Cash on Delivery">Cash on Delivery</option>-->
                         <option value="Online Payment">Online Payment</option>
                     </select>
                 </div>
