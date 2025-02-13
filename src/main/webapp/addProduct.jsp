@@ -96,7 +96,7 @@
     <div class="container" style="margin-top : 50px;">
         <h2>ADD NEW PRODUCT</h2>
         <%if(request.getAttribute("message")!=null){ %>
-         <h2 style= " margin:10px; color : blue; text-align : center;"><%=request.getAttribute("message")%></h2>
+         <h2 style= " margin:10px; color : green; text-align : center;"><%=request.getAttribute("message")%></h2>
          <%} %>
           
         <form action="AddProduct" method="post">

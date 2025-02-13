@@ -47,7 +47,6 @@ public class doPayment extends HttpServlet {
 		CustomerDAO cdao = new CustomerDAOImp();
 		Customer c = cdao.getCustomerByAccountNumber(account_number);
 		
-	try {
 				if(c!=null) {
 					
 					request.setAttribute("success","Payment Successfull!");
@@ -60,20 +59,7 @@ public class doPayment extends HttpServlet {
 					RequestDispatcher rd = request.getRequestDispatcher("doPayment.jsp");
 					rd.forward(request, response);
 				}
-	      }catch (NumberFormatException e) {
-	            // Log the exception if the account number is not valid
-	            e.printStackTrace();
-	            request.setAttribute("failure", "Invalid Account Number. Please try again.");
-	            RequestDispatcher rd = request.getRequestDispatcher("doPayment.jsp");
-	            rd.forward(request, response);
-	        } catch (Exception e) {
-	            // Log any other exceptions
-	            e.printStackTrace();
-	            request.setAttribute("failure", "An error occurred. Please try again.");
-	            RequestDispatcher rd = request.getRequestDispatcher("doPayment.jsp");
-	            rd.forward(request, response);
-	        }
-	    }
+	}
 
 
 }

@@ -17,11 +17,13 @@
             background-color: #f4f7f9;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         .card {
             border-radius: 15px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
+            max-width: 350px; /* Reduce the card width */
+            width: 100%; /* Ensure it is responsive */
         }
 
         .card-header {
@@ -36,12 +38,16 @@
 
         .card-body {
             background-color: white;
-            padding: 20px;
+            padding: 10px;
+        }
+
+        .card-body p {
+            margin-bottom: 7px; /* Reduce the space after each paragraph */
         }
 
         .profile-img {
-            width: 100px;
-            height: 100px;
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
             margin-bottom: 15px;
         }
@@ -50,7 +56,7 @@
             background-color: #008000;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 5px 10px;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
@@ -100,31 +106,26 @@
                                 <div class="card-body text-center">
                                     <i class="fa-solid fa-user" class="profile-img"></i>
                                     <h4><%= c.getName() %></h4>
-                                    <p><strong>Farmer Id:</strong> <%= c.getFarmer_id() %></p>
                                     <p><strong>Email:</strong> <%= c.getEmail() %></p>
                                     <p><strong>Phone:</strong> <%= c.getPhone() %></p>
                                     <p><strong>Address:</strong> <%= c.getAddress() %></p>
                                     <p><strong>State:</strong> <%= c.getState() %></p>
                                     <p><strong>City:</strong> <%= c.getCity() %></p>
                                     <p><strong>Pincode:</strong> <%= c.getPincode() %></p>
-                                     <p><strong>bank_name:</strong> <%= c.getBank_name() %></p>
-                                      <p><strong>branch:</strong> <%= c.getBranch() %></p>
-                                       <p><strong>ifsc:</strong> <%= c.getIfsc() %></p>
-                                        <p><strong>acc_no:</strong> <%= c.getAcc_no() %></p>
-                                    
+                                    <p><strong>Bank Name:</strong> <%= c.getBank_name() %></p>
+                                    <p><strong>Branch:</strong> <%= c.getBranch() %></p>
+                                    <p><strong>IFSC:</strong> <%= c.getIfsc() %></p>
+                                    <p><strong>Account No:</strong> <%= c.getAcc_no() %></p>
                                 </div>
                                 
                                 <div class="card-footer text-center">
-								    <div class="d-inline-block mx-2">
-								        <a href="adminDashboard.jsp"><button class="back-btn">Back</button></a>
-								    </div>
-								    <div class="d-inline-block mx-2">
-								        <form action="DeleteFarmerServlet" method="post">
-								            <input type="hidden" name="farmer_id" value="<%= c.getFarmer_id() %>">
-								            <button type="submit" class="delete-btn">Delete</button>
-								        </form>
-								    </div>
-								</div>
+                                    <div class="d-inline-block mx-2">
+                                        <form action="DeleteFarmerServlet" method="post">
+                                            <input type="hidden" name="farmer_id" value="<%= c.getFarmer_id() %>">
+                                            <button type="submit" class="delete-btn">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     <%

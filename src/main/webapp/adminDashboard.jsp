@@ -130,7 +130,7 @@
                 <div class="record-count"><%=fl.size() %></div>
             </div>
             <div class="record-row">
-                <div class="record-type"><a href="ViewCustomerDetails.jsp">Number of  Customer records</a></div>
+                <a href="ViewCustomerDetails.jsp"><div class="record-type">Number of  Customer records</div></a>
                 <div class="record-count"><%=cl.size() %></div>
             </div>
             <div class="record-row">
@@ -138,7 +138,7 @@
                 <div class="record-count"><%=pl.size() %></div>
             </div>
             <div class="record-row">
-                <a href="FarmerRevenue.jsp"><div class="record-type">Total revenue from farmer</div></a>
+                <a href="FarmerRevenue.jsp"><div class="record-type">Revenue Information</div></a>
                 <div class="record-count">1</div>
             </div>
             <div class="record-row">

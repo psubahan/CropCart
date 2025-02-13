@@ -75,7 +75,7 @@
             outline: none;
         }
 
-    button {
+    .button {
       padding: 10px;
       width: 100%;
       margin: 0 auto;
@@ -147,7 +147,7 @@
 
   <!-- Optionally, you can provide a link to go back or retry -->
  
-      <form action="doPayment2" method= POST>
+      <form action="doPayment2" method= "post">
         <label>Paying From</label>
         <input type="text" value="<%= c.getName() %>" readonly class="input">
 
@@ -161,15 +161,15 @@
         <input type="text" placeholder="*" name="customerAccNo" required class="input">
 
         <div class="btn">
-          <button type="submit">Pay now</button>
+          <input type="submit" value="Pay Now" class="button">
         </div>
       </form>
     </div>
   </div>
 
   <%
-      } // End of cid if condition
-    } // End of id if condition
+      }
+    } 
   }
   %>
 <%@ include file="footer.jsp" %>

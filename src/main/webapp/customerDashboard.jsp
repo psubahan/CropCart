@@ -20,6 +20,9 @@
 
          <style>
         
+        body{
+           background-color: #f4f4f4;
+        }
         .card {
             border-radius: 0px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -71,6 +74,10 @@
 
         table th {
             background-color: #f8f9fa;
+        }
+        
+        .update-link{
+          color : white; 
         }
     </style>
    

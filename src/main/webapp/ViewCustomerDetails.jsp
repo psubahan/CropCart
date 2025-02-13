@@ -22,6 +22,8 @@
             border-radius: 15px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
+            max-width: 350px; /* Reduce the card width */
+            width: 100%; /* Ensure it is responsive */
         }
 
         .card-header {
@@ -37,6 +39,10 @@
         .card-body {
             background-color: white;
             padding: 20px;
+        }
+        
+        .card-body p {
+            margin-bottom: 7px; /* Reduce the space after each paragraph */
         }
 
         .profile-img {
@@ -110,9 +116,9 @@
                                 </div>
                                 
                                 <div class="card-footer text-center">
-								    <div class="d-inline-block mx-2">
+								    <!-- <div class="d-inline-block mx-2">
 								        <a href="adminDashboard.jsp"><button class="back-btn">Back</button></a>
-								    </div>
+								    </div> -->
 								    <div class="d-inline-block mx-2">
 								        <form action="DeleteCustomerServlet" method="post">
 								            <input type="hidden" name="customer_id" value="<%= c.getCustomer_id() %>">

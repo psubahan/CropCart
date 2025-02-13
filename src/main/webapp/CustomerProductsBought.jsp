@@ -28,22 +28,23 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
-            margin: 20px auto;
-            max-width: 1200px;
+            margin: 50px auto;
+            max-width: 1100px;
         }
         .card {
             background-color: white;
-            border: 1px solid #ddd;
+            border: 0.5px solid #008000;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            width: 310px;
             overflow: hidden;
             text-align: center;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
         }
         .card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
         .card img {
             width: 100%;
@@ -79,7 +80,7 @@
             OrderDAO orderDAO = new OrdersDAOIpml();
             List<Orders> orderList = orderDAO.getOrders(customerId);
     %>
-        <h4>Customer Name: <%= c.getName() %></h4>
+        <!--<h4>Customer Name: <%= c.getName() %></h4>-->
         <div class="card-container">
             <%
                 if (orderList != null && !orderList.isEmpty()) {

@@ -21,6 +21,7 @@
         .container {
             padding: 20px;
             text-align: center; 
+            
         }
         
      
@@ -33,6 +34,7 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+            width : 1300px;
         }
         .product-card {
             background-color: #ffffff;
