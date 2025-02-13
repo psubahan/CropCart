@@ -187,8 +187,8 @@
 
     <% if (c != null) {
         int customerId = c.getCustomer_id();
-        ProductDAO pdao = new ProductDAOImp();
-        Map<String, Integer> categoryCountMap = pdao.getProductsBoughtByCategory(customerId);
+        OrderDAO odao = new OrdersDAOIpml();
+        Map<String, Integer> categoryCountMap = odao.getOrderCountByCategory(customerId);
         for (Map.Entry<String, Integer> entry : categoryCountMap.entrySet()) { %>
             categories.push('<%= entry.getKey() %>');
             counts.push(<%= entry.getValue() %>);

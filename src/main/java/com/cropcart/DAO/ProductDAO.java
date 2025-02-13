@@ -12,5 +12,5 @@ public interface ProductDAO {
 	boolean addProduct(ProductDetails product);
 	public List<ProductDetails> getProducts(int farmer_id);
 	public boolean updateProduct(ProductDetails p);
-    public Map<String, Integer> getProductsBoughtByCategory(int customerId);
+   
 }

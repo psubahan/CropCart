@@ -26,4 +26,5 @@ public class Orders {
 	private String delivary_Date;
 	private String decline_reason;
 	private String quantity;
+	private String productCategory;
 }
