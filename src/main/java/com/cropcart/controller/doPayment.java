@@ -12,54 +12,34 @@ import com.cropcart.DAO.CustomerDAO;
 import com.cropcart.DAO.CustomerDAOImp;
 import com.cropcart.dto.Customer;
 
-/**
- * Servlet implementation class doPayment
- */
-
 @WebServlet("/doPayment2")
 public class doPayment extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    private static final long serialVersionUID = 1L;
+
     public doPayment() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int account_number = Integer.parseInt(request.getParameter("customerAccNo"));
+        int farmerId = Integer.parseInt(request.getParameter("id"));
+        int customerId = Integer.parseInt(request.getParameter("cid"));
+        int cost = Integer.parseInt(request.getParameter("cost"));
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		int account_number = Integer.parseInt(request.getParameter("customerAccNo"));
-		
-		CustomerDAO cdao = new CustomerDAOImp();
-		Customer c = cdao.getCustomerByAccountNumber(account_number);
-		
-				if(c!=null) {
-					
-					request.setAttribute("success","Payment Successfull!");
-					RequestDispatcher rd = request.getRequestDispatcher("doPayment.jsp");
-					rd.forward(request, response);
-					
-			   }
-				else {
-					request.setAttribute("failure","Payment Failed! Please Enter Valid Account Number");
-					RequestDispatcher rd = request.getRequestDispatcher("doPayment.jsp");
-					rd.forward(request, response);
-				}
-	}
+        CustomerDAO cdao = new CustomerDAOImp();
+        Customer c = cdao.getCustomerByAccountNumber(account_number);
 
+        request.setAttribute("id", farmerId);
+        request.setAttribute("cid", customerId);
+        request.setAttribute("cost", cost);
 
+        if (c != null) {
+            request.setAttribute("success", "Payment Successful! ₹" + cost + " has been paid.");
+        } else {
+            request.setAttribute("failure", "Payment Failed! Please enter a valid account number.");
+        }
+
+        RequestDispatcher rd = request.getRequestDispatcher("doPayment.jsp");
+        rd.forward(request, response);
+    }
 }
